@@ -61,6 +61,10 @@ client.on('message', (message) => {
 	}
 });
 
+app.get('/', function(req, res) {
+	res.render('index');
+});
+
 //LISTEN
 client.once('ready', () => {
 	console.log('Connected as ' + client.user.tag);
