@@ -47,7 +47,7 @@ combat.setup = function(commandMessage, monster, player, turnCount) {
 				.then(() => sent.react('🩹'))
 				.then(() => sent.react('❔'))
 				.then(() => {
-					if (player.specialCount >= turnCount) {
+					if (turnCount >= player.specialCount) {
 						sent.react('✨');
 					}
 				});
@@ -155,7 +155,7 @@ combat.status = function(commandMessage, monster, player, turnCount) {
 combat.special = function(commandMessage, monster, player, turnCount) {
 	commandMessage.channel.send('```http\n' + monster.name + ' can only stand in awe of your special attack!\n```');
 
-	player.damage = Math.floor(Math.random() * player.damageMax + player.damageMin);
+	player.damage = player.damageMax;
 	commandMessage.channel.send(
 		'```css\n' +
 			commandMessage.author.username +
