@@ -5,12 +5,22 @@ const { Client, Attachment, Collection } = require('discord.js'),
 //Combat Action
 rpg.fight = (commandMessage) => {
 	//Monster and Player Objects
-	var monster = {
-		name: 'Derek',
-		hitPoints: 15,
-		damageMin: 1,
-		damageMax: 5
-	};
+	var monsterArray = [
+		{
+			name: 'Derek',
+			hitPoints: 15,
+			damageMin: 1,
+			damageMax: 5
+		},
+		{
+			name: 'Shawn',
+			hitPoints: 20,
+			damageMin: 2,
+			damageMax: 7
+		}
+	];
+	var iMonster = Math.floor(Math.random * monsterArray.length);
+	var monster = monsterArray[iMonster];
 	var player = {
 		name: commandMessage.author.username,
 		hitPoints: 15,
