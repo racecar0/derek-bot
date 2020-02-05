@@ -3,6 +3,7 @@ const { Client, Attachment, Collection } = require('discord.js'),
 	commands = new Collection(),
 	express = require('express'),
 	app = express(),
+	port = process.env.PORT || 3000,
 	bodyParser = require('body-parser'),
 	mongoose = require('mongoose'),
 	fs = require('fs'),
@@ -61,11 +62,12 @@ client.on('message', (message) => {
 	}
 });
 
+//WEBSITE ROUTES
 app.get('/', function(req, res) {
 	res.render('index');
 });
 
-//LISTEN
+//DISCORD LISTEN
 client.once('ready', () => {
 	console.log('Connected as ' + client.user.tag);
 	// Set bot status
@@ -82,3 +84,8 @@ client.once('ready', () => {
 });
 
 client.login(token);
+
+//WEBSITE LISTEN
+app.listen(port, function() {
+	console.log('YelpCamp Server Has Started!');
+});
