@@ -65,9 +65,9 @@ client.on('message', (message) => {
 });
 
 //WEBSITE ROUTES
-app.get('/', function(req, res) {
-	res.render('index');
-});
+// app.get('/', function(req, res) {
+// 	res.render('index');
+// });
 
 //DISCORD LISTEN
 client.once('ready', () => {
@@ -88,6 +88,6 @@ client.once('ready', () => {
 client.login(botToken);
 
 //WEBSITE LISTEN
-app.listen(port, function() {
-	console.log('Derek Bot Server Has Started!');
-});
+// app.listen(port, function() {
+// 	console.log('Derek Bot Server Has Started!');
+// });
