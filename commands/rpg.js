@@ -13,13 +13,19 @@ rpg.fight = (commandMessage) => {
 			damageMax: 5
 		},
 		{
-			name: 'Shawn',
+			name: 'Glenn',
 			hitPoints: 20,
 			damageMin: 2,
 			damageMax: 7
+		},
+		{
+			name: 'Shawn',
+			hitPoints: 25,
+			damageMin: 2,
+			damageMax: 10
 		}
 	];
-	var iMonster = Math.floor(Math.random * monsterArray.length);
+	var iMonster = Math.floor(Math.random * (monsterArray.length - 1));
 	var monster = monsterArray[iMonster];
 	var player = {
 		name: commandMessage.author.username,
