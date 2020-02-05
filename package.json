@@ -2,7 +2,7 @@
 	"name": "derek-rpg-bot",
 	"version": "1.0.0",
 	"description": "Hi, I'm Derek!",
-	"main": "app.js",
+	"main": "bot.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
