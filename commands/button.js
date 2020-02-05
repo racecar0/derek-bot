@@ -1,6 +1,5 @@
 var button = {};
 const { Client, Attachment, Collection } = require('discord.js'),
-	{ prefix } = require('../config.json'),
 	mongoose = require('mongoose'),
 	Derek = require('../models/derek');
 
