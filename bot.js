@@ -3,13 +3,15 @@ const { Client, Attachment, Collection } = require('discord.js'),
 	commands = new Collection(),
 	express = require('express'),
 	app = express(),
-	port = process.env.PORT || 3000,
 	bodyParser = require('body-parser'),
 	mongoose = require('mongoose'),
+	{ token } = require('./config.json'),
 	fs = require('fs'),
-	{ prefix, token, dbKey } = require('./config.json');
+	prefix = '!',
+	port = process.env.PORT || 3000,
+	botToken = process.env.BOTTOKEN || token,
+	url = process.env.DATABASEURL || 'mongodb://localhost:27017/derek_bot';
 
-const url = dbKey || 'mongodb://localhost:27017/derek_bot';
 mongoose.connect(url, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
@@ -83,9 +85,9 @@ client.once('ready', () => {
 	});
 });
 
-client.login(token);
+client.login(botToken);
 
 //WEBSITE LISTEN
 app.listen(port, function() {
-	console.log('YelpCamp Server Has Started!');
+	console.log('Derek Bot Server Has Started!');
 });
