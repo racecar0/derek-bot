@@ -10,19 +10,19 @@ rpg.fight = (commandMessage) => {
 			name: 'Derek',
 			hitPoints: 15,
 			damageMin: 1,
-			damageMax: 5
+			damageMax: 4
 		},
 		{
 			name: 'Glenn',
 			hitPoints: 20,
-			damageMin: 2,
-			damageMax: 7
+			damageMin: 0,
+			damageMax: 6
 		},
 		{
 			name: 'Shawn',
 			hitPoints: 25,
 			damageMin: 2,
-			damageMax: 10
+			damageMax: 7
 		}
 	];
 	var iMonster = Math.floor(Math.random() * Math.floor(monsterArray.length));
