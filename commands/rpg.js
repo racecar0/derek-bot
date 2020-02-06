@@ -21,7 +21,7 @@ rpg.fight = (commandMessage) => {
 		{
 			name: 'Shawn',
 			hitPoints: 25,
-			damageMin: 2,
+			damageMin: 1,
 			damageMax: 7
 		}
 	];
@@ -29,11 +29,29 @@ rpg.fight = (commandMessage) => {
 	var monster = monsterArray[iMonster];
 	var player = {
 		name: commandMessage.author.username,
-		hitPoints: 15,
-		damageMin: 1,
-		damageMax: 5,
-		shield: 2,
-		specialCount: 4
+		id: '',
+		username: commandMessage.author.username,
+		discriminator: '',
+		weapon: {
+			damageMin: 1,
+			damageMax: 5
+		},
+		armor: {
+			damageReduction: 2,
+			runModifier: 2
+		},
+		medication: {
+			healingMin: 1,
+			healingMax: 5
+		},
+		specialMove: {
+			damageMin: 1,
+			damageMax: 5,
+			healingMin: 1,
+			healingMax: 5,
+			counter: 4
+		},
+		credits: 0
 	};
 	var turnCount = 0;
 	combat.setup(commandMessage, monster, player, turnCount);

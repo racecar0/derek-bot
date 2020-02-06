@@ -5,12 +5,12 @@ const { Client, Attachment, Collection } = require('discord.js'),
 	app = express(),
 	bodyParser = require('body-parser'),
 	mongoose = require('mongoose'),
-	// { token } = require('./config.json'),
+	{ token } = require('./config.json'),
 	fs = require('fs'),
 	prefix = '!',
 	port = process.env.PORT || 3000,
-	botToken = process.env.BOTTOKEN || token,
-	url = process.env.DATABASEURL || 'mongodb://localhost:27017/derek_bot';
+	botToken = token,
+	url = 'mongodb://localhost:27017/derek_bot';
 
 mongoose.connect(url, {
 	useNewUrlParser: true,
@@ -32,6 +32,7 @@ for (const file of commandFiles) {
 //MY COMMAND ROUTES
 const button = require('./commands/button');
 const rpg = require('./commands/rpg');
+const profile = require('./commands/profile');
 
 //BOT RESPONSES
 client.on('message', (message) => {
@@ -48,6 +49,8 @@ client.on('message', (message) => {
 		button.button(message, commandName);
 	} else if (commandName === 'rpg') {
 		rpg.fight(message);
+	} else if (commandName === 'register') {
+		profile.newUser(message);
 	}
 
 	//Generalized way to set up commands according to Discord.js
@@ -78,6 +81,8 @@ client.once('ready', () => {
 	console.log('Servers:');
 	client.guilds.forEach((guild) => {
 		console.log(' - ' + guild.name);
+		// //List all users
+		// console.log(guild.members);
 		// List all channels
 		// guild.channels.forEach((channel) => {
 		// 	console.log(` -- ${channel.name} (${channel.type}) - ${channel.id}`);
