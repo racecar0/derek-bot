@@ -29,19 +29,17 @@ profile.newUser = (message) => {
 		credits: 0
 	};
 	User.find({ id: message.author.id }, (err, userFound) => {
+		console.log(userFound[0].id);
+		console.log(message.author.id);
 		if (err) {
 			console.log(err);
-		} else if (!userFound) {
+		} else if (typeof userFound != undefined) {
 			User.create(player, (err, newPlayer) => {
 				if (err) console.log(err);
 			});
 			message.channel.send('Profile Created');
-			console.log(userFound);
-			console.log(message.author.id);
-		} else {
+		} else if (userFound[0].id == message.author.id) {
 			message.channel.send('A profile with your id was already found.');
-			console.log(userFound);
-			console.log(message.author.id);
 		}
 	});
 };
