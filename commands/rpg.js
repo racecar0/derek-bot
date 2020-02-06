@@ -25,7 +25,7 @@ rpg.fight = (commandMessage) => {
 			damageMax: 10
 		}
 	];
-	var iMonster = Math.floor(Math.random * (monsterArray.length - 1));
+	var iMonster = Math.floor(Math.random() * Math.floor(monsterArray.length));
 	var monster = monsterArray[iMonster];
 	var player = {
 		name: commandMessage.author.username,
