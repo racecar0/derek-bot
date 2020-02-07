@@ -51,6 +51,8 @@ client.on('message', (message) => {
 		rpg.fight(message);
 	} else if (commandName === 'register') {
 		profile.newUser(message);
+	} else if (commandName === 'status') {
+		profile.status(message);
 	}
 
 	//Generalized way to set up commands according to Discord.js
