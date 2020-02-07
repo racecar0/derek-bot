@@ -29,16 +29,14 @@ profile.newUser = (message) => {
 		credits: 0
 	};
 	User.find({ id: message.author.id }, (err, userFound) => {
-		console.log(userFound[0].id);
-		console.log(message.author.id);
 		if (err) {
 			console.log(err);
-		} else if (typeof userFound != undefined) {
+		} else if (userFound.length < 1) {
 			User.create(player, (err, newPlayer) => {
 				if (err) console.log(err);
 			});
 			message.channel.send('Profile Created');
-		} else if (userFound[0].id == message.author.id) {
+		} else {
 			message.channel.send('A profile with your id was already found.');
 		}
 	});
