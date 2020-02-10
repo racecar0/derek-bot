@@ -30,6 +30,7 @@ profile.newUser = (message) => {
 			healingMax: 5,
 			counter: 4
 		},
+		hitPoints: 15,
 		experience: 0,
 		level: 1,
 		credits: 0

@@ -3,8 +3,8 @@ const { Client, Attachment, Collection } = require('discord.js'),
 	mongoose = require('mongoose');
 
 //Combat Action
-rpg.fight = (commandMessage) => {
-	//Monster and Player Objects
+rpg.fight = (commandMessage, player) => {
+	//Monster Array Objects
 	var monsterArray = [
 		{
 			name: 'Derek',
@@ -27,32 +27,6 @@ rpg.fight = (commandMessage) => {
 	];
 	var iMonster = Math.floor(Math.random() * Math.floor(monsterArray.length));
 	var monster = monsterArray[iMonster];
-	var player = {
-		name: commandMessage.author.username,
-		id: '',
-		username: commandMessage.author.username,
-		discriminator: '',
-		weapon: {
-			damageMin: 1,
-			damageMax: 5
-		},
-		armor: {
-			damageReduction: 2,
-			runModifier: 2
-		},
-		medication: {
-			healingMin: 1,
-			healingMax: 5
-		},
-		specialMove: {
-			damageMin: 1,
-			damageMax: 5,
-			healingMin: 1,
-			healingMax: 5,
-			counter: 4
-		},
-		credits: 0
-	};
 	var turnCount = 0;
 	combat.setup(commandMessage, monster, player, turnCount);
 };
@@ -69,7 +43,7 @@ combat.setup = function(commandMessage, monster, player, turnCount) {
 				'\nCurrent HP: ' +
 				monster.hitPoints +
 				'\n\nPlayer: ' +
-				player.name +
+				player.username +
 				'\nYour HP: ' +
 				player.hitPoints
 		)
@@ -81,7 +55,7 @@ combat.setup = function(commandMessage, monster, player, turnCount) {
 				.then(() => sent.react('🩹'))
 				.then(() => sent.react('❔'))
 				.then(() => {
-					if (turnCount >= player.specialCount) {
+					if (turnCount >= player.specialMove.counter) {
 						sent.react('✨');
 					}
 				});
@@ -115,13 +89,23 @@ combat.setup = function(commandMessage, monster, player, turnCount) {
 		});
 };
 combat.attack = function(commandMessage, monster, player, turnCount) {
-	player.damage = Math.floor(Math.random() * player.damageMax + player.damageMin);
+	player.damage =
+		Math.floor(Math.random() * (Math.floor(player.weapon.damageMax) + Math.ceil(player.weapon.damageMin) + 1)) +
+		player.weapon.damageMin;
 	commandMessage.channel.send(
-		'```diff\n- ' + commandMessage.author.username + ' swings for ' + player.damage + ' damage.\n```'
+		'```diff\n- You swing with your ' + player.weapon.name + ' for ' + player.damage + ' damage.\n```'
 	);
 	monster.hitPoints -= player.damage;
 
-	monster.damage = Math.floor(Math.random() * monster.damageMax + monster.damageMin);
+	monster.damage =
+		Math.floor(Math.random() * (Math.floor(monster.damageMax) + Math.ceil(monster.damageMin) + 1)) +
+		monster.damageMin;
+	//Player Damage Reduction Calculation
+	if (monster.damage - player.armor.damageReduction >= 0) {
+		monster.damage -= player.armor.damageReduction;
+	} else {
+		monster.damage = 0;
+	}
 	commandMessage.channel.send('```diff\n- ' + monster.name + ' swings for ' + monster.damage + ' damage.\n```');
 	player.hitPoints -= monster.damage;
 
@@ -135,8 +119,10 @@ combat.attack = function(commandMessage, monster, player, turnCount) {
 	}
 };
 combat.defend = function(commandMessage, monster, player, turnCount) {
-	monster.damage = Math.floor(Math.random() * (monster.damageMax - monster.damageMin) + monster.damageMin);
-	commandMessage.channel.send('```diff\n- ' + monster.name + ' swings for ' + monster.damage + ' damage.```');
+	monster.damage =
+		Math.floor(Math.random() * (Math.floor(monster.damageMax) + Math.ceil(monster.damageMin) + 1)) +
+		monster.damageMin;
+	commandMessage.channel.send('```diff\n- ' + monster.name + ' swings for ' + monster.damage + ' damage.\n```');
 	setTimeout(() => {
 		commandMessage.channel.send('```yaml\nYou deflect it with your shield.\n```');
 	}, 250);
@@ -152,14 +138,25 @@ combat.defend = function(commandMessage, monster, player, turnCount) {
 	}, 250);
 };
 combat.heal = function(commandMessage, monster, player, turnCount) {
-	player.damage = Math.floor(Math.random() * (player.damageMax - player.damageMin) + player.damageMin);
+	player.healing =
+		Math.floor(
+			Math.random() * (Math.floor(player.medication.healingMax) + Math.ceil(player.medication.healingMin) + 1)
+		) + player.medication.healingMin;
 	commandMessage.channel.send(
-		'```diff\n+ ' + commandMessage.author.username + ' heals for ' + player.damage + ' damage.```'
+		'```diff\n+ You use a ' + player.medication.name + ' and heal for ' + player.healing + ' damage.```'
 	);
 	player.hitPoints += player.damage;
 
-	monster.damage = Math.floor(Math.random() * (monster.damageMax - monster.damageMin) + monster.damageMin);
-	commandMessage.channel.send('```diff\n- ' + monster.name + ' swings for ' + monster.damage + ' damage.```');
+	monster.damage =
+		Math.floor(Math.random() * (Math.floor(monster.damageMax) + Math.ceil(monster.damageMin) + 1)) +
+		monster.damageMin;
+	//Player Damage Reduction Calculation
+	if (monster.damage - player.armor.damageReduction >= 0) {
+		monster.damage -= player.armor.damageReduction;
+	} else {
+		monster.damage = 0;
+	}
+	commandMessage.channel.send('```diff\n- ' + monster.name + ' swings for ' + monster.damage + ' damage.\n```');
 	player.hitPoints -= monster.damage;
 
 	if (monster.hitPoints > 0 && player.hitPoints > 0) {
@@ -174,28 +171,24 @@ combat.heal = function(commandMessage, monster, player, turnCount) {
 combat.status = function(commandMessage, monster, player, turnCount) {
 	commandMessage.channel.send(
 		'Attack Damage: ' +
-			player.damageMin +
+			player.weapon.damageMin +
 			'-' +
-			player.damageMax +
+			player.weapon.damageMax +
 			' damage' +
-			'\nShield Rating: ' +
-			player.shield +
+			'\nArmor Rating: ' +
+			player.armor.damageReduction +
 			'\nTurns until Special: ' +
-			(player.specialCount - turnCount)
+			(player.specialMove.counter - turnCount)
 	);
 
 	combat.setup(commandMessage, monster, player, turnCount);
 };
 combat.special = function(commandMessage, monster, player, turnCount) {
 	commandMessage.channel.send('```http\n' + monster.name + ' can only stand in awe of your special attack!\n```');
-
-	player.damage = player.damageMax;
+	//Needs a better calculation. Might need total revision to system.
+	player.damage = player.specialMove.damageMax;
 	commandMessage.channel.send(
-		'```css\n' +
-			commandMessage.author.username +
-			' pretends like they know what they are doing for ' +
-			player.damageMax +
-			' damage!!!\n```'
+		'```css\nYou use your ' + player.specialMove.name + ' for ' + player.damage + ' damage!!!\n```'
 	);
 	monster.hitPoints -= player.damage;
 	turnCount = 0;

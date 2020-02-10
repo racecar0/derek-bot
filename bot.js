@@ -5,12 +5,19 @@ const { Client, Attachment, Collection } = require('discord.js'),
 	app = express(),
 	bodyParser = require('body-parser'),
 	mongoose = require('mongoose'),
-	{ token } = require('./config.json'),
 	fs = require('fs'),
 	prefix = '!',
-	port = process.env.PORT || 3000,
+	User = require('./models/user'),
+	port = process.env.PORT || 3000;
+
+//FOR LOCAL DEVELOPMENT
+const { token } = require('./config.json'),
 	botToken = token,
 	url = 'mongodb://localhost:27017/derek_bot';
+
+//FOR PRODUCTION ENVIRONMENT
+// const botToken = process.env.BOTTOKEN,
+// url = process.env.DATABASEURL;
 
 mongoose.connect(url, {
 	useNewUrlParser: true,
@@ -47,14 +54,11 @@ client.on('message', (message) => {
 		button.hello(message);
 	} else if (commandName === 'button') {
 		button.button(message);
-	} else if (commandName === 'rpg') {
-		rpg.fight(message);
 	} else if (commandName === 'register') {
 		profile.newUser(message);
 	} else if (commandName === 'status') {
 		profile.status(message);
 	}
-
 	//Generalized way to set up commands according to Discord.js
 	if (!commands.has(commandName)) return;
 	const command = commands.get(commandName);
@@ -66,6 +70,34 @@ client.on('message', (message) => {
 	} catch (error) {
 		console.error(error);
 		message.reply('There was an error trying to execute that command!');
+	}
+});
+
+client.on('message', (message) => {
+	// Prevent bot from responding to its own messages and doing anything without prefix
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
+	//Remove prefix
+	const args = message.content.slice(prefix.length).split(/ +/);
+	//Take first element from args (the command itself) and store it
+	const commandName = args.shift().toLowerCase();
+	if (commandName === 'rpg') {
+		User.find({ userID: message.author.id }, function(err, foundPlayer) {
+			player = foundPlayer[0];
+			if (err) {
+				console.log(err);
+			} else if (player == undefined) {
+				message.channel.send('Please use !register to create a profile first.');
+			} else if (player.userID == message.author.id) {
+				rpg.fight(message, player);
+			} else {
+				console.log(player);
+				console.log(message.author.id);
+				message.channel.send('Something weird happened. Pinging Racecar0.');
+				client.fetchUser('201336725958557706', false).then((user) => {
+					user.send('Something asplode.');
+				});
+			}
+		});
 	}
 });
 

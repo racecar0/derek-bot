@@ -27,6 +27,7 @@ var PlayerSchema = new mongoose.Schema({
 		healingMax: Number,
 		counter: Number
 	},
+	hitPoints: Number,
 	experience: Number,
 	level: Number,
 	credits: Number
