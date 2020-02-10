@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var PlayerSchema = new mongoose.Schema({
-	id: String,
+	userID: String,
 	username: String,
 	discriminator: String,
 	weapon: {

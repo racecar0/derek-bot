@@ -44,9 +44,9 @@ client.on('message', (message) => {
 	const commandName = args.shift().toLowerCase();
 	if (commandName === 'hi') {
 		//This is my way to set up commands, with multiple functions available in a single file.
-		button.hello(message, commandName);
+		button.hello(message);
 	} else if (commandName === 'button') {
-		button.button(message, commandName);
+		button.button(message);
 	} else if (commandName === 'rpg') {
 		rpg.fight(message);
 	} else if (commandName === 'register') {

@@ -4,7 +4,7 @@ const mongoose = require('mongoose'),
 
 profile.newUser = (message) => {
 	var player = {
-		id: message.author.id,
+		userID: message.author.id,
 		username: message.author.username,
 		discriminator: message.author.discriminator,
 		weapon: {
@@ -34,84 +34,85 @@ profile.newUser = (message) => {
 		level: 1,
 		credits: 0
 	};
-	User.find({ id: message.author.id }, (err, userFound) => {
-		console.log(userFound);
+	User.find({ userID: message.author.id }, (err, userFound) => {
 		if (err) {
 			console.log(err);
 		} else if (userFound[0] == undefined) {
-			//This really should be using the id numbers of both userFound[0] and message.author.id, but that's taking longer to work
 			User.create(player, (err, newPlayer) => {
 				if (err) console.log(err);
 			});
 			message.channel.send('Profile Created');
-		} else if (userFound[0].id == message.author.id) {
+		} else if (userFound[0].userID == message.author.id) {
 			message.channel.send('A profile with your id was already found.');
 		} else {
 			console.log(userFound[0]);
 			console.log(message.author.id);
-			message.channel.send('Something weird happened. @Racecar0#8015 Go check the console.');
+			message.channel.send('Something weird happened. @Racecar0 Go check the console.');
 		}
-		// if (err) {
-		// 	console.log(err);
-		// } else if (userFound.length < 1) {
-		// 	//This really should be using the id numbers of both userFound[0] and message.author.id, but that's taking longer to work
-		// 	User.create(player, (err, newPlayer) => {
-		// 		if (err) console.log(err);
-		// 	});
-		// 	message.channel.send('Profile Created');
-		// } else {
-		// 	message.channel.send('A profile with your id was already found.');
-		// }
 	});
 };
 
 profile.status = (message) => {
-	var player = User.find({ id: message.author.id }, (err, userFound) => {
-		console.log(userFound[0]);
-		var player = userFound[0];
-		message.channel.send(
-			'**Username:** ' +
-				player.username +
-				'\n**Weapon (damage range):** ' +
-				player.weapon.name +
-				' (' +
-				player.weapon.damageMin +
-				'-' +
-				player.weapon.damageMax +
-				')' +
-				'\n**Armor (defense, run modifier):** ' +
-				player.armor.name +
-				' (' +
-				player.armor.damageReduction +
-				', ' +
-				player.armor.runModifier +
-				')' +
-				'\n**Medication (healing range):** ' +
-				player.medication.name +
-				' (' +
-				player.medication.healingMin +
-				'-' +
-				player.medication.healingMax +
-				')' +
-				'\n**Special (ability description):** \n' +
-				player.specialMove.name +
-				' deal ' +
-				player.specialMove.damageMin +
-				'-' +
-				player.specialMove.damageMax +
-				' damage and might heal for ' +
-				player.specialMove.healingMin +
-				'-' +
-				player.specialMove.healingMax +
-				' health' +
-				'\n**Experience (needed for next level):** ' +
-				player.experience +
-				' (n/a)' +
-				'\n**Current Level:** ' +
-				player.level +
-				'\n**Credits:** ' +
-				player.credits
-		);
+	User.find({ userID: message.author.id }, function(err, foundPlayer) {
+		player = foundPlayer[0];
+		if (err) {
+			console.log(err);
+			return;
+		} else if (player == undefined) {
+			message.channel.send('Please use !register to create a profile first.');
+		} else if (player.userID == message.author.id) {
+			message.channel.send(
+				'**Username:** ' +
+					player.username +
+					'\n**Weapon (damage range):** ' +
+					player.weapon.name +
+					' (' +
+					player.weapon.damageMin +
+					'-' +
+					player.weapon.damageMax +
+					')' +
+					'\n**Armor (defense, run modifier):** ' +
+					player.armor.name +
+					' (' +
+					player.armor.damageReduction +
+					', ' +
+					player.armor.runModifier +
+					')' +
+					'\n**Medication (healing range):** ' +
+					player.medication.name +
+					' (' +
+					player.medication.healingMin +
+					'-' +
+					player.medication.healingMax +
+					')' +
+					'\n**Special (ability description):** \n' +
+					player.specialMove.name +
+					' deal ' +
+					player.specialMove.damageMin +
+					'-' +
+					player.specialMove.damageMax +
+					' damage and might heal for ' +
+					player.specialMove.healingMin +
+					'-' +
+					player.specialMove.healingMax +
+					' health' +
+					'\n**Experience (needed for next level):** ' +
+					player.experience +
+					' (n/a)' +
+					'\n**Current Level:** ' +
+					player.level +
+					'\n**Credits:** ' +
+					player.credits
+			);
+		} else {
+			console.log(player);
+			console.log(message.author.id);
+			message.channel.send('Something weird happened. Pinging Racecar0.');
+			client.fetchUser('201336725958557706', false).then((user) => {
+				user.send('Something asplode.');
+			});
+		}
 	});
 };
+
 module.exports = profile;
