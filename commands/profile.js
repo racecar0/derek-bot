@@ -97,7 +97,7 @@ profile.status = (message) => {
 					'-' +
 					player.specialMove.healingMax +
 					' health' +
-					'\n**Experience (needed for next level):** ' +
+					'\n**Experience Total (XP needed for next level):** ' +
 					player.experience +
 					' (n/a)' +
 					'\n**Current Level:** ' +

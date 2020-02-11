@@ -1,0 +1,52 @@
+[
+	{
+		"level": 1,
+		"hitPoints": 15,
+		"experience": 0
+	},
+	{
+		"level": 2,
+		"hitPoints": 20,
+		"experience": 100
+	},
+	{
+		"level": 3,
+		"hitPoints": 25,
+		"experience": 200
+	},
+	{
+		"level": 4,
+		"hitPoints": 30,
+		"experience": 300
+	},
+	{
+		"level": 5,
+		"hitPoints": 35,
+		"experience": 400
+	},
+	{
+		"level": 6,
+		"hitPoints": 40,
+		"experience": 500
+	},
+	{
+		"level": 7,
+		"hitPoints": 45,
+		"experience": 600
+	},
+	{
+		"level": 8,
+		"hitPoints": 50,
+		"experience": 700
+	},
+	{
+		"level": 9,
+		"hitPoints": 75,
+		"experience": 800
+	},
+	{
+		"level": 10,
+		"hitPoints": 100,
+		"experience": 1000
+	}
+]

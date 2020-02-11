@@ -1,6 +1,8 @@
 var rpg = {};
 const { Client, Attachment, Collection } = require('discord.js'),
 	monsters = require('../data/monsters.json'),
+	levels = require('../data/experience.json'),
+	User = require('../models/user'),
 	mongoose = require('mongoose');
 
 //Combat Action
@@ -104,6 +106,8 @@ combat.attack = function(commandMessage, monster, player, turnCount) {
 		commandMessage.channel.send('You are dead.');
 	} else {
 		commandMessage.channel.send('Victory!');
+		credits.onVictory(commandMessage, monster, player);
+		experience.onVictory(commandMessage, monster, player);
 	}
 };
 combat.defend = function(commandMessage, monster, player, turnCount) {
@@ -122,6 +126,8 @@ combat.defend = function(commandMessage, monster, player, turnCount) {
 			commandMessage.channel.send('You are dead.');
 		} else {
 			commandMessage.channel.send('Victory!');
+			credits.onVictory(commandMessage, monster, player);
+			experience.onVictory(commandMessage, monster, player);
 		}
 	}, 250);
 };
@@ -154,6 +160,8 @@ combat.heal = function(commandMessage, monster, player, turnCount) {
 		commandMessage.channel.send('You are dead.');
 	} else {
 		commandMessage.channel.send('Victory!');
+		credits.onVictory(commandMessage, monster, player);
+		experience.onVictory(commandMessage, monster, player);
 	}
 };
 combat.status = function(commandMessage, monster, player, turnCount) {
@@ -187,5 +195,55 @@ combat.special = function(commandMessage, monster, player, turnCount) {
 		commandMessage.channel.send('You are dead.');
 	} else {
 		commandMessage.channel.send('Victory!');
+		credits.onVictory(commandMessage, monster, player);
+		experience.onVictory(commandMessage, monster, player);
+	}
+};
+
+//CREDITS
+var credits = {};
+
+credits.onVictory = function(commandMessage, monster, player) {
+	var updateCredits = player.credits + monster.credits;
+	User.findOneAndUpdate({ userID: player.userID }, { credits: updateCredits }, function(err, foundUser) {
+		if (err) {
+			console.log(err);
+		} else {
+			commandMessage.channel.send('You gained ' + monster.credits + ' credits!');
+		}
+	});
+};
+
+// credits.onDeath =
+
+//EXPERIENCE
+var experience = {};
+experience.onVictory = function(commandMessage, monster, player) {
+	var updateExp = player.experience + monster.experience;
+	User.findOneAndUpdate({ userID: player.userID }, { experience: updateExp }, function(err, foundUser) {
+		if (err) {
+			console.log(err);
+		} else {
+			commandMessage.channel.send('You gained ' + monster.experience + ' experience.');
+			experience.levelUp(commandMessage, player);
+		}
+	});
+};
+
+experience.levelUp = function(commandMessage, player) {
+	levelIndex = player.level;
+	if (player.experience >= levels[levelIndex].experience) {
+		newLevel = player.level + 1;
+		newHP = levels[levelIndex].hitPoints;
+		User.findOneAndUpdate({ userID: player.userID }, { level: newLevel, hitPoints: newHP }, function(
+			err,
+			foundUser
+		) {
+			if (err) {
+				console.log(err);
+			} else {
+				commandMessage.channel.send('You leveled up!');
+			}
+		});
 	}
 };
