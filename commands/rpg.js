@@ -1,10 +1,10 @@
-var rpg = {};
 const { Client, Attachment, Collection } = require('discord.js'),
 	monsters = require('../data/monsters.json'),
 	levels = require('../data/experience.json'),
 	User = require('../models/user'),
 	mongoose = require('mongoose');
 
+var rpg = {};
 //Combat Action
 rpg.fight = (commandMessage, player) => {
 	var monstersArray = [];

@@ -37,9 +37,10 @@ for (const file of commandFiles) {
 }
 
 //MY COMMAND ROUTES
-const button = require('./commands/button');
-const rpg = require('./commands/rpg');
-const profile = require('./commands/profile');
+const button = require('./commands/button'),
+	rpg = require('./commands/rpg'),
+	minigames = require('./commands/minigames'),
+	profile = require('./commands/profile');
 
 //BOT RESPONSES
 client.on('message', (message) => {
@@ -89,6 +90,24 @@ client.on('message', (message) => {
 				message.channel.send('Please use !register to create a profile first.');
 			} else if (player.userID == message.author.id) {
 				rpg.fight(message, player);
+			} else {
+				console.log(player);
+				console.log(message.author.id);
+				message.channel.send('Something weird happened. Pinging Racecar0.');
+				client.fetchUser('201336725958557706', false).then((user) => {
+					user.send('Something asplode.');
+				});
+			}
+		});
+	} else if (commandName === 'flip') {
+		User.find({ userID: message.author.id }, function(err, foundPlayer) {
+			player = foundPlayer[0];
+			if (err) {
+				console.log(err);
+			} else if (player == undefined) {
+				message.channel.send('Please use !register to create a profile first.');
+			} else if (player.userID == message.author.id) {
+				minigames.flip(message, player, args);
 			} else {
 				console.log(player);
 				console.log(message.author.id);
