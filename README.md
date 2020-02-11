@@ -4,11 +4,12 @@ TO DO LIST
 ==========
 
 ~~Redo Monster array to either pull from the DB or a JSON (haven't decided yet, probably latter).~~
-* Fix player/monster damage equation. Keeps doing more than it should.
+~~Add experience/credit gain after monster death. Credit loss after player death.~~
+* Fix player/monster damage equation. Keeps doing more damage than it should.
 * Allow users to pick a name at registration and change name after the fact.
-* Change shield to run.
-* Add experience/credit gain after monster death. Credit loss after player death.
-* Improved Leveling Systems
+* Change "shield" icon to "run" icon and revamp run system.
+* Improved Leveling Systems (maybe add a base damage/heal/DR/run to each level that gets added in the equation?)
 * Shop systems.
-* More robust Weapon, Armor, and Medication systems.
+* More robust Weapon, Armor, and Medication systems (maybe class-based, uses markdown tables).
 * Class systems (including different Special Moves)
+* Add more minigames

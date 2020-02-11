@@ -74,7 +74,8 @@ combat.setup = function(commandMessage, monster, player, turnCount) {
 					}
 				})
 				.catch((collected) => {
-					commandMessage.channel.send('Combat has timed out. You forfeit.');
+					commandMessage.channel.send('Combat has timed out. You died to indecision.');
+					credits.onDeath(commandMessage, player);
 				});
 		});
 };
@@ -104,6 +105,7 @@ combat.attack = function(commandMessage, monster, player, turnCount) {
 		combat.setup(commandMessage, monster, player, turnCount);
 	} else if (player.hitPoints <= 0) {
 		commandMessage.channel.send('You are dead.');
+		credits.onDeath(commandMessage, player);
 	} else {
 		commandMessage.channel.send('Victory!');
 		credits.onVictory(commandMessage, monster, player);
@@ -124,6 +126,7 @@ combat.defend = function(commandMessage, monster, player, turnCount) {
 			combat.setup(commandMessage, monster, player, turnCount);
 		} else if (player.hitPoints <= 0) {
 			commandMessage.channel.send('You are dead.');
+			credits.onDeath(commandMessage, player);
 		} else {
 			commandMessage.channel.send('Victory!');
 			credits.onVictory(commandMessage, monster, player);
@@ -158,6 +161,7 @@ combat.heal = function(commandMessage, monster, player, turnCount) {
 		combat.setup(commandMessage, monster, player, turnCount);
 	} else if (player.hitPoints <= 0) {
 		commandMessage.channel.send('You are dead.');
+		credits.onDeath(commandMessage, player);
 	} else {
 		commandMessage.channel.send('Victory!');
 		credits.onVictory(commandMessage, monster, player);
@@ -193,6 +197,7 @@ combat.special = function(commandMessage, monster, player, turnCount) {
 		combat.setup(commandMessage, monster, player, turnCount);
 	} else if (player.hitPoints <= 0) {
 		commandMessage.channel.send('You are dead.');
+		credits.onDeath(commandMessage, player);
 	} else {
 		commandMessage.channel.send('Victory!');
 		credits.onVictory(commandMessage, monster, player);
@@ -214,7 +219,16 @@ credits.onVictory = function(commandMessage, monster, player) {
 	});
 };
 
-// credits.onDeath =
+credits.onDeath = function(commandMessage, player) {
+	var updateCredits = Math.floor(player.credits / 2);
+	User.findOneAndUpdate({ userID: player.userID }, { credits: updateCredits }, function(err, foundUser) {
+		if (err) {
+			console.log(err);
+		} else {
+			commandMessage.channel.send('You lost ' + (player.credits - updateCredits) + ' credits when you died!');
+		}
+	});
+};
 
 //EXPERIENCE
 var experience = {};
@@ -232,7 +246,8 @@ experience.onVictory = function(commandMessage, monster, player) {
 
 experience.levelUp = function(commandMessage, player) {
 	levelIndex = player.level;
-	if (player.experience >= levels[levelIndex].experience) {
+	//If the player's experience is greater than the next level's experience requirement AND they are below the level cap
+	if (player.experience >= levels[levelIndex].experience && player.level < 10) {
 		newLevel = player.level + 1;
 		newHP = levels[levelIndex].hitPoints;
 		User.findOneAndUpdate({ userID: player.userID }, { level: newLevel, hitPoints: newHP }, function(
