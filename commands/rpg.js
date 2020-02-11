@@ -1,39 +1,27 @@
 var rpg = {};
 const { Client, Attachment, Collection } = require('discord.js'),
+	monsters = require('../data/monsters.json'),
 	mongoose = require('mongoose');
 
 //Combat Action
 rpg.fight = (commandMessage, player) => {
-	//Monster Array Objects
-	var monsterArray = [
-		{
-			name: 'Derek',
-			hitPoints: 15,
-			damageMin: 1,
-			damageMax: 4
-		},
-		{
-			name: 'Glenn',
-			hitPoints: 20,
-			damageMin: 0,
-			damageMax: 6
-		},
-		{
-			name: 'Shawn',
-			hitPoints: 25,
-			damageMin: 1,
-			damageMax: 7
+	var monstersArray = [];
+	for (i = 0; i < monsters.length; i++) {
+		if (monsters[i].level <= player.level) {
+			monstersArray.push(monsters[i]);
 		}
-	];
-	var iMonster = Math.floor(Math.random() * Math.floor(monsterArray.length));
-	var monster = monsterArray[iMonster];
+	}
+	var iMonster = Math.floor(Math.random() * Math.floor(monstersArray.length));
+	var monster = monstersArray[iMonster];
 	var turnCount = 0;
+	monster.tempHP = monster.hitPoints;
 	combat.setup(commandMessage, monster, player, turnCount);
 };
 
 module.exports = rpg;
 
 //Function Declarations
+//COMBAT
 var combat = {};
 combat.setup = function(commandMessage, monster, player, turnCount) {
 	commandMessage.channel
@@ -41,7 +29,7 @@ combat.setup = function(commandMessage, monster, player, turnCount) {
 			'Foe: ' +
 				monster.name +
 				'\nCurrent HP: ' +
-				monster.hitPoints +
+				monster.tempHP +
 				'\n\nPlayer: ' +
 				player.username +
 				'\nYour HP: ' +
@@ -95,7 +83,7 @@ combat.attack = function(commandMessage, monster, player, turnCount) {
 	commandMessage.channel.send(
 		'```diff\n- You swing with your ' + player.weapon.name + ' for ' + player.damage + ' damage.\n```'
 	);
-	monster.hitPoints -= player.damage;
+	monster.tempHP -= player.damage;
 
 	monster.damage =
 		Math.floor(Math.random() * (Math.floor(monster.damageMax) + Math.ceil(monster.damageMin) + 1)) +
@@ -109,7 +97,7 @@ combat.attack = function(commandMessage, monster, player, turnCount) {
 	commandMessage.channel.send('```diff\n- ' + monster.name + ' swings for ' + monster.damage + ' damage.\n```');
 	player.hitPoints -= monster.damage;
 
-	if (monster.hitPoints > 0 && player.hitPoints > 0) {
+	if (monster.tempHP > 0 && player.hitPoints > 0) {
 		turnCount++;
 		combat.setup(commandMessage, monster, player, turnCount);
 	} else if (player.hitPoints <= 0) {
@@ -127,7 +115,7 @@ combat.defend = function(commandMessage, monster, player, turnCount) {
 		commandMessage.channel.send('```yaml\nYou deflect it with your shield.\n```');
 	}, 250);
 	setTimeout(() => {
-		if (monster.hitPoints > 0 && player.hitPoints > 0) {
+		if (monster.tempHP > 0 && player.hitPoints > 0) {
 			turnCount++;
 			combat.setup(commandMessage, monster, player, turnCount);
 		} else if (player.hitPoints <= 0) {
@@ -159,7 +147,7 @@ combat.heal = function(commandMessage, monster, player, turnCount) {
 	commandMessage.channel.send('```diff\n- ' + monster.name + ' swings for ' + monster.damage + ' damage.\n```');
 	player.hitPoints -= monster.damage;
 
-	if (monster.hitPoints > 0 && player.hitPoints > 0) {
+	if (monster.tempHP > 0 && player.hitPoints > 0) {
 		turnCount++;
 		combat.setup(commandMessage, monster, player, turnCount);
 	} else if (player.hitPoints <= 0) {
@@ -190,10 +178,10 @@ combat.special = function(commandMessage, monster, player, turnCount) {
 	commandMessage.channel.send(
 		'```css\nYou use your ' + player.specialMove.name + ' for ' + player.damage + ' damage!!!\n```'
 	);
-	monster.hitPoints -= player.damage;
+	monster.tempHP -= player.damage;
 	turnCount = 0;
 
-	if (monster.hitPoints > 0 && player.hitPoints > 0) {
+	if (monster.tempHP > 0 && player.hitPoints > 0) {
 		combat.setup(commandMessage, monster, player, turnCount);
 	} else if (player.hitPoints <= 0) {
 		commandMessage.channel.send('You are dead.');
