@@ -13,3 +13,4 @@ TO DO LIST
 * More robust Weapon, Armor, and Medication systems (maybe class-based, uses markdown tables).
 * Class systems (including different Special Moves)
 * Add more minigames
+* Better formatting for combat, bars or lines or something
