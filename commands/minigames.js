@@ -10,7 +10,7 @@ minigames.flip = function(message, player, args) {
 	} else if (parseInt(args[0]) === NaN) {
 		console.log('toInteger: ' + args);
 		message.channel.send('Please use the correct format: !flip (credits) (choice)');
-	} else if (args[1].toLowerCase() !== 'heads' || args[1].toLowerCase() !== 'tails') {
+	} else if (args[1].toLowerCase() !== 'heads' && args[1].toLowerCase() !== 'tails') {
 		console.log('heads/tails: ' + args);
 		message.channel.send('Please use the correct format: !flip (credits) (choice)');
 	} else {
