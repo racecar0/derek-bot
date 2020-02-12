@@ -17,7 +17,6 @@ minigames.flip = function(message, player, args) {
 		var bet = parseInt(args[0]);
 		var answer = Math.floor(Math.random() * 2) + 1;
 		if (answer === 1 && args[1] === 'heads') {
-			bet = bet * 2;
 			var updateCredits = player.credits + bet;
 			User.findOneAndUpdate({ userID: player.userID }, { credits: updateCredits }, function(err, foundUser) {
 				if (err) {
