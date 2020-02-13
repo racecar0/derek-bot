@@ -5,7 +5,9 @@ TO DO LIST
 
 ~~Redo Monster array to either pull from the DB or a JSON (haven't decided yet, probably latter).~~
 ~~Add experience/credit gain after monster death. Credit loss after player death.~~
-* Fix player/monster damage equation. Keeps doing more damage than it should.
+* Fix player/monster damage equation. Keeps doing more damage in print than it should.
+* Leveling isn't triggering when xp equals the new level.
+* Healing is especially forked up. Keeps healing for more than it even says it does on print.
 * Allow users to pick a name at registration and change name after the fact.
 * Change "shield" icon to "run" icon and revamp run system.
 * Improved Leveling Systems (maybe add a base damage/heal/DR/run to each level that gets added in the equation?)

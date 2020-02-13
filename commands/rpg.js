@@ -81,16 +81,13 @@ combat.setup = function(commandMessage, monster, player, turnCount) {
 };
 combat.attack = function(commandMessage, monster, player, turnCount) {
 	player.damage =
-		Math.floor(Math.random() * (Math.floor(player.weapon.damageMax) + Math.ceil(player.weapon.damageMin) + 1)) +
-		player.weapon.damageMin;
+		Math.floor(Math.random() * (player.weapon.damageMax - player.weapon.damageMin + 1)) + player.weapon.damageMin;
 	commandMessage.channel.send(
 		'```diff\n- You swing with your ' + player.weapon.name + ' for ' + player.damage + ' damage.\n```'
 	);
 	monster.tempHP -= player.damage;
 
-	monster.damage =
-		Math.floor(Math.random() * (Math.floor(monster.damageMax) + Math.ceil(monster.damageMin) + 1)) +
-		monster.damageMin;
+	monster.damage = Math.floor(Math.random() * (monster.damageMax - monster.damageMin + 1)) + monster.damageMin;
 	//Player Damage Reduction Calculation
 	if (monster.damage - player.armor.damageReduction >= 0) {
 		monster.damage -= player.armor.damageReduction;
@@ -113,9 +110,7 @@ combat.attack = function(commandMessage, monster, player, turnCount) {
 	}
 };
 combat.defend = function(commandMessage, monster, player, turnCount) {
-	monster.damage =
-		Math.floor(Math.random() * (Math.floor(monster.damageMax) + Math.ceil(monster.damageMin) + 1)) +
-		monster.damageMin;
+	monster.damage = Math.floor(Math.random() * (monster.damageMax - monster.damageMin + 1)) + monster.damageMin;
 	commandMessage.channel.send('```diff\n- ' + monster.name + ' swings for ' + monster.damage + ' damage.\n```');
 	setTimeout(() => {
 		commandMessage.channel.send('```yaml\nYou deflect it with your shield.\n```');
@@ -136,17 +131,14 @@ combat.defend = function(commandMessage, monster, player, turnCount) {
 };
 combat.heal = function(commandMessage, monster, player, turnCount) {
 	player.healing =
-		Math.floor(
-			Math.random() * (Math.floor(player.medication.healingMax) + Math.ceil(player.medication.healingMin) + 1)
-		) + player.medication.healingMin;
+		Math.floor(Math.random() * (player.medication.healingMax - player.medication.healingMin + 1)) +
+		player.medication.healingMin;
 	commandMessage.channel.send(
 		'```diff\n+ You use a ' + player.medication.name + ' and heal for ' + player.healing + ' damage.```'
 	);
-	player.hitPoints += player.damage;
+	player.hitPoints += player.healing;
 
-	monster.damage =
-		Math.floor(Math.random() * (Math.floor(monster.damageMax) + Math.ceil(monster.damageMin) + 1)) +
-		monster.damageMin;
+	monster.damage = Math.floor(Math.random() * (monster.damageMax - monster.damageMin + 1)) + monster.damageMin;
 	//Player Damage Reduction Calculation
 	if (monster.damage - player.armor.damageReduction >= 0) {
 		monster.damage -= player.armor.damageReduction;
@@ -186,11 +178,23 @@ combat.status = function(commandMessage, monster, player, turnCount) {
 combat.special = function(commandMessage, monster, player, turnCount) {
 	commandMessage.channel.send('```http\n' + monster.name + ' can only stand in awe of your special attack!\n```');
 	//Needs a better calculation. Might need total revision to system.
-	player.damage = player.specialMove.damageMax;
+	player.damage =
+		Math.floor(Math.random() * (player.specialMove.damageMax - player.specialMove.damageMin + 1)) +
+		player.weapon.damageMin;
+	player.healing =
+		Math.floor(Math.random() * (player.specialMove.healingMax - player.specialMove.healingMin + 1)) +
+		player.specialMove.healingMin;
 	commandMessage.channel.send(
-		'```css\nYou use your ' + player.specialMove.name + ' for ' + player.damage + ' damage!!!\n```'
+		'```css\nYou use your ' +
+			player.specialMove.name +
+			' and deal ' +
+			player.damage +
+			'damage and heal for ' +
+			player.healing +
+			' health!!!\n```'
 	);
 	monster.tempHP -= player.damage;
+	player.hitPoints += player.healing;
 	turnCount = 0;
 
 	if (monster.tempHP > 0 && player.hitPoints > 0) {
@@ -239,26 +243,23 @@ experience.onVictory = function(commandMessage, monster, player) {
 			console.log(err);
 		} else {
 			commandMessage.channel.send('You gained ' + monster.experience + ' experience.');
-			experience.levelUp(commandMessage, player);
+			//If the player's experience is greater than the next level's experience requirement AND they are below the level cap
+			levelIndex = player.level;
+			if (player.experience >= levels[levelIndex].experience && player.level < 10) {
+				experience.levelUp(commandMessage, player, levelIndex);
+			}
 		}
 	});
 };
 
-experience.levelUp = function(commandMessage, player) {
-	levelIndex = player.level;
-	//If the player's experience is greater than the next level's experience requirement AND they are below the level cap
-	if (player.experience >= levels[levelIndex].experience && player.level < 10) {
-		newLevel = player.level + 1;
-		newHP = levels[levelIndex].hitPoints;
-		User.findOneAndUpdate({ userID: player.userID }, { level: newLevel, hitPoints: newHP }, function(
-			err,
-			foundUser
-		) {
-			if (err) {
-				console.log(err);
-			} else {
-				commandMessage.channel.send('You leveled up!');
-			}
-		});
-	}
+experience.levelUp = function(commandMessage, player, levelIndex) {
+	newLevel = player.level + 1;
+	newHP = levels[levelIndex].hitPoints;
+	User.findOneAndUpdate({ userID: player.userID }, { level: newLevel, hitPoints: newHP }, function(err, foundUser) {
+		if (err) {
+			console.log(err);
+		} else {
+			commandMessage.channel.send('You leveled up!');
+		}
+	});
 };
