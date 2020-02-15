@@ -248,7 +248,7 @@ experience.onVictory = function(commandMessage, monster, player) {
 				if (err) {
 					console.log(err);
 				} else {
-					levelIndex = foundUser[0].level;
+					levelIndex = foundUser.level;
 					if (player.experience >= levels[levelIndex].experience && player.level < 10) {
 						experience.levelUp(commandMessage, player, levelIndex);
 					}
