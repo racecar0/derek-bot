@@ -1,6 +1,6 @@
 [
 	{
-		"name": "Treasure Goblin",
+		"name": "Arizona Trash Bag",
 		"hitPoints": 1,
 		"tempHP": 0,
 		"damageMin": 1,
@@ -10,7 +10,7 @@
 		"level": 1
 	},
 	{
-		"name": "Derek",
+		"name": "A Trolley Problem",
 		"hitPoints": 15,
 		"tempHP": 0,
 		"damageMin": 1,
@@ -30,14 +30,94 @@
 		"level": 1
 	},
 	{
-		"name": "Shawn",
+		"name": "Bad Janet",
 		"hitPoints": 30,
 		"tempHP": 0,
-		"damageMin": 1,
+		"damageMin": 2,
 		"damageMax": 7,
 		"credits": 30,
 		"experience": 30,
 		"level": 2
+	},
+	{
+		"name": "Derek",
+		"hitPoints": 35,
+		"tempHP": 0,
+		"damageMin": 1,
+		"damageMax": 8,
+		"credits": 40,
+		"experience": 40,
+		"level": 3
+	},
+	{
+		"name": "Bambadjan",
+		"hitPoints": 40,
+		"tempHP": 0,
+		"damageMin": 2,
+		"damageMax": 8,
+		"credits": 50,
+		"experience": 50,
+		"level": 4
+	},
+	{
+		"name": "Chris Baker",
+		"hitPoints": 45,
+		"tempHP": 0,
+		"damageMin": 1,
+		"damageMax": 9,
+		"credits": 100,
+		"experience": 60,
+		"level": 5
+	},
+	{
+		"name": "Trevor",
+		"hitPoints": 50,
+		"tempHP": 0,
+		"damageMin": 3,
+		"damageMax": 9,
+		"credits": 200,
+		"experience": 70,
+		"level": 6
+	},
+	{
+		"name": "Vicky",
+		"hitPoints": 55,
+		"tempHP": 0,
+		"damageMin": 1,
+		"damageMax": 10,
+		"credits": 300,
+		"experience": 80,
+		"level": 7
+	},
+	{
+		"name": "Bad Janet",
+		"hitPoints": 30,
+		"tempHP": 0,
+		"damageMin": 4,
+		"damageMax": 10,
+		"credits": 400,
+		"experience": 90,
+		"level": 8
+	},
+	{
+		"name": "The Judge",
+		"hitPoints": 40,
+		"tempHP": 0,
+		"damageMin": 5,
+		"damageMax": 10,
+		"credits": 500,
+		"experience": 100,
+		"level": 9
+	},
+	{
+		"name": "Shawn",
+		"hitPoints": 45,
+		"tempHP": 0,
+		"damageMin": 1,
+		"damageMax": 20,
+		"credits": 10000,
+		"experience": 100,
+		"level": 10
 	},
 	{
 		"name": "Example Model",

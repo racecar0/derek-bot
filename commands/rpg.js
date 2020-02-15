@@ -189,7 +189,7 @@ combat.special = function(commandMessage, monster, player, turnCount) {
 			player.specialMove.name +
 			' and deal ' +
 			player.damage +
-			'damage and heal for ' +
+			' damage and heal for ' +
 			player.healing +
 			' health!!!\n```'
 	);
@@ -244,10 +244,16 @@ experience.onVictory = function(commandMessage, monster, player) {
 		} else {
 			commandMessage.channel.send('You gained ' + monster.experience + ' experience.');
 			//If the player's experience is greater than the next level's experience requirement AND they are below the level cap
-			levelIndex = player.level;
-			if (player.experience >= levels[levelIndex].experience && player.level < 10) {
-				experience.levelUp(commandMessage, player, levelIndex);
-			}
+			User.findOne({ userID: player.userID }, function(err, foundUser) {
+				if (err) {
+					console.log(err);
+				} else {
+					levelIndex = foundUser[0].level;
+					if (player.experience >= levels[levelIndex].experience && player.level < 10) {
+						experience.levelUp(commandMessage, player, levelIndex);
+					}
+				}
+			});
 		}
 	});
 };
