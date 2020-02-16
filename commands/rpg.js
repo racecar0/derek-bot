@@ -69,7 +69,7 @@ combat.setup = function(commandMessage, monster, player, turnCount) {
 						combat.heal(commandMessage, monster, player, turnCount);
 					} else if (reaction.emoji.name === '❔') {
 						combat.status(commandMessage, monster, player, turnCount);
-					} else if (reaction.emoji.name === '✨') {
+					} else if (reaction.emoji.name === '✨' && turnCount >= player.specialMove.counter) {
 						combat.special(commandMessage, monster, player, turnCount);
 					}
 				})

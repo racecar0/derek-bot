@@ -11,13 +11,13 @@ const { Client, Attachment, Collection } = require('discord.js'),
 	port = process.env.PORT || 3000;
 
 //FOR LOCAL DEVELOPMENT
-// const { token } = require('./config.json'),
-// 	botToken = token,
-// 	url = 'mongodb://localhost:27017/derek_bot';
+const { token } = require('./config.json'),
+	botToken = token,
+	url = 'mongodb://localhost:27017/derek_bot';
 
 //FOR PRODUCTION ENVIRONMENT
-const botToken = process.env.BOTTOKEN,
-	url = process.env.DATABASEURL;
+// const botToken = process.env.BOTTOKEN,
+// 	url = process.env.DATABASEURL;
 
 mongoose.connect(url, {
 	useNewUrlParser: true,
@@ -40,6 +40,7 @@ for (const file of commandFiles) {
 const button = require('./commands/button'),
 	rpg = require('./commands/rpg'),
 	minigames = require('./commands/minigames'),
+	shops = require('./commands/shops'),
 	profile = require('./commands/profile');
 
 //BOT RESPONSES
@@ -108,6 +109,24 @@ client.on('message', (message) => {
 				message.channel.send('Please use !register to create a profile first.');
 			} else if (player.userID == message.author.id) {
 				minigames.flip(message, player, args);
+			} else {
+				console.log(player);
+				console.log(message.author.id);
+				message.channel.send('Something weird happened. Pinging Racecar0.');
+				client.fetchUser('201336725958557706', false).then((user) => {
+					user.send('Something asplode.');
+				});
+			}
+		});
+	} else if (commandName === 'buy') {
+		User.find({ userID: message.author.id }, function(err, foundPlayer) {
+			player = foundPlayer[0];
+			if (err) {
+				console.log(err);
+			} else if (player == undefined) {
+				message.channel.send('Please use !register to create a profile first.');
+			} else if (player.userID == message.author.id) {
+				shops.weapons(message, player, args);
 			} else {
 				console.log(player);
 				console.log(message.author.id);

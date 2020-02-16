@@ -97,7 +97,8 @@
 		"damageMax": 10,
 		"credits": 400,
 		"experience": 90,
-		"level": 8
+		"level": 8,
+		"_comments": "This is a second Bad Janet apparently. I forgot to change her, but it's kind of funny to have another one that hits a ton harder than the other."
 	},
 	{
 		"name": "The Judge",
