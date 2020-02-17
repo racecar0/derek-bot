@@ -33,7 +33,7 @@ profile.newUser = (message) => {
 		hitPoints: 15,
 		experience: 0,
 		level: 1,
-		credits: 0
+		credits: 10000
 	};
 	User.find({ userID: message.author.id }, (err, userFound) => {
 		if (err) {

@@ -126,7 +126,7 @@ client.on('message', (message) => {
 			} else if (player == undefined) {
 				message.channel.send('Please use !register to create a profile first.');
 			} else if (player.userID == message.author.id) {
-				shops.weapons(message, player, args);
+				shops.sort(message, player, args);
 			} else {
 				console.log(player);
 				console.log(message.author.id);

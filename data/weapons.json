@@ -1,0 +1,72 @@
+[
+	{
+		"number": 0,
+		"name": "Lonely Girl Margarita Mix",
+		"minimum": 1,
+		"maximum": 6,
+		"price": 4000
+	},
+	{
+		"number": 1,
+		"name": "Bowl of Paper Clips",
+		"minimum": 2,
+		"maximum": 5,
+		"price": 5000
+	},
+	{
+		"number": 2,
+		"name": "Yogurt, Yoghurt, Yoghurté",
+		"minimum": 1,
+		"maximum": 7,
+		"price": 10000
+	},
+	{
+		"number": 3,
+		"name": "Shrimp Vending Machine",
+		"minimum": 1,
+		"maximum": 8,
+		"price": 15000
+	},
+	{
+		"number": 4,
+		"name": "Stuffed Frog",
+		"minimum": 1,
+		"maximum": 9,
+		"price": 25000
+	},
+	{
+		"number": 5,
+		"name": "Holy Motherforking Shirtballs",
+		"minimum": 1,
+		"maximum": 10,
+		"price": 50000
+	},
+	{
+		"number": 6,
+		"name": "Purple Train to Groovy City",
+		"minimum": 1,
+		"maximum": 15,
+		"price": 75000
+	},
+	{
+		"number": 7,
+		"name": "Human Eraser Clicker Thingy",
+		"minimum": 1,
+		"maximum": 20,
+		"price": 100000
+	},
+	{
+		"number": 8,
+		"name": "The Kierkegaard Rap",
+		"minimum": 1,
+		"maximum": 25,
+		"price": 1000000
+	},
+	{
+		"number": 9,
+		"name": "The Wave",
+		"minimum": 1,
+		"maximum": 30,
+		"price": 10000000
+	}
+]

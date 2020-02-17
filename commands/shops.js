@@ -1,45 +1,89 @@
 var shops = {};
 const mongoose = require('mongoose'),
+	weapons = require('../data/weapons.json'),
 	User = require('../models/user');
 
+shops.sort = function(message, player, args) {
+	console.log(args);
+	//sort between weapons, armor, medication, special
+	if (args === undefined) {
+		message.channel.send(
+			'Please specify what you would like to buy. !buy (weapons, armor, medication, OR special)'
+		);
+	} else if (args[0] === 'weapons') {
+		shops.weapons(message, player);
+	} else if (args[0] === 'armor') {
+		message.channel.send("The armor shop isn't open yet.");
+	} else if (args[0] === 'medication') {
+		message.channel.send("The medication shop isn't open yet.");
+	} else if (args[0] === 'special') {
+		message.channel.send("The special move shop isn't open yet.");
+	} else {
+		message.channel.send(
+			'Please specify what you would like to buy. !buy (weapons, armor, medication, OR special)'
+		);
+	}
+};
+
 shops.weapons = function(message, player) {
-	message.channel.send('Starting shop image.').then((sent) => {
+	var items = shops.setup(weapons);
+	message.channel.send(items).then((sent) => {
 		// 'sent' is that message you just sent
 		sent
-			.react('⬅')
+			.react('0️⃣')
 			.then(() => sent.react('1️⃣'))
 			.then(() => sent.react('2️⃣'))
 			.then(() => sent.react('3️⃣'))
 			.then(() => sent.react('4️⃣'))
 			.then(() => sent.react('5️⃣'))
-			.then(() => sent.react('➡'));
+			.then(() => sent.react('6️⃣'))
+			.then(() => sent.react('7️⃣'))
+			.then(() => sent.react('8️⃣'))
+			.then(() => sent.react('9️⃣'));
 
 		const filter = (reaction, user) => {
 			return (
-				[ '⬅', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '➡' ].includes(reaction.emoji.name) &&
-				user.id === message.author.id
+				[ '0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣' ].includes(
+					reaction.emoji.name
+				) && user.id === message.author.id
 			);
 		};
 
 		sent
-			.awaitReactions(filter, { max: 1, time: 20000, errors: [ 'time' ] })
+			.awaitReactions(filter, { max: 1, time: 30000, errors: [ 'time' ] })
 			.then((collected) => {
 				const reaction = collected.first();
 
-				if (reaction.emoji.name === '⬅') {
-					sent.edit('You pressed the left button.');
+				if (reaction.emoji.name === '0️⃣') {
+					var selection = 0;
+					shops.purchase(message, sent, weapons, selection, player);
 				} else if (reaction.emoji.name === '1️⃣') {
-					sent.edit('You pressed the 1 button.');
+					var selection = 1;
+					shops.purchase(message, sent, weapons, selection, player);
 				} else if (reaction.emoji.name === '2️⃣') {
-					sent.edit('You pressed the 2 button.');
+					var selection = 2;
+					shops.purchase(message, sent, weapons, selection, player);
 				} else if (reaction.emoji.name === '3️⃣') {
-					sent.edit('You pressed the 3 button.');
+					var selection = 3;
+					shops.purchase(message, sent, weapons, selection, player);
 				} else if (reaction.emoji.name === '4️⃣') {
-					sent.edit('You pressed the 4 button.');
+					var selection = 4;
+					shops.purchase(message, sent, weapons, selection, player);
 				} else if (reaction.emoji.name === '5️⃣') {
-					sent.edit('You pressed the 5 button.');
-				} else if (reaction.emoji.name === '➡') {
-					sent.edit('You pressed the right button.');
+					var selection = 5;
+					shops.purchase(message, sent, weapons, selection, player);
+				} else if (reaction.emoji.name === '6️⃣') {
+					var selection = 6;
+					shops.purchase(message, sent, weapons, selection, player);
+				} else if (reaction.emoji.name === '7️⃣') {
+					var selection = 7;
+					shops.purchase(message, sent, weapons, selection, player);
+				} else if (reaction.emoji.name === '8️⃣') {
+					var selection = 8;
+					shops.purchase(message, sent, weapons, selection, player);
+				} else if (reaction.emoji.name === '9️⃣') {
+					var selection = 9;
+					shops.purchase(message, sent, weapons, selection, player);
 				}
 			})
 			.catch((collected) => {
@@ -56,10 +100,60 @@ shops.index = function() {
 	//Moves the index forward and backward and edits/redraws the response emojis.
 };
 
-shops.purchase = function() {
-	//Purchases the item at the given number. Knows at what point the index is to correctly purchase. Checks credit balance. Assigns the item's stats to the user.
+shops.purchase = function(message, sent, items, selection, player) {
+	//Checks credit balance. Returns in the correct item in the array for assignment.
+	if (player.credits >= items[selection].price) {
+		var updateCredits = player.credits - items[selection].price;
+		//Assign Item to player
+		User.findOneAndUpdate(
+			{ userID: player.userID },
+			{
+				credits: updateCredits,
+				weapon: {
+					name: items[selection].name,
+					damageMin: items[selection].minimum,
+					damageMax: items[selection].maximum
+				}
+			},
+			function(err, foundUser) {
+				if (err) {
+					console.log(err);
+				} else {
+					sent.edit('You purchased ' + items[selection].name + '.');
+				}
+			}
+		);
+	} else {
+		sent.edit('You do not have enough credits for that item. Please try to purchase something else.');
+	}
 };
 
 shops.response = function() {
 	//Deletes and replaces the emojis for purchases. Waits for responses and such.
+};
+
+shops.setup = function(items) {
+	var shopString =
+		'```| # |Item Name                     |Price     |Min |Max |\n|---|------------------------------|----------|----|----|\n';
+	for (i = 0; i < items.length; i++) {
+		shopString +=
+			'|' +
+			items[i].number +
+			' '.repeat(3 - items[i].number.toString().length) +
+			'|' +
+			items[i].name +
+			' '.repeat(30 - items[i].name.length) +
+			'|' +
+			items[i].price +
+			' '.repeat(10 - items[i].price.toString().length) +
+			'|' +
+			items[i].minimum +
+			' '.repeat(4 - items[i].minimum.toString().length) +
+			'|' +
+			items[i].maximum +
+			' '.repeat(4 - items[i].maximum.toString().length) +
+			'|\n';
+	}
+	shopString += '|---|------------------------------|----------|----|----|```';
+	return shopString;
 };

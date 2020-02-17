@@ -14,4 +14,5 @@ TO DO LIST
 * Shop systems.
 * More robust Weapon, Armor, and Medication systems (maybe class-based, uses markdown tables).
 * Class systems (including different Special Moves)
+* Add individual combat messages for weapons.
 * Add more minigames
