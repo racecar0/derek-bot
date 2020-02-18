@@ -185,7 +185,7 @@ combat.special = function(commandMessage, monster, player, turnCount) {
 	//Needs a better calculation. Might need total revision to system.
 	player.damage =
 		Math.floor(Math.random() * (player.specialMove.damageMax - player.specialMove.damageMin + 1)) +
-		player.weapon.damageMin;
+		player.specialMove.damageMin;
 	player.healing =
 		Math.floor(Math.random() * (player.specialMove.healingMax - player.specialMove.healingMin + 1)) +
 		player.specialMove.healingMin;
