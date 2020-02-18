@@ -71,6 +71,11 @@ combat.setup = function(commandMessage, monster, player, turnCount) {
 						combat.status(commandMessage, monster, player, turnCount);
 					} else if (reaction.emoji.name === '✨' && turnCount >= player.specialMove.counter) {
 						combat.special(commandMessage, monster, player, turnCount);
+					} else if (reaction.emoji.name === '✨' && turnCount < player.specialMove.counter) {
+						commandMessage.channel.send(
+							'Either something went wrong or you tried to cheat. Either way, you died.'
+						);
+						credits.onDeath(commandMessage, player);
 					}
 				})
 				.catch((collected) => {
