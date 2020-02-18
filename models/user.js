@@ -25,6 +25,7 @@ var PlayerSchema = new mongoose.Schema({
 		damageMax: Number,
 		healingMin: Number,
 		healingMax: Number,
+		stopEnemy: Boolean,
 		counter: Number
 	},
 	hitPoints: Number,

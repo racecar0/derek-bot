@@ -259,7 +259,7 @@ shops.special = function(message, player) {
 				' '.repeat(5 - items[i].counter.toString().length) +
 				'|' +
 				items[i].stopEnemy +
-				' '.repeat(10 - items[i].stopEnemy.toString().length) +
+				' '.repeat(11 - items[i].stopEnemy.toString().length) +
 				'|\n';
 		}
 		shopString +=
