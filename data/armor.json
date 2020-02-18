@@ -1,0 +1,72 @@
+[
+	{
+		"number": 0,
+		"name": "Brain-y Bunch Sweater",
+		"minimum": 2,
+		"maximum": 1,
+		"price": 4000
+	},
+	{
+		"number": 1,
+		"name": "Monk's Robes",
+		"minimum": 2,
+		"maximum": 2,
+		"price": 5000
+	},
+	{
+		"number": 2,
+		"name": "Jacksonville Jaguars Jersey",
+		"minimum": 3,
+		"maximum": 2,
+		"price": 10000
+	},
+	{
+		"number": 3,
+		"name": "Who, What, Where, Wine! Shirt",
+		"minimum": 3,
+		"maximum": 3,
+		"price": 15000
+	},
+	{
+		"number": 4,
+		"name": "Acidcat's Mask",
+		"minimum": 4,
+		"maximum": 3,
+		"price": 25000
+	},
+	{
+		"number": 5,
+		"name": "One of Chris Baker's Shirts",
+		"minimum": 4,
+		"maximum": 4,
+		"price": 50000
+	},
+	{
+		"number": 6,
+		"name": "Disco Janet's Rollerskates",
+		"minimum": 5,
+		"maximum": 4,
+		"price": 75000
+	},
+	{
+		"number": 7,
+		"name": "TGP Committee Medallion",
+		"minimum": 5,
+		"maximum": 5,
+		"price": 100000
+	},
+	{
+		"number": 8,
+		"name": "The Judge's Robes",
+		"minimum": 6,
+		"maximum": 6,
+		"price": 1000000
+	},
+	{
+		"number": 9,
+		"name": "Peacock Feather Bowtie",
+		"minimum": 10,
+		"maximum": 10,
+		"price": 10000000
+	}
+]
