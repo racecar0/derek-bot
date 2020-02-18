@@ -134,7 +134,7 @@ combat.heal = function(commandMessage, monster, player, turnCount) {
 		Math.floor(Math.random() * (player.medication.healingMax - player.medication.healingMin + 1)) +
 		player.medication.healingMin;
 	commandMessage.channel.send(
-		'```diff\n+ You use a ' + player.medication.name + ' and heal for ' + player.healing + ' damage.```'
+		'```diff\n+ You use ' + player.medication.name + ' and heal for ' + player.healing + ' damage.```'
 	);
 	player.hitPoints += player.healing;
 

@@ -381,7 +381,7 @@ shops.setup = function(items) {
 			'```| # |Item Name                     |Price     |Min |Max |\n|---|------------------------------|----------|----|----|\n';
 	} else if (items[0].type === 'armor') {
 		var shopString =
-			'```| # |Item Name                     |Price     | DR |Run%|\n|---|------------------------------|----------|----|----|\n';
+			'```| # |Item Name                     |Price     |DR  |Run%|\n|---|------------------------------|----------|----|----|\n';
 	}
 	for (i = 0; i < items.length; i++) {
 		shopString +=
