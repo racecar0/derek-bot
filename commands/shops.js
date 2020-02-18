@@ -125,34 +125,34 @@ shops.armor = function(message, player) {
 
 				if (reaction.emoji.name === '0️⃣') {
 					var selection = 0;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, armor, selection, player);
 				} else if (reaction.emoji.name === '1️⃣') {
 					var selection = 1;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, armor, selection, player);
 				} else if (reaction.emoji.name === '2️⃣') {
 					var selection = 2;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, armor, selection, player);
 				} else if (reaction.emoji.name === '3️⃣') {
 					var selection = 3;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, armor, selection, player);
 				} else if (reaction.emoji.name === '4️⃣') {
 					var selection = 4;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, armor, selection, player);
 				} else if (reaction.emoji.name === '5️⃣') {
 					var selection = 5;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, armor, selection, player);
 				} else if (reaction.emoji.name === '6️⃣') {
 					var selection = 6;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, armor, selection, player);
 				} else if (reaction.emoji.name === '7️⃣') {
 					var selection = 7;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, armor, selection, player);
 				} else if (reaction.emoji.name === '8️⃣') {
 					var selection = 8;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, armor, selection, player);
 				} else if (reaction.emoji.name === '9️⃣') {
 					var selection = 9;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, armor, selection, player);
 				}
 			})
 			.catch((collected) => {
@@ -191,34 +191,34 @@ shops.medication = function(message, player) {
 
 				if (reaction.emoji.name === '0️⃣') {
 					var selection = 0;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, medication, selection, player);
 				} else if (reaction.emoji.name === '1️⃣') {
 					var selection = 1;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, medication, selection, player);
 				} else if (reaction.emoji.name === '2️⃣') {
 					var selection = 2;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, medication, selection, player);
 				} else if (reaction.emoji.name === '3️⃣') {
 					var selection = 3;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, medication, selection, player);
 				} else if (reaction.emoji.name === '4️⃣') {
 					var selection = 4;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, medication, selection, player);
 				} else if (reaction.emoji.name === '5️⃣') {
 					var selection = 5;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, medication, selection, player);
 				} else if (reaction.emoji.name === '6️⃣') {
 					var selection = 6;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, medication, selection, player);
 				} else if (reaction.emoji.name === '7️⃣') {
 					var selection = 7;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, medication, selection, player);
 				} else if (reaction.emoji.name === '8️⃣') {
 					var selection = 8;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, medication, selection, player);
 				} else if (reaction.emoji.name === '9️⃣') {
 					var selection = 9;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, medication, selection, player);
 				}
 			})
 			.catch((collected) => {
@@ -257,34 +257,34 @@ shops.special = function(message, player) {
 
 				if (reaction.emoji.name === '0️⃣') {
 					var selection = 0;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, special, selection, player);
 				} else if (reaction.emoji.name === '1️⃣') {
 					var selection = 1;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, special, selection, player);
 				} else if (reaction.emoji.name === '2️⃣') {
 					var selection = 2;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, special, selection, player);
 				} else if (reaction.emoji.name === '3️⃣') {
 					var selection = 3;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, special, selection, player);
 				} else if (reaction.emoji.name === '4️⃣') {
 					var selection = 4;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, special, selection, player);
 				} else if (reaction.emoji.name === '5️⃣') {
 					var selection = 5;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, special, selection, player);
 				} else if (reaction.emoji.name === '6️⃣') {
 					var selection = 6;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, special, selection, player);
 				} else if (reaction.emoji.name === '7️⃣') {
 					var selection = 7;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, special, selection, player);
 				} else if (reaction.emoji.name === '8️⃣') {
 					var selection = 8;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, special, selection, player);
 				} else if (reaction.emoji.name === '9️⃣') {
 					var selection = 9;
-					shops.purchase(message, sent, weapons, selection, player);
+					shops.purchase(message, sent, special, selection, player);
 				}
 			})
 			.catch((collected) => {
@@ -305,25 +305,67 @@ shops.purchase = function(message, sent, items, selection, player) {
 	//Checks credit balance. Returns in the correct item in the array for assignment.
 	if (player.credits >= items[selection].price) {
 		var updateCredits = player.credits - items[selection].price;
-		//Assign Item to player
-		User.findOneAndUpdate(
-			{ userID: player.userID },
-			{
-				credits: updateCredits,
-				weapon: {
-					name: items[selection].name,
-					damageMin: items[selection].minimum,
-					damageMax: items[selection].maximum
+		if (items[selection].type === 'weapon') {
+			//Assign Item to player
+			User.findOneAndUpdate(
+				{ userID: player.userID },
+				{
+					credits: updateCredits,
+					weapon: {
+						name: items[selection].name,
+						damageMin: items[selection].minimum,
+						damageMax: items[selection].maximum
+					}
+				},
+				function(err, foundUser) {
+					if (err) {
+						console.log(err);
+					} else {
+						sent.edit('You purchased ' + items[selection].name + '.');
+					}
 				}
-			},
-			function(err, foundUser) {
-				if (err) {
-					console.log(err);
-				} else {
-					sent.edit('You purchased ' + items[selection].name + '.');
+			);
+		} else if (items[selection].type === 'armor') {
+			//Assign Item to player
+			User.findOneAndUpdate(
+				{ userID: player.userID },
+				{
+					credits: updateCredits,
+					armor: {
+						name: items[selection].name,
+						damageReduction: items[selection].minimum,
+						runModifier: items[selection].maximum
+					}
+				},
+				function(err, foundUser) {
+					if (err) {
+						console.log(err);
+					} else {
+						sent.edit('You purchased ' + items[selection].name + '.');
+					}
 				}
-			}
-		);
+			);
+		} else if (items[selection].type === 'medication') {
+			//Assign Item to player
+			User.findOneAndUpdate(
+				{ userID: player.userID },
+				{
+					credits: updateCredits,
+					medication: {
+						name: items[selection].name,
+						healingMin: items[selection].minimum,
+						healingMax: items[selection].maximum
+					}
+				},
+				function(err, foundUser) {
+					if (err) {
+						console.log(err);
+					} else {
+						sent.edit('You purchased ' + items[selection].name + '.');
+					}
+				}
+			);
+		}
 	} else {
 		sent.edit('You do not have enough credits for that item. Please try to purchase something else.');
 	}
@@ -334,8 +376,13 @@ shops.response = function() {
 };
 
 shops.setup = function(items) {
-	var shopString =
-		'```| # |Item Name                     |Price     |Min |Max |\n|---|------------------------------|----------|----|----|\n';
+	if (items[0].type === 'weapon' || items[0].type === 'medication') {
+		var shopString =
+			'```| # |Item Name                     |Price     |Min |Max |\n|---|------------------------------|----------|----|----|\n';
+	} else if (items[0].type === 'armor') {
+		var shopString =
+			'```| # |Item Name                     |Price     | DR |Run%|\n|---|------------------------------|----------|----|----|\n';
+	}
 	for (i = 0; i < items.length; i++) {
 		shopString +=
 			'|' +

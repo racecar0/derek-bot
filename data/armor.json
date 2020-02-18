@@ -1,6 +1,7 @@
 [
 	{
 		"number": 0,
+		"type": "armor",
 		"name": "Brain-y Bunch Sweater",
 		"minimum": 2,
 		"maximum": 1,
@@ -8,6 +9,7 @@
 	},
 	{
 		"number": 1,
+		"type": "armor",
 		"name": "Monk's Robes",
 		"minimum": 2,
 		"maximum": 2,
@@ -15,6 +17,7 @@
 	},
 	{
 		"number": 2,
+		"type": "armor",
 		"name": "Jacksonville Jaguars Jersey",
 		"minimum": 3,
 		"maximum": 2,
@@ -22,6 +25,7 @@
 	},
 	{
 		"number": 3,
+		"type": "armor",
 		"name": "Who, What, Where, Wine! Shirt",
 		"minimum": 3,
 		"maximum": 3,
@@ -29,6 +33,7 @@
 	},
 	{
 		"number": 4,
+		"type": "armor",
 		"name": "Acidcat's Mask",
 		"minimum": 4,
 		"maximum": 3,
@@ -36,6 +41,7 @@
 	},
 	{
 		"number": 5,
+		"type": "armor",
 		"name": "One of Chris Baker's Shirts",
 		"minimum": 4,
 		"maximum": 4,
@@ -43,6 +49,7 @@
 	},
 	{
 		"number": 6,
+		"type": "armor",
 		"name": "Disco Janet's Rollerskates",
 		"minimum": 5,
 		"maximum": 4,
@@ -50,6 +57,7 @@
 	},
 	{
 		"number": 7,
+		"type": "armor",
 		"name": "TGP Committee Medallion",
 		"minimum": 5,
 		"maximum": 5,
@@ -57,6 +65,7 @@
 	},
 	{
 		"number": 8,
+		"type": "armor",
 		"name": "The Judge's Robes",
 		"minimum": 6,
 		"maximum": 6,
@@ -64,6 +73,7 @@
 	},
 	{
 		"number": 9,
+		"type": "armor",
 		"name": "Peacock Feather Bowtie",
 		"minimum": 10,
 		"maximum": 10,

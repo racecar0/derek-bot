@@ -1,6 +1,7 @@
 [
 	{
 		"number": 0,
+		"type": "medication",
 		"name": "Duval Ditchwater",
 		"minimum": 1,
 		"maximum": 6,
@@ -8,6 +9,7 @@
 	},
 	{
 		"number": 1,
+		"type": "medication",
 		"name": "Koulouri",
 		"minimum": 2,
 		"maximum": 5,
@@ -15,6 +17,7 @@
 	},
 	{
 		"number": 2,
+		"type": "medication",
 		"name": "Mall Churro Dog",
 		"minimum": 1,
 		"maximum": 7,
@@ -22,6 +25,7 @@
 	},
 	{
 		"number": 3,
+		"type": "medication",
 		"name": "One of Them Shrampies",
 		"minimum": 1,
 		"maximum": 8,
@@ -29,6 +33,7 @@
 	},
 	{
 		"number": 4,
+		"type": "medication",
 		"name": "Martini Glass Full of Olives",
 		"minimum": 1,
 		"maximum": 9,
@@ -36,6 +41,7 @@
 	},
 	{
 		"number": 5,
+		"type": "medication",
 		"name": "Fourth of July Cocktail",
 		"minimum": 1,
 		"maximum": 10,
@@ -43,6 +49,7 @@
 	},
 	{
 		"number": 6,
+		"type": "medication",
 		"name": "A Lone Burrito",
 		"minimum": 1,
 		"maximum": 15,
@@ -50,6 +57,7 @@
 	},
 	{
 		"number": 7,
+		"type": "medication",
 		"name": "Extra Large Plate of Nachos",
 		"minimum": 1,
 		"maximum": 20,
@@ -57,6 +65,7 @@
 	},
 	{
 		"number": 8,
+		"type": "medication",
 		"name": "14oz. Steak w/ Novelty Pencil",
 		"minimum": 1,
 		"maximum": 25,
@@ -64,7 +73,8 @@
 	},
 	{
 		"number": 9,
-		"name": "M&M Peeps Chili",
+		"type": "medication",
+		"name": "Peeps and M&M's Chili",
 		"minimum": 1,
 		"maximum": 30,
 		"price": 10000000

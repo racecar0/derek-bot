@@ -1,6 +1,7 @@
 [
 	{
 		"number": 0,
+		"type": "weapon",
 		"name": "Lonely Girl Margarita Mix",
 		"minimum": 1,
 		"maximum": 6,
@@ -8,6 +9,7 @@
 	},
 	{
 		"number": 1,
+		"type": "weapon",
 		"name": "Bowl of Paper Clips",
 		"minimum": 2,
 		"maximum": 5,
@@ -15,6 +17,7 @@
 	},
 	{
 		"number": 2,
+		"type": "weapon",
 		"name": "Yogurt, Yoghurt, Yoghurté",
 		"minimum": 1,
 		"maximum": 7,
@@ -22,6 +25,7 @@
 	},
 	{
 		"number": 3,
+		"type": "weapon",
 		"name": "Shrimp Vending Machine",
 		"minimum": 1,
 		"maximum": 8,
@@ -29,6 +33,7 @@
 	},
 	{
 		"number": 4,
+		"type": "weapon",
 		"name": "Stuffed Frog",
 		"minimum": 1,
 		"maximum": 9,
@@ -36,6 +41,7 @@
 	},
 	{
 		"number": 5,
+		"type": "weapon",
 		"name": "Holy Motherforking Shirtballs",
 		"minimum": 1,
 		"maximum": 10,
@@ -43,6 +49,7 @@
 	},
 	{
 		"number": 6,
+		"type": "weapon",
 		"name": "Purple Train to Groovy City",
 		"minimum": 1,
 		"maximum": 15,
@@ -50,6 +57,7 @@
 	},
 	{
 		"number": 7,
+		"type": "weapon",
 		"name": "Human Eraser Clicker Thingy",
 		"minimum": 1,
 		"maximum": 20,
@@ -57,6 +65,7 @@
 	},
 	{
 		"number": 8,
+		"type": "weapon",
 		"name": "The Kierkegaard Rap",
 		"minimum": 1,
 		"maximum": 25,
@@ -64,6 +73,7 @@
 	},
 	{
 		"number": 9,
+		"type": "weapon",
 		"name": "The Wave",
 		"minimum": 1,
 		"maximum": 30,
