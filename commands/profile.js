@@ -28,6 +28,7 @@ profile.newUser = (message) => {
 			damageMax: 5,
 			healingMin: 1,
 			healingMax: 5,
+			stopEnemy: true,
 			counter: 4
 		},
 		hitPoints: 15,

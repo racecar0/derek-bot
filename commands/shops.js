@@ -29,7 +29,7 @@ shops.sort = function(message, player, args) {
 };
 
 shops.weapons = function(message, player) {
-	var items = shops.setup(weapons);
+	var items = shops.setup(weapons, player);
 	message.channel.send(items).then((sent) => {
 		// 'sent' is that message you just sent
 		sent
@@ -95,7 +95,7 @@ shops.weapons = function(message, player) {
 	});
 };
 shops.armor = function(message, player) {
-	var items = shops.setup(armor);
+	var items = shops.setup(armor, player);
 	message.channel.send(items).then((sent) => {
 		// 'sent' is that message you just sent
 		sent
@@ -161,7 +161,7 @@ shops.armor = function(message, player) {
 	});
 };
 shops.medication = function(message, player) {
-	var items = shops.setup(medication);
+	var items = shops.setup(medication, player);
 	message.channel.send(items).then((sent) => {
 		// 'sent' is that message you just sent
 		sent
@@ -227,7 +227,48 @@ shops.medication = function(message, player) {
 	});
 };
 shops.special = function(message, player) {
-	var items = shops.setup(special);
+	var items = specialSetup(special);
+	function specialSetup(items) {
+		var shopString =
+			'```| # |Item Name                     |Price     | Healing | Damage  |Count|Stop Enemy?|\n|---|------------------------------|----------|Min |Max |Min |Max |-----|-----------|\n';
+		for (i = 0; i < items.length; i++) {
+			shopString +=
+				'|' +
+				items[i].number +
+				' '.repeat(3 - items[i].number.toString().length) +
+				'|' +
+				items[i].name +
+				' '.repeat(30 - items[i].name.length) +
+				'|' +
+				items[i].price +
+				' '.repeat(10 - items[i].price.toString().length) +
+				'|' +
+				items[i].healingMin +
+				' '.repeat(4 - items[i].healingMin.toString().length) +
+				'|' +
+				items[i].healingMax +
+				' '.repeat(4 - items[i].healingMax.toString().length) +
+				'|' +
+				items[i].damageMin +
+				' '.repeat(4 - items[i].damageMin.toString().length) +
+				'|' +
+				items[i].damageMax +
+				' '.repeat(4 - items[i].damageMax.toString().length) +
+				'|' +
+				items[i].counter +
+				' '.repeat(5 - items[i].counter.toString().length) +
+				'|' +
+				items[i].stopEnemy +
+				' '.repeat(10 - items[i].stopEnemy.toString().length) +
+				'|\n';
+		}
+		shopString +=
+			'|---|------------------------------|----------|----|----|----|----|-----|-----------|\nAvailable credits: ' +
+			player.credits +
+			'```';
+		return shopString;
+	}
+
 	message.channel.send(items).then((sent) => {
 		// 'sent' is that message you just sent
 		sent
@@ -365,6 +406,30 @@ shops.purchase = function(message, sent, items, selection, player) {
 					}
 				}
 			);
+		} else if (items[selection].type === 'special') {
+			//Assign Item to player
+			User.findOneAndUpdate(
+				{ userID: player.userID },
+				{
+					credits: updateCredits,
+					specialMove: {
+						name: items[selection].name,
+						damageMin: items[selection].damageMin,
+						damageMin: items[selection].damageMax,
+						healingMin: items[selection].healingMin,
+						healingMax: items[selection].healingMax,
+						stopEnemy: items[selection].stopEnemy,
+						counter: items[selection].counter
+					}
+				},
+				function(err, foundUser) {
+					if (err) {
+						console.log(err);
+					} else {
+						sent.edit('You purchased ' + items[selection].name + '.');
+					}
+				}
+			);
 		}
 	} else {
 		sent.edit('You do not have enough credits for that item. Please try to purchase something else.');
@@ -402,6 +467,7 @@ shops.setup = function(items) {
 			' '.repeat(4 - items[i].maximum.toString().length) +
 			'|\n';
 	}
-	shopString += '|---|------------------------------|----------|----|----|```';
+	shopString +=
+		'|---|------------------------------|----------|----|----|\nAvailable credits: ' + player.credits + '```';
 	return shopString;
 };

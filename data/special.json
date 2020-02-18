@@ -1,10 +1,122 @@
 [
 	{
-		"name": "Flying Fists",
+		"number": 0,
+		"type": "special",
+		"name": "Flying Fists 0",
 		"damageMin": 1,
 		"damageMax": 5,
 		"healingMin": 1,
 		"healingMax": 5,
-		"counter": 4
+		"stopEnemy": true,
+		"counter": 4,
+		"price": 1000000
+	},
+	{
+		"number": 1,
+		"type": "special",
+		"name": "Flying Fists 1",
+		"damageMin": 1,
+		"damageMax": 5,
+		"healingMin": 1,
+		"healingMax": 5,
+		"stopEnemy": true,
+		"counter": 4,
+		"price": 1000000
+	},
+	{
+		"number": 2,
+		"type": "special",
+		"name": "Flying Fists 2",
+		"damageMin": 1,
+		"damageMax": 5,
+		"healingMin": 1,
+		"healingMax": 5,
+		"stopEnemy": true,
+		"counter": 4,
+		"price": 1000000
+	},
+	{
+		"number": 3,
+		"type": "special",
+		"name": "Flying Fists 3",
+		"damageMin": 1,
+		"damageMax": 5,
+		"healingMin": 1,
+		"healingMax": 5,
+		"stopEnemy": true,
+		"counter": 4,
+		"price": 1000000
+	},
+	{
+		"number": 4,
+		"type": "special",
+		"name": "Flying Fists 4",
+		"damageMin": 1,
+		"damageMax": 5,
+		"healingMin": 1,
+		"healingMax": 5,
+		"stopEnemy": true,
+		"counter": 4,
+		"price": 1000000
+	},
+	{
+		"number": 5,
+		"type": "special",
+		"name": "Flying Fists 5",
+		"damageMin": 1,
+		"damageMax": 5,
+		"healingMin": 1,
+		"healingMax": 5,
+		"stopEnemy": true,
+		"counter": 4,
+		"price": 1000000
+	},
+	{
+		"number": 6,
+		"type": "special",
+		"name": "Flying Fists 6",
+		"damageMin": 1,
+		"damageMax": 5,
+		"healingMin": 1,
+		"healingMax": 5,
+		"stopEnemy": true,
+		"counter": 4,
+		"price": 1000000
+	},
+	{
+		"number": 7,
+		"type": "special",
+		"name": "Flying Fists 7",
+		"damageMin": 1,
+		"damageMax": 5,
+		"healingMin": 1,
+		"healingMax": 5,
+		"stopEnemy": true,
+		"counter": 4,
+		"price": 1000000
+	},
+	{
+		"number": 8,
+		"type": "special",
+		"name": "Flying Fists 8",
+		"damageMin": 1,
+		"damageMax": 5,
+		"healingMin": 1,
+		"healingMax": 5,
+		"stopEnemy": true,
+		"counter": 4,
+		"price": 1000000
+	},
+	{
+		"number": 9,
+		"type": "special",
+		"name": "Flying Fists 9",
+		"damageMin": 1,
+		"damageMax": 5,
+		"healingMin": 1,
+		"healingMax": 5,
+		"stopEnemy": true,
+		"counter": 4,
+		"price": 1000000
 	}
 ]
