@@ -20,7 +20,7 @@ shops.sort = function(message, player, args) {
 	} else if (args[0] === 'medication') {
 		shops.medication(message, player);
 	} else if (args[0] === 'special') {
-		message.channel.send("The special move shop isn't open yet.");
+		shops.special(message, player);
 	} else {
 		message.channel.send(
 			'Please specify what you would like to buy. !buy (weapons, armor, medication, OR special)'
