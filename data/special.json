@@ -1,0 +1,10 @@
+[
+	{
+		"name": "Flying Fists",
+		"damageMin": 1,
+		"damageMax": 5,
+		"healingMin": 1,
+		"healingMax": 5,
+		"counter": 4
+	}
+]
