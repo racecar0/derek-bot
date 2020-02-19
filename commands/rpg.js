@@ -57,7 +57,7 @@ combat.setup = function(commandMessage, monster, player, turnCount) {
 			};
 
 			sent
-				.awaitReactions(filter, { max: 1, time: 20000, errors: [ 'time' ] })
+				.awaitReactions(filter, { max: 1, time: 60000, errors: [ 'time' ] })
 				.then((collected) => {
 					const reaction = collected.first();
 
