@@ -5,6 +5,7 @@
 		"tempHP": 0,
 		"damageMin": 1,
 		"damageMax": 1,
+		"runDifficulty": 0,
 		"credits": 1000,
 		"experience": 0,
 		"level": 1
@@ -15,6 +16,7 @@
 		"tempHP": 0,
 		"damageMin": 1,
 		"damageMax": 4,
+		"runDifficulty": 15,
 		"credits": 10,
 		"experience": 10,
 		"level": 1
@@ -25,6 +27,7 @@
 		"tempHP": 0,
 		"damageMin": 0,
 		"damageMax": 6,
+		"runDifficulty": 1,
 		"credits": 20,
 		"experience": 20,
 		"level": 1
@@ -35,6 +38,7 @@
 		"tempHP": 0,
 		"damageMin": 2,
 		"damageMax": 7,
+		"runDifficulty": 10,
 		"credits": 30,
 		"experience": 30,
 		"level": 2
@@ -45,6 +49,7 @@
 		"tempHP": 0,
 		"damageMin": 1,
 		"damageMax": 8,
+		"runDifficulty": 10,
 		"credits": 40,
 		"experience": 40,
 		"level": 3
@@ -55,6 +60,7 @@
 		"tempHP": 0,
 		"damageMin": 2,
 		"damageMax": 8,
+		"runDifficulty": 5,
 		"credits": 50,
 		"experience": 50,
 		"level": 4
@@ -65,6 +71,7 @@
 		"tempHP": 0,
 		"damageMin": 1,
 		"damageMax": 9,
+		"runDifficulty": -5,
 		"credits": 100,
 		"experience": 60,
 		"level": 5
@@ -75,6 +82,7 @@
 		"tempHP": 0,
 		"damageMin": 3,
 		"damageMax": 9,
+		"runDifficulty": 30,
 		"credits": 200,
 		"experience": 70,
 		"level": 6
@@ -85,6 +93,7 @@
 		"tempHP": 0,
 		"damageMin": 1,
 		"damageMax": 10,
+		"runDifficulty": 20,
 		"credits": 300,
 		"experience": 80,
 		"level": 7
@@ -95,6 +104,7 @@
 		"tempHP": 0,
 		"damageMin": 4,
 		"damageMax": 10,
+		"runDifficulty": 10,
 		"credits": 400,
 		"experience": 90,
 		"level": 8,
@@ -106,6 +116,7 @@
 		"tempHP": 0,
 		"damageMin": 5,
 		"damageMax": 10,
+		"runDifficulty": 40,
 		"credits": 500,
 		"experience": 100,
 		"level": 9
@@ -116,6 +127,7 @@
 		"tempHP": 0,
 		"damageMin": 1,
 		"damageMax": 20,
+		"runDifficulty": 30,
 		"credits": 10000,
 		"experience": 100,
 		"level": 10
@@ -126,6 +138,7 @@
 		"tempHP": 0,
 		"damageMin": 999999,
 		"damageMax": 999999,
+		"runDifficulty": 999999,
 		"credits": 999999,
 		"experience": 999999,
 		"level": 999999,

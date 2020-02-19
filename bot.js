@@ -39,6 +39,7 @@ for (const file of commandFiles) {
 //MY COMMAND ROUTES
 const button = require('./commands/button'),
 	rpg = require('./commands/rpg'),
+	fight = require('./commands/fight'),
 	minigames = require('./commands/minigames'),
 	shops = require('./commands/shops'),
 	profile = require('./commands/profile');
@@ -82,7 +83,7 @@ client.on('message', (message) => {
 	const args = message.content.slice(prefix.length).split(/ +/);
 	//Take first element from args (the command itself) and store it
 	const commandName = args.shift().toLowerCase();
-	if (commandName === 'rpg') {
+	if (commandName === 'rpg' || commandName === 'fight') {
 		User.find({ userID: message.author.id }, function(err, foundPlayer) {
 			player = foundPlayer[0];
 			if (err) {
@@ -90,7 +91,7 @@ client.on('message', (message) => {
 			} else if (player == undefined) {
 				message.channel.send('Please use !register to create a profile first.');
 			} else if (player.userID == message.author.id) {
-				rpg.fight(message, player);
+				fight.start(message, player);
 			} else {
 				console.log(player);
 				console.log(message.author.id);
