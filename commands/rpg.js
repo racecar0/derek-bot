@@ -229,7 +229,7 @@ credits.onVictory = function(commandMessage, monster, player) {
 };
 
 credits.onDeath = function(commandMessage, player) {
-	var updateCredits = Math.floor(player.credits / 2);
+	var updateCredits = player.credits - Math.floor(player.credits * 0.1);
 	User.findOneAndUpdate({ userID: player.userID }, { credits: updateCredits }, function(err, foundUser) {
 		if (err) {
 			console.log(err);
