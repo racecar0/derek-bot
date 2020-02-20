@@ -83,7 +83,7 @@ combat.setup = function(commandMessage, monster, player, turnCount) {
 							);
 							credits.onDeath(commandMessage, player);
 						}
-					}, 5000);
+					}, 2000);
 				})
 				.catch((collected) => {
 					commandMessage.channel.send('Combat has timed out. You died to indecision.');
@@ -151,7 +151,7 @@ combat.edit = function(commandMessage, monster, player, turnCount, sent) {
 							);
 							credits.onDeath(commandMessage, player);
 						}
-					}, 1500);
+					}, 2000);
 				})
 				.catch((collected) => {
 					commandMessage.channel.send('Combat has timed out. You died to indecision.');
