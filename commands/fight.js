@@ -63,14 +63,19 @@ combat.setup = function(commandMessage, monster, player, turnCount) {
 					const reaction = collected.first();
 
 					if (reaction.emoji.name === '⚔') {
+						sent.clearReactions();
 						combat.attack(commandMessage, monster, player, turnCount, sent);
 					} else if (reaction.emoji.name === '👟') {
+						sent.clearReactions();
 						combat.run(commandMessage, monster, player, turnCount, sent);
 					} else if (reaction.emoji.name === '🩹') {
+						sent.clearReactions();
 						combat.heal(commandMessage, monster, player, turnCount, sent);
 					} else if (reaction.emoji.name === '❔') {
+						sent.clearReactions();
 						combat.status(commandMessage, monster, player, turnCount, sent);
 					} else if (reaction.emoji.name === '✨' && turnCount >= player.specialMove.counter) {
+						sent.clearReactions();
 						combat.special(commandMessage, monster, player, turnCount, sent);
 					} else if (reaction.emoji.name === '✨' && turnCount < player.specialMove.counter) {
 						commandMessage.channel.send(
