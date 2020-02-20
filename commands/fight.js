@@ -61,28 +61,29 @@ combat.setup = function(commandMessage, monster, player, turnCount) {
 				.awaitReactions(filter, { max: 1, time: 60000, errors: [ 'time' ] })
 				.then((collected) => {
 					const reaction = collected.first();
-
-					if (reaction.emoji.name === '⚔') {
-						sent.clearReactions();
-						combat.attack(commandMessage, monster, player, turnCount, sent);
-					} else if (reaction.emoji.name === '👟') {
-						sent.clearReactions();
-						combat.run(commandMessage, monster, player, turnCount, sent);
-					} else if (reaction.emoji.name === '🩹') {
-						sent.clearReactions();
-						combat.heal(commandMessage, monster, player, turnCount, sent);
-					} else if (reaction.emoji.name === '❔') {
-						sent.clearReactions();
-						combat.status(commandMessage, monster, player, turnCount, sent);
-					} else if (reaction.emoji.name === '✨' && turnCount >= player.specialMove.counter) {
-						sent.clearReactions();
-						combat.special(commandMessage, monster, player, turnCount, sent);
-					} else if (reaction.emoji.name === '✨' && turnCount < player.specialMove.counter) {
-						commandMessage.channel.send(
-							'Either something went wrong or you tried to cheat. Either way, you died.'
-						);
-						credits.onDeath(commandMessage, player);
-					}
+					setTimeout(() => {
+						if (reaction.emoji.name === '⚔') {
+							sent.clearReactions();
+							combat.attack(commandMessage, monster, player, turnCount, sent);
+						} else if (reaction.emoji.name === '👟') {
+							sent.clearReactions();
+							combat.run(commandMessage, monster, player, turnCount, sent);
+						} else if (reaction.emoji.name === '🩹') {
+							sent.clearReactions();
+							combat.heal(commandMessage, monster, player, turnCount, sent);
+						} else if (reaction.emoji.name === '❔') {
+							sent.clearReactions();
+							combat.status(commandMessage, monster, player, turnCount, sent);
+						} else if (reaction.emoji.name === '✨' && turnCount >= player.specialMove.counter) {
+							sent.clearReactions();
+							combat.special(commandMessage, monster, player, turnCount, sent);
+						} else if (reaction.emoji.name === '✨' && turnCount < player.specialMove.counter) {
+							commandMessage.channel.send(
+								'Either something went wrong or you tried to cheat. Either way, you died.'
+							);
+							credits.onDeath(commandMessage, player);
+						}
+					}, 5000);
 				})
 				.catch((collected) => {
 					commandMessage.channel.send('Combat has timed out. You died to indecision.');
@@ -128,28 +129,29 @@ combat.edit = function(commandMessage, monster, player, turnCount, sent) {
 				.awaitReactions(filter, { max: 1, time: 60000, errors: [ 'time' ] })
 				.then((collected) => {
 					const reaction = collected.first();
-
-					if (reaction.emoji.name === '⚔') {
-						sent.clearReactions();
-						combat.attack(commandMessage, monster, player, turnCount, sent);
-					} else if (reaction.emoji.name === '👟') {
-						sent.clearReactions();
-						combat.run(commandMessage, monster, player, turnCount, sent);
-					} else if (reaction.emoji.name === '🩹') {
-						sent.clearReactions();
-						combat.heal(commandMessage, monster, player, turnCount, sent);
-					} else if (reaction.emoji.name === '❔') {
-						sent.clearReactions();
-						combat.status(commandMessage, monster, player, turnCount, sent);
-					} else if (reaction.emoji.name === '✨' && turnCount >= player.specialMove.counter) {
-						sent.clearReactions();
-						combat.special(commandMessage, monster, player, turnCount, sent);
-					} else if (reaction.emoji.name === '✨' && turnCount < player.specialMove.counter) {
-						commandMessage.channel.send(
-							'Either something went wrong or you tried to cheat. Either way, you died.'
-						);
-						credits.onDeath(commandMessage, player);
-					}
+					setTimeout(() => {
+						if (reaction.emoji.name === '⚔') {
+							sent.clearReactions();
+							combat.attack(commandMessage, monster, player, turnCount, sent);
+						} else if (reaction.emoji.name === '👟') {
+							sent.clearReactions();
+							combat.run(commandMessage, monster, player, turnCount, sent);
+						} else if (reaction.emoji.name === '🩹') {
+							sent.clearReactions();
+							combat.heal(commandMessage, monster, player, turnCount, sent);
+						} else if (reaction.emoji.name === '❔') {
+							sent.clearReactions();
+							combat.status(commandMessage, monster, player, turnCount, sent);
+						} else if (reaction.emoji.name === '✨' && turnCount >= player.specialMove.counter) {
+							sent.clearReactions();
+							combat.special(commandMessage, monster, player, turnCount, sent);
+						} else if (reaction.emoji.name === '✨' && turnCount < player.specialMove.counter) {
+							commandMessage.channel.send(
+								'Either something went wrong or you tried to cheat. Either way, you died.'
+							);
+							credits.onDeath(commandMessage, player);
+						}
+					}, 5000);
 				})
 				.catch((collected) => {
 					commandMessage.channel.send('Combat has timed out. You died to indecision.');
