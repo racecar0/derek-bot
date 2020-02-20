@@ -83,7 +83,7 @@ combat.setup = function(commandMessage, monster, player, turnCount) {
 							);
 							credits.onDeath(commandMessage, player);
 						}
-					}, 2000);
+					}, 2500);
 				})
 				.catch((collected) => {
 					commandMessage.channel.send('Combat has timed out. You died to indecision.');
@@ -151,7 +151,7 @@ combat.edit = function(commandMessage, monster, player, turnCount, sent) {
 							);
 							credits.onDeath(commandMessage, player);
 						}
-					}, 2000);
+					}, 2500);
 				})
 				.catch((collected) => {
 					commandMessage.channel.send('Combat has timed out. You died to indecision.');
@@ -190,9 +190,35 @@ combat.attack = function(commandMessage, monster, player, turnCount, sent) {
 		turnCount++;
 		combat.edit(commandMessage, monster, player, turnCount, sent);
 	} else if (player.hitPoints <= 0) {
+		sent.edit(
+			'```http\n' +
+				player.combatMessage +
+				'\n\nFoe: ' +
+				monster.name +
+				'\nHP: ' +
+				monster.tempHP +
+				'\n\nPlayer: ' +
+				player.username +
+				'\nHP: ' +
+				player.hitPoints +
+				'```'
+		);
 		commandMessage.channel.send('You are dead.');
 		credits.onDeath(commandMessage, player);
 	} else {
+		sent.edit(
+			'```http\n' +
+				player.combatMessage +
+				'\n\nFoe: ' +
+				monster.name +
+				'\nHP: ' +
+				monster.tempHP +
+				'\n\nPlayer: ' +
+				player.username +
+				'\nHP: ' +
+				player.hitPoints +
+				'```'
+		);
 		commandMessage.channel.send('Victory!');
 		credits.onVictory(commandMessage, monster, player);
 		experience.onVictory(commandMessage, monster, player);
@@ -225,9 +251,35 @@ combat.run = function(commandMessage, monster, player, turnCount, sent) {
 			turnCount++;
 			combat.edit(commandMessage, monster, player, turnCount, sent);
 		} else if (player.hitPoints <= 0) {
+			sent.edit(
+				'```http\n' +
+					player.combatMessage +
+					'\n\nFoe: ' +
+					monster.name +
+					'\nHP: ' +
+					monster.tempHP +
+					'\n\nPlayer: ' +
+					player.username +
+					'\nHP: ' +
+					player.hitPoints +
+					'```'
+			);
 			commandMessage.channel.send('You are dead.');
 			credits.onDeath(commandMessage, player);
 		} else {
+			sent.edit(
+				'```http\n' +
+					player.combatMessage +
+					'\n\nFoe: ' +
+					monster.name +
+					'\nHP: ' +
+					monster.tempHP +
+					'\n\nPlayer: ' +
+					player.username +
+					'\nHP: ' +
+					player.hitPoints +
+					'```'
+			);
 			commandMessage.channel.send('Victory!');
 			credits.onVictory(commandMessage, monster, player);
 			experience.onVictory(commandMessage, monster, player);
@@ -265,9 +317,35 @@ combat.heal = function(commandMessage, monster, player, turnCount, sent) {
 		turnCount++;
 		combat.edit(commandMessage, monster, player, turnCount, sent);
 	} else if (player.hitPoints <= 0) {
+		sent.edit(
+			'```http\n' +
+				player.combatMessage +
+				'\n\nFoe: ' +
+				monster.name +
+				'\nHP: ' +
+				monster.tempHP +
+				'\n\nPlayer: ' +
+				player.username +
+				'\nHP: ' +
+				player.hitPoints +
+				'```'
+		);
 		commandMessage.channel.send('You are dead.');
 		credits.onDeath(commandMessage, player);
 	} else {
+		sent.edit(
+			'```http\n' +
+				player.combatMessage +
+				'\n\nFoe: ' +
+				monster.name +
+				'\nHP: ' +
+				monster.tempHP +
+				'\n\nPlayer: ' +
+				player.username +
+				'\nHP: ' +
+				player.hitPoints +
+				'```'
+		);
 		commandMessage.channel.send('Victory!');
 		credits.onVictory(commandMessage, monster, player);
 		experience.onVictory(commandMessage, monster, player);
@@ -316,9 +394,35 @@ combat.special = function(commandMessage, monster, player, turnCount, sent) {
 	if (monster.tempHP > 0 && player.hitPoints > 0) {
 		combat.edit(commandMessage, monster, player, turnCount, sent);
 	} else if (player.hitPoints <= 0) {
+		sent.edit(
+			'```http\n' +
+				player.combatMessage +
+				'\n\nFoe: ' +
+				monster.name +
+				'\nHP: ' +
+				monster.tempHP +
+				'\n\nPlayer: ' +
+				player.username +
+				'\nHP: ' +
+				player.hitPoints +
+				'```'
+		);
 		commandMessage.channel.send('You are dead.');
 		credits.onDeath(commandMessage, player);
 	} else {
+		sent.edit(
+			'```http\n' +
+				player.combatMessage +
+				'\n\nFoe: ' +
+				monster.name +
+				'\nHP: ' +
+				monster.tempHP +
+				'\n\nPlayer: ' +
+				player.username +
+				'\nHP: ' +
+				player.hitPoints +
+				'```'
+		);
 		commandMessage.channel.send('Victory!');
 		credits.onVictory(commandMessage, monster, player);
 		experience.onVictory(commandMessage, monster, player);
