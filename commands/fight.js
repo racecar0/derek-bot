@@ -151,7 +151,7 @@ combat.edit = function(commandMessage, monster, player, turnCount, sent) {
 							);
 							credits.onDeath(commandMessage, player);
 						}
-					}, 5000);
+					}, 1500);
 				})
 				.catch((collected) => {
 					commandMessage.channel.send('Combat has timed out. You died to indecision.');
