@@ -103,8 +103,7 @@ combat.edit = function(commandMessage, monster, player, turnCount, sent) {
 		.then((sent) => {
 			// 'sent' is that message you just sent
 			sent
-				.clearReactions()
-				.then(() => sent.react('⚔'))
+				.react('⚔')
 				.then(() => sent.react('👟'))
 				.then(() => sent.react('🩹'))
 				.then(() => sent.react('❔'))
@@ -126,14 +125,19 @@ combat.edit = function(commandMessage, monster, player, turnCount, sent) {
 					const reaction = collected.first();
 
 					if (reaction.emoji.name === '⚔') {
+						sent.clearReactions();
 						combat.attack(commandMessage, monster, player, turnCount, sent);
 					} else if (reaction.emoji.name === '👟') {
+						sent.clearReactions();
 						combat.run(commandMessage, monster, player, turnCount, sent);
 					} else if (reaction.emoji.name === '🩹') {
+						sent.clearReactions();
 						combat.heal(commandMessage, monster, player, turnCount, sent);
 					} else if (reaction.emoji.name === '❔') {
+						sent.clearReactions();
 						combat.status(commandMessage, monster, player, turnCount, sent);
 					} else if (reaction.emoji.name === '✨' && turnCount >= player.specialMove.counter) {
+						sent.clearReactions();
 						combat.special(commandMessage, monster, player, turnCount, sent);
 					} else if (reaction.emoji.name === '✨' && turnCount < player.specialMove.counter) {
 						commandMessage.channel.send(
