@@ -7,7 +7,6 @@ const mongoose = require('mongoose'),
 	User = require('../models/user');
 
 shops.sort = function(message, player, args) {
-	console.log(args);
 	//sort between weapons, armor, medication, special
 	if (args === undefined) {
 		message.channel.send(

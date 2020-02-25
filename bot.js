@@ -8,16 +8,17 @@ const { Client, Attachment, Collection } = require('discord.js'),
 	fs = require('fs'),
 	prefix = '!',
 	User = require('./models/user'),
+	Realm = require('./models/realm'),
 	port = process.env.PORT || 3000;
 
 //FOR LOCAL DEVELOPMENT
-// const { token } = require('./config.json'),
-// 	botToken = token,
-// 	url = 'mongodb://localhost:27017/derek_bot';
+const { token } = require('./config.json'),
+	botToken = token,
+	url = 'mongodb://localhost:27017/derek_bot';
 
 //FOR PRODUCTION ENVIRONMENT
-const botToken = process.env.BOTTOKEN,
-	url = process.env.DATABASEURL;
+// const botToken = process.env.BOTTOKEN,
+// 	url = process.env.DATABASEURL;
 
 mongoose.connect(url, {
 	useNewUrlParser: true,
@@ -42,6 +43,7 @@ const button = require('./commands/button'),
 	fight = require('./commands/fight'),
 	minigames = require('./commands/minigames'),
 	shops = require('./commands/shops'),
+	realm = require('./commands/realm'),
 	profile = require('./commands/profile');
 
 //BOT RESPONSES
@@ -119,6 +121,24 @@ client.on('message', (message) => {
 				});
 			}
 		});
+	} else if (commandName === 'realm') {
+		User.find({ userID: message.author.id }, function(err, foundPlayer) {
+			player = foundPlayer[0];
+			if (err) {
+				console.log(err);
+			} else if (player == undefined) {
+				message.channel.send('Please use !register to create a profile first.');
+			} else if (player.userID == message.author.id) {
+				realm.sort(message, player, args);
+			} else {
+				console.log(player);
+				console.log(message.author.id);
+				message.channel.send('Something weird happened. Pinging Racecar0.');
+				client.fetchUser('201336725958557706', false).then((user) => {
+					user.send('Something asplode.');
+				});
+			}
+		});
 	} else if (commandName === 'buy') {
 		User.find({ userID: message.author.id }, function(err, foundPlayer) {
 			player = foundPlayer[0];
@@ -161,6 +181,16 @@ client.once('ready', () => {
 		// 	console.log(` -- ${channel.name} (${channel.type}) - ${channel.id}`);
 		// });
 	});
+	//SetInterval for Realm
+	// var realmTimer = setInterval(function() {
+	// 	Realm.updateMany({}, { takenTurn: true }, function(err, res) {
+	// 		if (err) {
+	// 			console.log(err);
+	// 		} else {
+	// 			console.log(Date.now());
+	// 		}
+	// 	});
+	// }, 120000);
 });
 
 client.login(botToken);

@@ -23,3 +23,19 @@ KINGDOM BUILDER TO DO LIST
 * Build basic resource management engine
 * Build timer system for AFK resource building
 * Special Events that trigger under the right circumstances, maybe give rare items
+// realm.start should mark the turn as taken for the day. It should also run through the resource acquisition/payment. Payment/acquisition needs to calculate since last time played. It should also give surprise events.
+// realm.buy should handle the merchant system of organizing the realm with leftover credits. Stores you can buy from: food,
+// realm.attack should allow a player to attack another player for resources.
+// Resources: Population {produce: taxes/credits, consume: food, rate: normal}, Farms {produce: food, consume: energy, rate: normal}, Science {produce: tech, consume: energy, ore, rate: slow}, Mining {produce: ore, consume: energy (large), rate: slow}, Renewables {produce: energy (large), consume: credits, rate: none (single purchase)}
+
+Population is the only thing that gains you credits (and the only thing of value outside of realm). Population happiness is the rate that increases or decreases the population. Population happiness is affected by a scale from 1-10. Happiness is determined by whether or not appropriate ratios of population to resource are met. 
+
+Food: 1:1
+Housing: 1:.5
+Education: 1:.75
+Science: 1:.25
+Energy: 1:.9
+Entertainment: 1:.2 (During periods that your empire is not PEACEFUL (such as after a civil war), the tourist attractions earn very little or nothing.)
+Mining: 1:.5
+Government: 1:.001
+

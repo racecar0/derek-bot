@@ -1,0 +1,28 @@
+[
+	{
+		"eventText": "You won the lottery!",
+		"credits": 1.2,
+		"energy": 1,
+		"resources": 1,
+		"population": 1,
+		"food": 1,
+		"housing": 1,
+		"education": 1,
+		"science": 1,
+		"entertainment": 1,
+		"government": 1
+	},
+	{
+		"eventText": "Nothing happened.",
+		"credits": 1,
+		"energy": 1,
+		"resources": 1,
+		"population": 1,
+		"food": 1,
+		"housing": 1,
+		"education": 1,
+		"science": 1,
+		"entertainment": 1,
+		"government": 1
+	}
+]

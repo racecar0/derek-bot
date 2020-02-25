@@ -1,0 +1,62 @@
+[
+	{
+		"name": "anarchy",
+		"level": 1,
+		"minPopulationRate": -0.3,
+		"maxPopulationRate": -0.2
+	},
+	{
+		"name": "attempted revolution",
+		"level": 2,
+		"minPopulationRate": -0.2,
+		"maxPopulationRate": -0.1
+	},
+	{
+		"name": "rioting",
+		"level": 3,
+		"minPopulationRate": -0.1,
+		"maxPopulationRate": -0.05
+	},
+	{
+		"name": "civil unrest",
+		"level": 4,
+		"minPopulationRate": -0.1,
+		"maxPopulationRate": 0.1
+	},
+	{
+		"name": "indifference",
+		"level": 5,
+		"minPopulationRate": 0.1,
+		"maxPopulationRate": 0.2
+	},
+	{
+		"name": "lawfulness",
+		"level": 6,
+		"minPopulationRate": 0.2,
+		"maxPopulationRate": 0.3
+	},
+	{
+		"name": "good will",
+		"level": 7,
+		"minPopulationRate": 0.3,
+		"maxPopulationRate": 0.4
+	},
+	{
+		"name": "like-mindedness",
+		"level": 8,
+		"minPopulationRate": 0.4,
+		"maxPopulationRate": 0.5
+	},
+	{
+		"name": "peace and equality",
+		"level": 9,
+		"minPopulationRate": 0.5,
+		"maxPopulationRate": 0.6
+	},
+	{
+		"name": "uptopia",
+		"level": 10,
+		"minPopulationRate": 0.6,
+		"maxPopulationRate": 0.7
+	}
+]
