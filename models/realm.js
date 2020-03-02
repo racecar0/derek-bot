@@ -6,10 +6,22 @@ var RealmSchema = new mongoose.Schema({
 	discriminator: String,
 	date: {
 		created: Number,
-		firstDailyLogin: Number
+		lastLogin: Number
 	},
 	takenTurn: Boolean,
-	realmCredits: Number
+	population: Number,
+	food: Number,
+	housing: Number,
+	naturalResources: Number,
+	energyProduction: Number,
+	education: Number,
+	scientificResearch: Number,
+	entertainment: Number,
+	government: Number,
+	realmCredits: Number,
+	realmEnergy: Number,
+	realmResources: Number,
+	taxRate: Number
 });
 
 module.exports = mongoose.model('Realm', RealmSchema);

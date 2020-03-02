@@ -1,0 +1,50 @@
+[
+	{
+		"number": 1,
+		"name": "Food Production",
+		"price": 1,
+		"value": 1
+	},
+	{
+		"number": 2,
+		"name": "Housing",
+		"price": 5,
+		"value": 1
+	},
+	{
+		"number": 3,
+		"name": "Natural Resources",
+		"price": 10,
+		"value": 1
+	},
+	{
+		"number": 4,
+		"name": "Energy Production",
+		"price": 5,
+		"value": 1
+	},
+	{
+		"number": 5,
+		"name": "Education",
+		"price": 1000,
+		"value": 1
+	},
+	{
+		"number": 6,
+		"name": "Scientific Research",
+		"price": 100000,
+		"value": 1
+	},
+	{
+		"number": 7,
+		"name": "Entertainment",
+		"price": 1000000,
+		"value": 1
+	},
+	{
+		"number": 8,
+		"name": "Government",
+		"price": 1000000000,
+		"value": 1
+	}
+]

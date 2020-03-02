@@ -160,11 +160,6 @@ client.on('message', (message) => {
 	}
 });
 
-//WEBSITE ROUTES
-// app.get('/', function(req, res) {
-// 	res.render('index');
-// });
-
 //DISCORD LISTEN
 client.once('ready', () => {
 	console.log('Connected as ' + client.user.tag);
@@ -198,4 +193,9 @@ client.login(botToken);
 //WEBSITE LISTEN
 // app.listen(port, function() {
 // 	console.log('Derek Bot Server Has Started!');
+// });
+
+//WEBSITE ROUTES
+// app.get('/', function(req, res) {
+// 	res.render('index');
 // });
