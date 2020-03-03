@@ -667,13 +667,15 @@ realm.populationRate = function(message, player, time) {
 			var populationChange = Math.round(
 				foundUser.population * populationlevels[populationRate].minPopulationRate * (time / 1440)
 			);
+
 			message.channel.send(
 				'Your planet is in a state of ' +
 					populationlevels[populationRate].name +
-					'.\nYour population has been adjusted to ' +
+					'.\nYour population has changed by ' +
 					populationChange +
 					'.'
 			);
+			populationChange += foundUser.population;
 			Realm.findOneAndUpdate(
 				{ userID: foundUser.userID },
 				{
