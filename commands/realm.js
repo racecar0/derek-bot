@@ -536,7 +536,7 @@ realm.autoUpkeep = function(message, player, time) {
 		});
 	});
 	setTimeout(() => {
-		realm.populationRate(message, player);
+		realm.populationRate(message, player, time);
 	}, 10000);
 };
 
@@ -620,11 +620,11 @@ realm.manualUpkeep = function(message, player, time) {
 		});
 	});
 	setTimeout(() => {
-		realm.populationRate(message, player);
+		realm.populationRate(message, player, time);
 	}, 10000);
 };
 
-realm.populationRate = function(message, player) {
+realm.populationRate = function(message, player, time) {
 	Realm.findOne({ userID: player.userID }, function(err, foundUser) {
 		if (err) {
 			console.log(err);
@@ -662,7 +662,9 @@ realm.populationRate = function(message, player) {
 			if (governmentCheck >= 1) {
 				populationRate++;
 			}
-			var populationChange = foundUser.population * populationlevels[populationRate].minPopulationRate;
+			var populationChange = Math.round(
+				foundUser.population * populationlevels[populationRate].minPopulationRate * (time / 1440)
+			);
 			message.channel.send(
 				'Your planet is in a state of ' +
 					populationlevels[populationRate].name +

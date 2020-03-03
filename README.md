@@ -27,7 +27,8 @@ KINGDOM BUILDER TO DO LIST
 * Separate status command into an account creation command and the turn command
 * Special Events that trigger under the right circumstances, maybe give rare items (Needs better way to handle odds of certain events)
 * Build Tax Rate change command
-* change Population Rate to be a range between min and max (currently just uses min)
+* Change Population Rate to be a range between min and max (currently just uses min)
+* Allow '!realm check' command to take some arguments for looking specifically at different aspects of the game (populationRate happiness, assets, resources)
 * Build Science shop (for upgrades)
 * Build PVP between realms for stealing resources (military system)
 
