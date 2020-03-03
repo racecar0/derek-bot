@@ -156,6 +156,8 @@ realm.check = function(message, player) {
 				foundUser.realmEnergy +
 				'\nAvailable Resources: ' +
 				foundUser.realmResources +
+				'\nTotal Population: ' +
+				foundUser.population +
 				'```';
 			message.channel.send(checkString);
 			//Add estimated upkeep costs based on current assets.
@@ -414,7 +416,7 @@ realm.income = function(message, player, time) {
 					if (err) {
 						console.log(err);
 					} else {
-						realm.upkeep(message, foundUser);
+						realm.upkeep(message, foundUser, time);
 					}
 				}
 			);
@@ -535,7 +537,7 @@ realm.autoUpkeep = function(message, player, time) {
 			}
 		});
 	});
-	setTimeout((time) => {
+	setTimeout(() => {
 		realm.populationRate(message, player, time);
 	}, 10000);
 };
@@ -619,7 +621,7 @@ realm.manualUpkeep = function(message, player, time) {
 			}
 		});
 	});
-	setTimeout((time) => {
+	setTimeout(() => {
 		realm.populationRate(message, player, time);
 	}, 10000);
 };
