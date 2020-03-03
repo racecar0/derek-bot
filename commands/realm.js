@@ -535,7 +535,7 @@ realm.autoUpkeep = function(message, player, time) {
 			}
 		});
 	});
-	setTimeout(() => {
+	setTimeout((time) => {
 		realm.populationRate(message, player, time);
 	}, 10000);
 };
@@ -619,7 +619,7 @@ realm.manualUpkeep = function(message, player, time) {
 			}
 		});
 	});
-	setTimeout(() => {
+	setTimeout((time) => {
 		realm.populationRate(message, player, time);
 	}, 10000);
 };
