@@ -22,15 +22,14 @@ KINGDOM BUILDER TO DO LIST
 ==========================
 ~~Build basic resource management engine~~
 ~~Build timer system for AFK resource building~~
+* Add '!realm help' command with more detail
+* Add manual management for Upkeep so users can choose what to pay for and what not to
+* Separate status command into an account creation command and the turn command
 * Special Events that trigger under the right circumstances, maybe give rare items (Needs better way to handle odds of certain events)
 * Build Tax Rate change command
+* change Population Rate to be a range between min and max (currently just uses min)
 * Build Science shop (for upgrades)
 * Build PVP between realms for stealing resources (military system)
-
-
-Resources: Population {produce: taxes/credits, consume: food, rate: normal}, Farms {produce: food, consume: energy, rate: normal}, Science {produce: tech, consume: energy, ore, rate: slow}, Mining {produce: ore, consume: energy (large), rate: slow}, Renewables {produce: energy (large), consume: credits, rate: none (single purchase)}
-
-Population is the main thing that gains you credits (and the only thing of value outside of Realm). Population happiness is the rate that increases or decreases the population. Population happiness is affected by a scale from 1-10. Happiness is determined by whether or not appropriate ratios of population to resource are met. 
 
 Food: 1:1
 Housing: 1:.75

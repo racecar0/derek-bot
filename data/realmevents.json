@@ -1,6 +1,6 @@
 [
 	{
-		"eventText": "You won the lottery!",
+		"eventText": "Event Checker: You won the lottery!",
 		"credits": 1.2,
 		"energy": 1,
 		"resources": 1,
@@ -13,7 +13,7 @@
 		"government": 1
 	},
 	{
-		"eventText": "Nothing happened.",
+		"eventText": "Event Checker: Nothing happened.",
 		"credits": 1,
 		"energy": 1,
 		"resources": 1,

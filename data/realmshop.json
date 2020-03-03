@@ -3,48 +3,88 @@
 		"number": 1,
 		"name": "Food Production",
 		"price": 1,
-		"value": 1
+		"incomeCredits": 0,
+		"incomeEnergy": 0,
+		"incomeResources": 0,
+		"upkeepCredits": 1,
+		"upkeepEnergy": 1,
+		"upkeepResources": 1
 	},
 	{
 		"number": 2,
 		"name": "Housing",
 		"price": 5,
-		"value": 1
+		"incomeCredits": 0,
+		"incomeEnergy": 0,
+		"incomeResources": 0,
+		"upkeepCredits": 5,
+		"upkeepEnergy": 2,
+		"upkeepResources": 1
 	},
 	{
 		"number": 3,
 		"name": "Natural Resources",
 		"price": 10,
-		"value": 1
+		"incomeCredits": 0,
+		"incomeEnergy": 0,
+		"incomeResources": 1000,
+		"upkeepCredits": 10,
+		"upkeepEnergy": 0,
+		"upkeepResources": 0
 	},
 	{
 		"number": 4,
 		"name": "Energy Production",
 		"price": 5,
-		"value": 1
+		"incomeCredits": 0,
+		"incomeEnergy": 500,
+		"incomeResources": 0,
+		"upkeepCredits": 5,
+		"upkeepEnergy": 0,
+		"upkeepResources": 0
 	},
 	{
 		"number": 5,
 		"name": "Education",
 		"price": 1000,
-		"value": 1
+		"incomeCredits": 0,
+		"incomeEnergy": 0,
+		"incomeResources": 0,
+		"upkeepCredits": 10,
+		"upkeepEnergy": 5,
+		"upkeepResources": 0
 	},
 	{
 		"number": 6,
 		"name": "Scientific Research",
 		"price": 100000,
-		"value": 1
+		"incomeCredits": 0,
+		"incomeEnergy": 0,
+		"incomeResources": 0,
+		"upkeepCredits": 1000,
+		"upkeepEnergy": 1000,
+		"upkeepResources": 1000
 	},
 	{
 		"number": 7,
 		"name": "Entertainment",
 		"price": 1000000,
-		"value": 1
+		"incomeCredits": 100000,
+		"incomeEnergy": 0,
+		"incomeResources": 0,
+		"upkeepCredits": 0,
+		"upkeepEnergy": 0,
+		"upkeepResources": 0
 	},
 	{
 		"number": 8,
 		"name": "Government",
 		"price": 1000000000,
-		"value": 1
+		"incomeCredits": 0,
+		"incomeEnergy": 0,
+		"incomeResources": 0,
+		"upkeepCredits": 0,
+		"upkeepEnergy": 0,
+		"upkeepResources": 0
 	}
 ]
