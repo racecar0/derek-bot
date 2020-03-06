@@ -43,9 +43,4 @@ Government: 1:.001 (deeper unrest for not meeting ratio)
 
 Other notes: Food and Natural Resources in surplus can be eliminated through catastrophe.
 
-Three currencies: credits, energy, resources
-
-1440 minutes in a day.
-Daily Growth Rates:
-
 
