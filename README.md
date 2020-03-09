@@ -43,4 +43,10 @@ Government: 1:.001 (deeper unrest for not meeting ratio)
 
 Other notes: Food and Natural Resources in surplus can be eliminated through catastrophe.
 
+Mini Todo
+=========
+* Multiple rolls happening after scoring.
+* Add "roll all" option.
+* Setup full holding options.
+* Remove options after being scored.
 
