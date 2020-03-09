@@ -121,6 +121,24 @@ client.on('message', (message) => {
 				});
 			}
 		});
+	} else if (commandName === 'yacht') {
+		User.find({ userID: message.author.id }, function(err, foundPlayer) {
+			player = foundPlayer[0];
+			if (err) {
+				console.log(err);
+			} else if (player == undefined) {
+				message.channel.send('Please use !register to create a profile first.');
+			} else if (player.userID == message.author.id) {
+				minigames.yacht(message, player);
+			} else {
+				console.log(player);
+				console.log(message.author.id);
+				message.channel.send('Something weird happened. Pinging Racecar0.');
+				client.fetchUser('201336725958557706', false).then((user) => {
+					user.send('Something asplode.');
+				});
+			}
+		});
 	} else if (commandName === 'realm') {
 		User.find({ userID: message.author.id }, function(err, foundPlayer) {
 			player = foundPlayer[0];
@@ -168,7 +186,7 @@ client.once('ready', () => {
 	// List servers the bot is connected to
 	console.log('Servers:');
 	client.guilds.forEach((guild) => {
-		console.log(' - ' + guild.name);
+		console.log(' - ' + guild.name + ', ' + guild.id);
 		// //List all users
 		// console.log(guild.members);
 		// List all channels
