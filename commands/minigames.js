@@ -82,6 +82,19 @@ minigames.yacht.init = (message, player) => {
 	scoreboard.leftScore = 0;
 	scoreboard.rightScore = 0;
 	scoreboard.grandTotalScore = 0;
+	scoreboard.onesDone = false;
+	scoreboard.twosDone = false;
+	scoreboard.threesDone = false;
+	scoreboard.foursDone = false;
+	scoreboard.fivesDone = false;
+	scoreboard.sixesDone = false;
+	scoreboard.threeKindDone = false;
+	scoreboard.fourKindDone = false;
+	scoreboard.fullHouseDone = false;
+	scoreboard.smStraightDone = false;
+	scoreboard.bigStraightDone = false;
+	scoreboard.chanceDone = false;
+	scoreboard.yachtDone = false;
 	var rollsLeft = 3;
 	scoreboard.display =
 		'```cs\nWelcome to Yacht!\n|-------|---|---------------|---|\n|Ones   |' +
@@ -250,7 +263,7 @@ minigames.yacht.display = (message, player, diceObj, hold, scoreboard, rollsLeft
 					.then(() => diceSent.react('3️⃣'))
 					.then(() => diceSent.react('4️⃣'))
 					.then(() => diceSent.react('5️⃣'))
-					.then(() => diceSent.react('🇦'))
+					// .then(() => diceSent.react('🇦'))
 					.then(() => diceSent.react('✏'));
 				const filter = (reaction, user) => {
 					return (
@@ -274,8 +287,8 @@ minigames.yacht.display = (message, player, diceObj, hold, scoreboard, rollsLeft
 								hold[3] = true;
 							} else if (reaction.emoji.name === '5️⃣') {
 								hold[4] = true;
-							} else if (reaction.emoji.name === '🇦') {
-								hold = [ false, false, false, false, false ];
+								// } else if (reaction.emoji.name === '🇦') {
+								// 	hold = [ false, false, false, false, false ];
 							} else if (reaction.emoji.name === '✏') {
 								diceSent.delete();
 								hold = [ false, false, false, false, false ];
@@ -318,25 +331,81 @@ minigames.yacht.display = (message, player, diceObj, hold, scoreboard, rollsLeft
 };
 
 minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLeft, scoreboardSent) => {
-	message.channel.send('Now it is is time to score.\n' + diceObj.display).then((scoreSent) => {
+	message.channel.send('Now it is is time to score.').then((scoreSent) => {
 		scoreSent
-			.react('1️⃣')
-			.then(() => scoreSent.react('2️⃣'))
-			.then(() => scoreSent.react('3️⃣'))
-			.then(() => scoreSent.react('4️⃣'))
-			.then(() => scoreSent.react('5️⃣'))
-			.then(() => scoreSent.react('6️⃣'))
-			.then(() => scoreSent.react('🇹'))
-			.then(() => scoreSent.react('🇫'))
-			.then(() => scoreSent.react('🏠'))
-			.then(() => scoreSent.react('⏩'))
-			.then(() => scoreSent.react('⏭'))
-			.then(() => scoreSent.react('🎰'))
-			.then(() => scoreSent.react('🎲'));
+			.edit(
+				"Here's the scoring key:\n1️⃣=Ones, 2️⃣=Twos, 3️⃣=Threes, 4️⃣=Fours, 5️⃣=Fives, 6️⃣=Sixes, ☘=3 of a Kind, 🍀=4 of a Kind, 🏠=Full House, ⏩=Small Straight, ⏭=Big Straight, 🎰=Chance, 🎲=Yacht\n" +
+					diceObj.display
+			)
+			.then(() => {
+				if (scoreboard.onesDone === false) {
+					scoreSent.react('1️⃣');
+				}
+			})
+			.then(() => {
+				if (scoreboard.twosDone === false) {
+					scoreSent.react('2️⃣');
+				}
+			})
+			.then(() => {
+				if (scoreboard.threesDone === false) {
+					scoreSent.react('3️⃣');
+				}
+			})
+			.then(() => {
+				if (scoreboard.foursDone === false) {
+					scoreSent.react('4️⃣');
+				}
+			})
+			.then(() => {
+				if (scoreboard.fivesDone === false) {
+					scoreSent.react('5️⃣');
+				}
+			})
+			.then(() => {
+				if (scoreboard.sixesDone === false) {
+					scoreSent.react('6️⃣');
+				}
+			})
+			.then(() => {
+				if (scoreboard.threeKindDone === false) {
+					scoreSent.react('☘');
+				}
+			})
+			.then(() => {
+				if (scoreboard.fourKindDone === false) {
+					scoreSent.react('🍀');
+				}
+			})
+			.then(() => {
+				if (scoreboard.fullHouseDone === false) {
+					scoreSent.react('🏠');
+				}
+			})
+			.then(() => {
+				if (scoreboard.smStraightDone === false) {
+					scoreSent.react('⏩');
+				}
+			})
+			.then(() => {
+				if (scoreboard.bigStraightDone === false) {
+					scoreSent.react('⏭');
+				}
+			})
+			.then(() => {
+				if (scoreboard.chanceDone === false) {
+					scoreSent.react('🎰');
+				}
+			})
+			.then(() => {
+				if (scoreboard.yachtDone === false) {
+					scoreSent.react('🎲');
+				}
+			});
 
 		const filter = (reaction, user) => {
 			return (
-				[ '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '🇹', '🇫', '🏠', '⏩', '⏭', '🎰', '🎲' ].includes(
+				[ '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '☘', '🍀', '🏠', '⏩', '⏭', '🎰', '🎲' ].includes(
 					reaction.emoji.name
 				) && user.id === message.author.id
 			);
@@ -412,7 +481,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 					'```';
 
 				if (reaction.emoji.name === '1️⃣') {
-					if (scoreboard.onesScore === 0) {
+					if (scoreboard.onesDone === false) {
 						diceObj.result = diceObj.result.split('');
 						//Calculate button score
 						for (i = 0; i < diceObj.result.length; i++) {
@@ -422,6 +491,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						}
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
+						scoreboard.onesDone = true;
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -432,15 +502,450 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 							rollsLeft,
 							scoreboardSent
 						);
+					} else if (scoreboard.onesDone === true) {
+						scoreSent.edit("Please don't try to cheat.");
+						setTimeout(() => {
+							scoreSent.delete();
+							minigames.yacht.diceCheck(
+								message,
+								player,
+								diceObj,
+								hold,
+								scoreboard,
+								rollsLeft,
+								scoreboardSent
+							);
+						}, 3000);
 					}
 				} else if (reaction.emoji.name === '2️⃣') {
-					if (scoreboard.twosScore === 0) {
+					if (scoreboard.twosDone === false) {
 						diceObj.result = diceObj.result.split('');
 						//Calculate button score
 						for (i = 0; i < diceObj.result.length; i++) {
 							if (diceObj.result[i] == 2) {
 								scoreboard.twosScore += 2;
 							}
+						}
+						var newTotal = minigames.yacht.calculateTotal(scoreboard);
+						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
+						scoreboard.twosDone = true;
+						scoreSent.delete();
+						minigames.yacht.display(
+							message,
+							player,
+							rolledDiceObj,
+							hold,
+							newTotal,
+							rollsLeft,
+							scoreboardSent
+						);
+					} else if (scoreboard.twosDone === true) {
+						scoreSent.edit("Please don't try to cheat.");
+						setTimeout(() => {
+							scoreSent.delete();
+							minigames.yacht.diceCheck(
+								message,
+								player,
+								diceObj,
+								hold,
+								scoreboard,
+								rollsLeft,
+								scoreboardSent
+							);
+						}, 3000);
+					}
+				} else if (reaction.emoji.name === '3️⃣') {
+					if (scoreboard.threesDone === false) {
+						diceObj.result = diceObj.result.split('');
+						//Calculate button score
+						for (i = 0; i < diceObj.result.length; i++) {
+							if (diceObj.result[i] == 3) {
+								scoreboard.threesScore += 3;
+							}
+						}
+						var newTotal = minigames.yacht.calculateTotal(scoreboard);
+						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
+						scoreboard.threesDone = true;
+						scoreSent.delete();
+						minigames.yacht.display(
+							message,
+							player,
+							rolledDiceObj,
+							hold,
+							newTotal,
+							rollsLeft,
+							scoreboardSent
+						);
+					} else if (scoreboard.threesDone === true) {
+						scoreSent.edit("Please don't try to cheat.");
+						setTimeout(() => {
+							scoreSent.delete();
+							minigames.yacht.diceCheck(
+								message,
+								player,
+								diceObj,
+								hold,
+								scoreboard,
+								rollsLeft,
+								scoreboardSent
+							);
+						}, 3000);
+					}
+				} else if (reaction.emoji.name === '4️⃣') {
+					if (scoreboard.foursDone === false) {
+						diceObj.result = diceObj.result.split('');
+						//Calculate button score
+						for (i = 0; i < diceObj.result.length; i++) {
+							if (diceObj.result[i] == 4) {
+								scoreboard.foursScore += 4;
+							}
+						}
+						var newTotal = minigames.yacht.calculateTotal(scoreboard);
+						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
+						scoreboard.foursDone = true;
+						scoreSent.delete();
+						minigames.yacht.display(
+							message,
+							player,
+							rolledDiceObj,
+							hold,
+							newTotal,
+							rollsLeft,
+							scoreboardSent
+						);
+					} else if (scoreboard.foursDone === true) {
+						scoreSent.edit("Please don't try to cheat.");
+						setTimeout(() => {
+							scoreSent.delete();
+							minigames.yacht.diceCheck(
+								message,
+								player,
+								diceObj,
+								hold,
+								scoreboard,
+								rollsLeft,
+								scoreboardSent
+							);
+						}, 3000);
+					}
+				} else if (reaction.emoji.name === '5️⃣') {
+					if (scoreboard.fivesDone === false) {
+						diceObj.result = diceObj.result.split('');
+						//Calculate button score
+						for (i = 0; i < diceObj.result.length; i++) {
+							if (diceObj.result[i] == 5) {
+								scoreboard.fivesScore += 5;
+							}
+						}
+						var newTotal = minigames.yacht.calculateTotal(scoreboard);
+						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
+						scoreboard.fivesDone = true;
+						scoreSent.delete();
+						minigames.yacht.display(
+							message,
+							player,
+							rolledDiceObj,
+							hold,
+							newTotal,
+							rollsLeft,
+							scoreboardSent
+						);
+					} else if (scoreboard.fivesDone === true) {
+						scoreSent.edit("Please don't try to cheat.");
+						setTimeout(() => {
+							scoreSent.delete();
+							minigames.yacht.diceCheck(
+								message,
+								player,
+								diceObj,
+								hold,
+								scoreboard,
+								rollsLeft,
+								scoreboardSent
+							);
+						}, 3000);
+					}
+				} else if (reaction.emoji.name === '6️⃣') {
+					if (scoreboard.sixesDone === false) {
+						diceObj.result = diceObj.result.split('');
+						//Calculate button score
+						for (i = 0; i < diceObj.result.length; i++) {
+							if (diceObj.result[i] == 6) {
+								scoreboard.sixesScore += 6;
+							}
+						}
+						var newTotal = minigames.yacht.calculateTotal(scoreboard);
+						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
+						scoreboard.sixesDone = true;
+						scoreSent.delete();
+						minigames.yacht.display(
+							message,
+							player,
+							rolledDiceObj,
+							hold,
+							newTotal,
+							rollsLeft,
+							scoreboardSent
+						);
+					} else if (scoreboard.sixesDone === true) {
+						scoreSent.edit("Please don't try to cheat.");
+						setTimeout(() => {
+							scoreSent.delete();
+							minigames.yacht.diceCheck(
+								message,
+								player,
+								diceObj,
+								hold,
+								scoreboard,
+								rollsLeft,
+								scoreboardSent
+							);
+						}, 3000);
+					}
+				} else if (reaction.emoji.name === '☘') {
+					if (scoreboard.threeKindDone === false) {
+						//Calculate button score
+						let pattern = /111|222|333|444|555|666/g;
+						let result = pattern.test(diceObj.result);
+						diceObj.result = diceObj.result.split('');
+						if (result === true) {
+							diceObj.result.forEach((num) => {
+								num = parseInt(num);
+								scoreboard.threeKindScore += num;
+							});
+						} else {
+							scoreboard.threeKindScore = 0;
+						}
+						var newTotal = minigames.yacht.calculateTotal(scoreboard);
+						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
+						scoreboard.threeKindDone = true;
+						scoreSent.delete();
+						minigames.yacht.display(
+							message,
+							player,
+							rolledDiceObj,
+							hold,
+							newTotal,
+							rollsLeft,
+							scoreboardSent
+						);
+					} else if (scoreboard.threeKindDone === true) {
+						scoreSent.edit("Please don't try to cheat.");
+						setTimeout(() => {
+							scoreSent.delete();
+							minigames.yacht.diceCheck(
+								message,
+								player,
+								diceObj,
+								hold,
+								scoreboard,
+								rollsLeft,
+								scoreboardSent
+							);
+						}, 3000);
+					}
+				} else if (reaction.emoji.name === '🍀') {
+					if (scoreboard.fourKindDone === false) {
+						//Calculate button score
+						let pattern = /1111|2222|3333|4444|5555|6666/g;
+						let result = pattern.test(diceObj.result);
+						diceObj.result = diceObj.result.split('');
+						if (result === true) {
+							diceObj.result.forEach((num) => {
+								num = parseInt(num);
+								scoreboard.fourKindScore += num;
+							});
+						} else {
+							scoreboard.fourKindScore = 0;
+						}
+						var newTotal = minigames.yacht.calculateTotal(scoreboard);
+						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
+						scoreboard.fourKindDone = true;
+						scoreSent.delete();
+						minigames.yacht.display(
+							message,
+							player,
+							rolledDiceObj,
+							hold,
+							newTotal,
+							rollsLeft,
+							scoreboardSent
+						);
+					} else if (scoreboard.fourKindDone === true) {
+						scoreSent.edit("Please don't try to cheat.");
+						setTimeout(() => {
+							scoreSent.delete();
+							minigames.yacht.diceCheck(
+								message,
+								player,
+								diceObj,
+								hold,
+								scoreboard,
+								rollsLeft,
+								scoreboardSent
+							);
+						}, 3000);
+					}
+				} else if (reaction.emoji.name === '🏠') {
+					if (scoreboard.fullHouseDone === false) {
+						//Calculate button score
+						let pattern = /(.)\1{2}(.)\2|(.)\3(.)\4{2}/g;
+						let result = pattern.test(diceObj.result);
+						if (result === true) {
+							scoreboard.fullHouseScore += 25;
+						} else {
+							scoreboard.fullHouseScore = 0;
+						}
+						var newTotal = minigames.yacht.calculateTotal(scoreboard);
+						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
+						scoreboard.fullHouseDone = true;
+						scoreSent.delete();
+						minigames.yacht.display(
+							message,
+							player,
+							rolledDiceObj,
+							hold,
+							newTotal,
+							rollsLeft,
+							scoreboardSent
+						);
+					} else if (scoreboard.fullHouseDone === true) {
+						scoreSent.edit("Please don't try to cheat.");
+						setTimeout(() => {
+							scoreSent.delete();
+							minigames.yacht.diceCheck(
+								message,
+								player,
+								diceObj,
+								hold,
+								scoreboard,
+								rollsLeft,
+								scoreboardSent
+							);
+						}, 3000);
+					}
+				} else if (reaction.emoji.name === '⏩') {
+					if (scoreboard.smStraightDone === false) {
+						//Calculate button score
+						let pattern = /1234|2345|3456/g;
+						let result = pattern.test(diceObj.result.replace(/(.)\1/, '$1'));
+						if (result === true) {
+							scoreboard.smallStraightScore += 30;
+						} else {
+							scoreboard.smallStraightScore = 0;
+						}
+						var newTotal = minigames.yacht.calculateTotal(scoreboard);
+						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
+						scoreboard.smStraightDone = true;
+						scoreSent.delete();
+						minigames.yacht.display(
+							message,
+							player,
+							rolledDiceObj,
+							hold,
+							newTotal,
+							rollsLeft,
+							scoreboardSent
+						);
+					} else if (scoreboard.smStraightDone === true) {
+						scoreSent.edit("Please don't try to cheat.");
+						setTimeout(() => {
+							scoreSent.delete();
+							minigames.yacht.diceCheck(
+								message,
+								player,
+								diceObj,
+								hold,
+								scoreboard,
+								rollsLeft,
+								scoreboardSent
+							);
+						}, 3000);
+					}
+				} else if (reaction.emoji.name === '⏭') {
+					if (scoreboard.bigStraightDone === false) {
+						//Calculate button score
+						let pattern = /12345|23456/g;
+						let result = pattern.test(diceObj.result);
+						if (result === true) {
+							scoreboard.bigStraightScore += 40;
+						} else {
+							scoreboard.bigStraightScore = 0;
+						}
+						var newTotal = minigames.yacht.calculateTotal(scoreboard);
+						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
+						scoreboard.bigStraightDone = true;
+						scoreSent.delete();
+						minigames.yacht.display(
+							message,
+							player,
+							rolledDiceObj,
+							hold,
+							newTotal,
+							rollsLeft,
+							scoreboardSent
+						);
+					} else if (scoreboard.bigStraightDone === true) {
+						scoreSent.edit("Please don't try to cheat.");
+						setTimeout(() => {
+							scoreSent.delete();
+							minigames.yacht.diceCheck(
+								message,
+								player,
+								diceObj,
+								hold,
+								scoreboard,
+								rollsLeft,
+								scoreboardSent
+							);
+						}, 3000);
+					}
+				} else if (reaction.emoji.name === '🎰') {
+					if (scoreboard.chanceDone === false) {
+						diceObj.result = diceObj.result.split('');
+						//Calculate button score
+						diceObj.result.forEach((num) => {
+							num = parseInt(num);
+							scoreboard.chanceScore += num;
+						});
+						var newTotal = minigames.yacht.calculateTotal(scoreboard);
+						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
+						scoreboard.chanceDone = true;
+						scoreSent.delete();
+						minigames.yacht.display(
+							message,
+							player,
+							rolledDiceObj,
+							hold,
+							newTotal,
+							rollsLeft,
+							scoreboardSent
+						);
+					} else if (scoreboard.chanceDone === true) {
+						scoreSent.edit("Please don't try to cheat.");
+						setTimeout(() => {
+							scoreSent.delete();
+							minigames.yacht.diceCheck(
+								message,
+								player,
+								diceObj,
+								hold,
+								scoreboard,
+								rollsLeft,
+								scoreboardSent
+							);
+						}, 3000);
+					}
+				} else if (reaction.emoji.name === '🎲') {
+					if (scoreboard.yachtDone === false) {
+						//Calculate button score
+						let pattern = /11111|22222|33333|44444|55555|66666/g;
+						// let pattern = /(.)\1{4}/g;
+						let result = pattern.test(diceObj.result);
+						if (result === true) {
+							scoreboard.yachtScore += 50;
+						} else {
+							scoreboard.yachtDone = true;
 						}
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
@@ -454,6 +959,20 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 							rollsLeft,
 							scoreboardSent
 						);
+					} else if (scoreboard.yachtDone === true) {
+						scoreSent.edit("Please don't try to cheat.");
+						setTimeout(() => {
+							scoreSent.delete();
+							minigames.yacht.diceCheck(
+								message,
+								player,
+								diceObj,
+								hold,
+								scoreboard,
+								rollsLeft,
+								scoreboardSent
+							);
+						}, 3000);
 					}
 				}
 			})
@@ -528,4 +1047,99 @@ minigames.yacht.calculateTotal = (scoreboard) => {
 	return scoreboard;
 };
 
+minigames.yacht.end = (scoreboard, scoreboardSent, scoreSent) => {
+	let doneArray = [
+		scoreboard.onesDone,
+		scoreboard.twosDone,
+		scoreboard.threesDone,
+		scoreboard.foursDone,
+		scoreboard.fivesDone,
+		scoreboard.sixesDone,
+		scoreboard.threeKindDone,
+		scoreboard.fourKindDone,
+		scoreboard.fullHouseDone,
+		scoreboard.smallStraightDone,
+		scoreboard.bigStraightDone,
+		scoreboard.chanceDone,
+		scoreboard.yachtDone
+	];
+	let gameOver = true;
+	doneArray.forEach((item) => {
+		if (item === false) {
+			gameOver = false;
+		}
+	});
+	if (!gameOver) {
+		//Display
+		scoreboard.display =
+			'```cs\nWelcome to Yacht!\n|-------|---|---------------|---|\n|Ones   |' +
+			' '.repeat(3 - scoreboard.onesScore.toString().length) +
+			scoreboard.onesScore +
+			'|Three of a Kind|' +
+			' '.repeat(3 - scoreboard.threeKindScore.toString().length) +
+			scoreboard.threeKindScore +
+			'|\n' +
+			'|Twos   |' +
+			' '.repeat(3 - scoreboard.twosScore.toString().length) +
+			scoreboard.twosScore +
+			'|Four of a Kind |' +
+			' '.repeat(3 - scoreboard.fourKindScore.toString().length) +
+			scoreboard.fourKindScore +
+			'|\n' +
+			'|Threes |' +
+			' '.repeat(3 - scoreboard.threesScore.toString().length) +
+			scoreboard.threesScore +
+			'|Full House     |' +
+			' '.repeat(3 - scoreboard.fullHouseScore.toString().length) +
+			scoreboard.fullHouseScore +
+			'|\n' +
+			'|Fours  |' +
+			' '.repeat(3 - scoreboard.foursScore.toString().length) +
+			scoreboard.foursScore +
+			'|Small Straight |' +
+			' '.repeat(3 - scoreboard.smallStraightScore.toString().length) +
+			scoreboard.smallStraightScore +
+			'|\n' +
+			'|Fives  |' +
+			' '.repeat(3 - scoreboard.fivesScore.toString().length) +
+			scoreboard.fivesScore +
+			'|Big Straight   |' +
+			' '.repeat(3 - scoreboard.bigStraightScore.toString().length) +
+			scoreboard.bigStraightScore +
+			'|\n' +
+			'|Sixes  |' +
+			' '.repeat(3 - scoreboard.sixesScore.toString().length) +
+			scoreboard.sixesScore +
+			'|Chance         |' +
+			' '.repeat(3 - scoreboard.chanceScore.toString().length) +
+			scoreboard.chanceScore +
+			'|\n' +
+			'|Bonus* |' +
+			' '.repeat(3 - scoreboard.bonusScore.toString().length) +
+			scoreboard.bonusScore +
+			'|Yacht          |' +
+			' '.repeat(3 - scoreboard.yachtScore.toString().length) +
+			scoreboard.yachtScore +
+			'|\n|-------|---|---------------|---|\n*35 Bonus Points when Left Score >= 63\n\n|-----------|---|\n' +
+			'|Left Score |' +
+			' '.repeat(3 - scoreboard.leftScore.toString().length) +
+			scoreboard.leftScore +
+			'|\n|Right Score|' +
+			' '.repeat(3 - scoreboard.rightScore.toString().length) +
+			scoreboard.rightScore +
+			'|\n|Grand Total|' +
+			' '.repeat(3 - scoreboard.grandTotalScore.toString().length) +
+			scoreboard.grandTotalScore +
+			'|\n|-----------|---|\nRolls left: ' +
+			rollsLeft +
+			'```';
+		scoreboardSent.edit(scoreboard.display);
+		scoreSent.delete();
+		//End the game.
+		message.channel.send('The game is over! Your final score: ' + grandTotalScore);
+		//Add high score to chart.
+		//Break out.
+		return gameOver;
+	}
+};
 module.exports = minigames;

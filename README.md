@@ -45,7 +45,7 @@ Other notes: Food and Natural Resources in surplus can be eliminated through cat
 
 Mini Todo
 =========
-* Remove options after being scored.
-* Finish all scoring options.
 * Add visual timers to choices.
+* Add DB support for a high score board.
+* Fix scoring button order.
 
