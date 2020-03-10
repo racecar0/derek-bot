@@ -45,8 +45,7 @@ Other notes: Food and Natural Resources in surplus can be eliminated through cat
 
 Mini Todo
 =========
-* Setup full holding options.
-* Add "roll all" option.
 * Remove options after being scored.
 * Finish all scoring options.
+* Add visual timers to choices.
 

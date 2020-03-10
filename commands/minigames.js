@@ -132,17 +132,17 @@ minigames.yacht.init = (message, player) => {
 		'|Yacht          |' +
 		' '.repeat(3 - scoreboard.yachtScore.toString().length) +
 		scoreboard.yachtScore +
-		'|\n|-------|---|---------------|---|\n*35 Bonus Points when Left Score >= 63\n\n|----------|---|-----------|---|-----------|---|\n' +
-		'|Left Score|' +
+		'|\n|-------|---|---------------|---|\n*35 Bonus Points when Left Score >= 63\n\n|-----------|---|\n' +
+		'|Left Score |' +
 		' '.repeat(3 - scoreboard.leftScore.toString().length) +
 		scoreboard.leftScore +
-		'|Right Score|' +
+		'|\n|Right Score|' +
 		' '.repeat(3 - scoreboard.rightScore.toString().length) +
 		scoreboard.rightScore +
-		'|Grand Total|' +
+		'|\n|Grand Total|' +
 		' '.repeat(3 - scoreboard.grandTotalScore.toString().length) +
 		scoreboard.grandTotalScore +
-		'|\n|----------|---|-----------|---|-----------|---|\nRolls left: ' +
+		'|\n|-----------|---|\nRolls left: ' +
 		rollsLeft +
 		'```';
 
@@ -228,17 +228,17 @@ minigames.yacht.display = (message, player, diceObj, hold, scoreboard, rollsLeft
 		'|Yacht          |' +
 		' '.repeat(3 - scoreboard.yachtScore.toString().length) +
 		scoreboard.yachtScore +
-		'|\n|-------|---|---------------|---|\n*35 Bonus Points when Left Score >= 63\n\n|----------|---|-----------|---|-----------|---|\n' +
-		'|Left Score|' +
+		'|\n|-------|---|---------------|---|\n*35 Bonus Points when Left Score >= 63\n\n|-----------|---|\n' +
+		'|Left Score |' +
 		' '.repeat(3 - scoreboard.leftScore.toString().length) +
 		scoreboard.leftScore +
-		'|Right Score|' +
+		'|\n|Right Score|' +
 		' '.repeat(3 - scoreboard.rightScore.toString().length) +
 		scoreboard.rightScore +
-		'|Grand Total|' +
+		'|\n|Grand Total|' +
 		' '.repeat(3 - scoreboard.grandTotalScore.toString().length) +
 		scoreboard.grandTotalScore +
-		'|\n|----------|---|-----------|---|-----------|---|\nRolls left: ' +
+		'|\n|-----------|---|\nRolls left: ' +
 		rollsLeft +
 		'```';
 	scoreboardSent.edit(scoreboard.display).then((scoreboardSent) => {
@@ -250,95 +250,36 @@ minigames.yacht.display = (message, player, diceObj, hold, scoreboard, rollsLeft
 					.then(() => diceSent.react('3️⃣'))
 					.then(() => diceSent.react('4️⃣'))
 					.then(() => diceSent.react('5️⃣'))
+					.then(() => diceSent.react('🇦'))
 					.then(() => diceSent.react('✏'));
 				const filter = (reaction, user) => {
 					return (
-						[ '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '✏' ].includes(reaction.emoji.name) &&
+						[ '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '🇦', '✏' ].includes(reaction.emoji.name) &&
 						user.id === message.author.id
 					);
 				};
 				diceSent
-					.awaitReactions(filter, { max: 1, time: 60000, errors: [ 'time' ] })
+					.awaitReactions(filter, { max: 5, time: 30000 })
 					.then((collected) => {
-						const reaction = collected.first();
-						setTimeout(() => {
+						let skipRolls = false;
+						var reactions = collected.array();
+						reactions.forEach((reaction) => {
 							if (reaction.emoji.name === '1️⃣') {
 								hold[0] = true;
-								var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
-								rollsLeft -= 1;
-								hold = [ false, false, false, false, false ];
-								diceSent.delete();
-								minigames.yacht.display(
-									message,
-									player,
-									rolledDiceObj,
-									hold,
-									scoreboard,
-									rollsLeft,
-									scoreboardSent
-								);
 							} else if (reaction.emoji.name === '2️⃣') {
 								hold[1] = true;
-								var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
-								rollsLeft -= 1;
-								hold = [ false, false, false, false, false ];
-								diceSent.delete();
-								minigames.yacht.display(
-									message,
-									player,
-									rolledDiceObj,
-									hold,
-									scoreboard,
-									rollsLeft,
-									scoreboardSent
-								);
 							} else if (reaction.emoji.name === '3️⃣') {
 								hold[2] = true;
-								var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
-								rollsLeft -= 1;
-								hold = [ false, false, false, false, false ];
-								diceSent.delete();
-								minigames.yacht.display(
-									message,
-									player,
-									rolledDiceObj,
-									hold,
-									scoreboard,
-									rollsLeft,
-									scoreboardSent
-								);
 							} else if (reaction.emoji.name === '4️⃣') {
 								hold[3] = true;
-								var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
-								rollsLeft -= 1;
-								hold = [ false, false, false, false, false ];
-								diceSent.delete();
-								minigames.yacht.display(
-									message,
-									player,
-									rolledDiceObj,
-									hold,
-									scoreboard,
-									rollsLeft,
-									scoreboardSent
-								);
 							} else if (reaction.emoji.name === '5️⃣') {
 								hold[4] = true;
-								var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
-								rollsLeft -= 1;
+							} else if (reaction.emoji.name === '🇦') {
 								hold = [ false, false, false, false, false ];
-								diceSent.delete();
-								minigames.yacht.display(
-									message,
-									player,
-									rolledDiceObj,
-									hold,
-									scoreboard,
-									rollsLeft,
-									scoreboardSent
-								);
 							} else if (reaction.emoji.name === '✏') {
 								diceSent.delete();
+								hold = [ false, false, false, false, false ];
+								skipRolls = true;
 								minigames.yacht.diceCheck(
 									message,
 									player,
@@ -349,7 +290,22 @@ minigames.yacht.display = (message, player, diceObj, hold, scoreboard, rollsLeft
 									scoreboardSent
 								);
 							}
-						}, 2500);
+						});
+						if (skipRolls === false) {
+							var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
+							rollsLeft -= 1;
+							hold = [ false, false, false, false, false ];
+							diceSent.delete();
+							minigames.yacht.display(
+								message,
+								player,
+								rolledDiceObj,
+								hold,
+								scoreboard,
+								rollsLeft,
+								scoreboardSent
+							);
+						}
 					})
 					.catch((collected) => {
 						message.channel.send('Something went horribly, horribly wrong here.');
@@ -441,17 +397,17 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 					'|Yacht          |' +
 					' '.repeat(3 - scoreboard.yachtScore.toString().length) +
 					scoreboard.yachtScore +
-					'|\n|-------|---|---------------|---|\n*35 Bonus Points when Left Score >= 63\n\n|----------|---|-----------|---|-----------|---|\n' +
-					'|Left Score|' +
+					'|\n|-------|---|---------------|---|\n*35 Bonus Points when Left Score >= 63\n\n|-----------|---|\n' +
+					'|Left Score |' +
 					' '.repeat(3 - scoreboard.leftScore.toString().length) +
 					scoreboard.leftScore +
-					'|Right Score|' +
+					'|\n|Right Score|' +
 					' '.repeat(3 - scoreboard.rightScore.toString().length) +
 					scoreboard.rightScore +
-					'|Grand Total|' +
+					'|\n|Grand Total|' +
 					' '.repeat(3 - scoreboard.grandTotalScore.toString().length) +
 					scoreboard.grandTotalScore +
-					'|\n|----------|---|-----------|---|-----------|---|\nRolls left: ' +
+					'|\n|-----------|---|\nRolls left: ' +
 					rollsLeft +
 					'```';
 
@@ -502,8 +458,9 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 				}
 			})
 			.catch((collected) => {
-				console.log(collected);
-				message.channel.send('The shopkeeper kicked you out because you were loitering.');
+				message.channel.send(
+					'You must not be paying attention anymore. Go ahead and start up a new game when you are ready.'
+				);
 			});
 	});
 };
