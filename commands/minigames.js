@@ -4,7 +4,11 @@ const { Client, Attachment, Collection } = require('discord.js'),
 	client = new Client();
 
 var minigames = {};
-//FLIP MINIGAME
+minigames.yacht = {};
+
+/////////////////
+//FLIP MINIGAME//
+/////////////////
 minigames.flip = function(message, player, args) {
 	if (args[0] > player.credits) {
 		message.channel.send("You don't have enough credits.");
@@ -55,7 +59,10 @@ minigames.flip = function(message, player, args) {
 	}
 };
 
-minigames.yacht = (message, player) => {
+//////////////////
+//YACHT MINIGAME//
+//////////////////
+minigames.yacht.init = (message, player) => {
 	//Setup
 	var scoreboard = {};
 	scoreboard.onesScore = 0;
@@ -160,20 +167,17 @@ minigames.yacht = (message, player) => {
 	diceObj.images = [ emojiDiceOne, emojiDiceTwo, emojiDiceThree, emojiDiceFour, emojiDiceFive, emojiDiceSix ];
 	diceObj.display = [ emojiDiceOne, emojiDiceTwo, emojiDiceThree, emojiDiceFour, emojiDiceFive ];
 
-	var rolledDiceObj = minigames.rollDice(hold, diceObj);
+	var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 	//Display
 	message.channel.send('Welcome to Yacht!').then((scoreboardSent) => {
-		minigames.yachtDisplay(message, player, rolledDiceObj, hold, scoreboard, rollsLeft, scoreboardSent);
+		minigames.yacht.display(message, player, rolledDiceObj, hold, scoreboard, rollsLeft, scoreboardSent);
 	});
 
-	//Score
 	//End
 };
-// minigames.customEmoji = id => client.emojis.find(emoji => emoji.id === id);
-module.exports = minigames;
 
 //Functions
-minigames.yachtDisplay = (message, player, diceObj, hold, scoreboard, rollsLeft, scoreboardSent) => {
+minigames.yacht.display = (message, player, diceObj, hold, scoreboard, rollsLeft, scoreboardSent) => {
 	//Display
 	scoreboard.display =
 		'```cs\nWelcome to Yacht!\n|-------|---|---------------|---|\n|Ones   |' +
@@ -238,7 +242,6 @@ minigames.yachtDisplay = (message, player, diceObj, hold, scoreboard, rollsLeft,
 		rollsLeft +
 		'```';
 	scoreboardSent.edit(scoreboard.display).then((scoreboardSent) => {
-		//Add more scoreboardSent edits here.
 		if (rollsLeft > 0) {
 			message.channel.send(diceObj.display).then((diceSent) => {
 				diceSent
@@ -261,11 +264,11 @@ minigames.yachtDisplay = (message, player, diceObj, hold, scoreboard, rollsLeft,
 						setTimeout(() => {
 							if (reaction.emoji.name === '1️⃣') {
 								hold[0] = true;
-								var rolledDiceObj = minigames.rollDice(hold, diceObj);
+								var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 								rollsLeft -= 1;
 								hold = [ false, false, false, false, false ];
 								diceSent.delete();
-								minigames.yachtDisplay(
+								minigames.yacht.display(
 									message,
 									player,
 									rolledDiceObj,
@@ -276,11 +279,11 @@ minigames.yachtDisplay = (message, player, diceObj, hold, scoreboard, rollsLeft,
 								);
 							} else if (reaction.emoji.name === '2️⃣') {
 								hold[1] = true;
-								var rolledDiceObj = minigames.rollDice(hold, diceObj);
+								var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 								rollsLeft -= 1;
 								hold = [ false, false, false, false, false ];
 								diceSent.delete();
-								minigames.yachtDisplay(
+								minigames.yacht.display(
 									message,
 									player,
 									rolledDiceObj,
@@ -291,11 +294,11 @@ minigames.yachtDisplay = (message, player, diceObj, hold, scoreboard, rollsLeft,
 								);
 							} else if (reaction.emoji.name === '3️⃣') {
 								hold[2] = true;
-								var rolledDiceObj = minigames.rollDice(hold, diceObj);
+								var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 								rollsLeft -= 1;
 								hold = [ false, false, false, false, false ];
 								diceSent.delete();
-								minigames.yachtDisplay(
+								minigames.yacht.display(
 									message,
 									player,
 									rolledDiceObj,
@@ -306,11 +309,11 @@ minigames.yachtDisplay = (message, player, diceObj, hold, scoreboard, rollsLeft,
 								);
 							} else if (reaction.emoji.name === '4️⃣') {
 								hold[3] = true;
-								var rolledDiceObj = minigames.rollDice(hold, diceObj);
+								var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 								rollsLeft -= 1;
 								hold = [ false, false, false, false, false ];
 								diceSent.delete();
-								minigames.yachtDisplay(
+								minigames.yacht.display(
 									message,
 									player,
 									rolledDiceObj,
@@ -321,11 +324,11 @@ minigames.yachtDisplay = (message, player, diceObj, hold, scoreboard, rollsLeft,
 								);
 							} else if (reaction.emoji.name === '5️⃣') {
 								hold[4] = true;
-								var rolledDiceObj = minigames.rollDice(hold, diceObj);
+								var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 								rollsLeft -= 1;
 								hold = [ false, false, false, false, false ];
 								diceSent.delete();
-								minigames.yachtDisplay(
+								minigames.yacht.display(
 									message,
 									player,
 									rolledDiceObj,
@@ -336,7 +339,7 @@ minigames.yachtDisplay = (message, player, diceObj, hold, scoreboard, rollsLeft,
 								);
 							} else if (reaction.emoji.name === '✏') {
 								diceSent.delete();
-								minigames.diceCheck(
+								minigames.yacht.diceCheck(
 									message,
 									player,
 									diceObj,
@@ -353,13 +356,12 @@ minigames.yachtDisplay = (message, player, diceObj, hold, scoreboard, rollsLeft,
 					});
 			});
 		} else {
-			diceSent.delete();
-			minigames.diceCheck(message, player, diceObj, hold, scoreboard, rollsLeft, scoreboardSent);
+			minigames.yacht.diceCheck(message, player, diceObj, hold, scoreboard, rollsLeft, scoreboardSent);
 		}
 	});
 };
 
-minigames.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLeft, scoreboardSent) => {
+minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLeft, scoreboardSent) => {
 	message.channel.send('Now it is is time to score.\n' + diceObj.display).then((scoreSent) => {
 		scoreSent
 			.react('1️⃣')
@@ -462,10 +464,10 @@ minigames.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLeft, sc
 								scoreboard.onesScore += 1;
 							}
 						}
-						var newTotal = minigames.calculateTotal(scoreboard);
-						var rolledDiceObj = minigames.rollDice(hold, diceObj);
+						var newTotal = minigames.yacht.calculateTotal(scoreboard);
+						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreSent.delete();
-						minigames.yachtDisplay(
+						minigames.yacht.display(
 							message,
 							player,
 							rolledDiceObj,
@@ -484,10 +486,10 @@ minigames.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLeft, sc
 								scoreboard.twosScore += 2;
 							}
 						}
-						var newTotal = minigames.calculateTotal(scoreboard);
-						var rolledDiceObj = minigames.rollDice(hold, diceObj);
+						var newTotal = minigames.yacht.calculateTotal(scoreboard);
+						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreSent.delete();
-						minigames.yachtDisplay(
+						minigames.yacht.display(
 							message,
 							player,
 							rolledDiceObj,
@@ -506,7 +508,7 @@ minigames.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLeft, sc
 	});
 };
 
-minigames.rollDice = (hold, diceObj) => {
+minigames.yacht.rollDice = (hold, diceObj) => {
 	if (typeof diceObj.result === 'string') {
 		diceObj.result = diceObj.result.split('');
 		for (i = 0; i < diceObj.result.length; i++) {
@@ -542,7 +544,7 @@ minigames.rollDice = (hold, diceObj) => {
 	diceObj.display = diceObj.display.join('');
 	return diceObj;
 };
-minigames.calculateTotal = (scoreboard) => {
+minigames.yacht.calculateTotal = (scoreboard) => {
 	//Calculate totals
 	scoreboard.leftScore = 0;
 	scoreboard.rightScore = 0;
@@ -568,4 +570,5 @@ minigames.calculateTotal = (scoreboard) => {
 	scoreboard.grandTotalScore = scoreboard.leftScore + scoreboard.rightScore;
 	return scoreboard;
 };
-//Need to clean up the Yacht functions so they live inside of a minigames.yacht object.
+
+module.exports = minigames;
