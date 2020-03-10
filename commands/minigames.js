@@ -95,7 +95,7 @@ minigames.yacht.init = (message, player) => {
 	scoreboard.bigStraightDone = false;
 	scoreboard.chanceDone = false;
 	scoreboard.yachtDone = false;
-	var rollsLeft = 3;
+	var rollsLeft = 2;
 	scoreboard.display =
 		'```cs\nWelcome to Yacht!\n|-------|---|---------------|---|\n|Ones   |' +
 		' '.repeat(3 - scoreboard.onesScore.toString().length) +
@@ -416,7 +416,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 			.then((collected) => {
 				const reaction = collected.first();
 
-				rollsLeft = 3;
+				rollsLeft = 2;
 				scoreboard.display =
 					'```cs\nWelcome to Yacht!\n|-------|---|---------------|---|\n|Ones   |' +
 					' '.repeat(3 - scoreboard.onesScore.toString().length) +

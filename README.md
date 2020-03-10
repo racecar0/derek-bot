@@ -48,4 +48,7 @@ Mini Todo
 * Add visual timers to choices.
 * Add DB support for a high score board.
 * Fix scoring button order.
-
+* Add game cleanup.
+* Change scoring to match Yacht and not Yahtzee.
+* Add betting credits.
+* Double-check scoring a small straight with a big one.
