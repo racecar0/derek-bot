@@ -52,3 +52,4 @@ Mini Todo
 * Change scoring to match Yacht and not Yahtzee.
 * Add betting credits.
 * Double-check scoring a small straight with a big one.
+* Feedback - when you scratch something, you should change the 0 on the scorecard to a hyphen. Alternatively, everything could start with a hyphen and when you scratch something it changes to 0.

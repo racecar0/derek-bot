@@ -95,64 +95,103 @@ minigames.yacht.init = (message, player) => {
 	scoreboard.bigStraightDone = false;
 	scoreboard.chanceDone = false;
 	scoreboard.yachtDone = false;
+	scoreboard.onesCheck = '-';
+	scoreboard.twosCheck = '-';
+	scoreboard.threesCheck = '-';
+	scoreboard.foursCheck = '-';
+	scoreboard.fivesCheck = '-';
+	scoreboard.sixesCheck = '-';
+	scoreboard.threeKindCheck = '-';
+	scoreboard.fourKindCheck = '-';
+	scoreboard.fullHouseCheck = '-';
+	scoreboard.smStraightCheck = '-';
+	scoreboard.bigStraightCheck = '-';
+	scoreboard.chanceCheck = '-';
+	scoreboard.yachtCheck = '-';
 	var rollsLeft = 2;
 	scoreboard.display =
-		'```cs\nWelcome to Yacht!\n|-------|---|---------------|---|\n|Ones   |' +
+		'```cs\nWelcome to Yacht!\n|-|-------|---|-|---------------|---|\n|' +
+		scoreboard.onesCheck +
+		'|Ones   |' +
 		' '.repeat(3 - scoreboard.onesScore.toString().length) +
 		scoreboard.onesScore +
+		'|' +
+		scoreboard.threeKindCheck +
 		'|Three of a Kind|' +
 		' '.repeat(3 - scoreboard.threeKindScore.toString().length) +
 		scoreboard.threeKindScore +
 		'|\n' +
+		'|' +
+		scoreboard.twosCheck +
 		'|Twos   |' +
 		' '.repeat(3 - scoreboard.twosScore.toString().length) +
 		scoreboard.twosScore +
+		'|' +
+		scoreboard.fourKindCheck +
 		'|Four of a Kind |' +
 		' '.repeat(3 - scoreboard.fourKindScore.toString().length) +
 		scoreboard.fourKindScore +
 		'|\n' +
+		'|' +
+		scoreboard.threesCheck +
 		'|Threes |' +
 		' '.repeat(3 - scoreboard.threesScore.toString().length) +
 		scoreboard.threesScore +
+		'|' +
+		scoreboard.fullHouseCheck +
 		'|Full House     |' +
 		' '.repeat(3 - scoreboard.fullHouseScore.toString().length) +
 		scoreboard.fullHouseScore +
 		'|\n' +
+		'|' +
+		scoreboard.foursCheck +
 		'|Fours  |' +
 		' '.repeat(3 - scoreboard.foursScore.toString().length) +
 		scoreboard.foursScore +
+		'|' +
+		scoreboard.smStraightCheck +
 		'|Small Straight |' +
 		' '.repeat(3 - scoreboard.smallStraightScore.toString().length) +
 		scoreboard.smallStraightScore +
 		'|\n' +
+		'|' +
+		scoreboard.fivesCheck +
 		'|Fives  |' +
 		' '.repeat(3 - scoreboard.fivesScore.toString().length) +
 		scoreboard.fivesScore +
+		'|' +
+		scoreboard.bigStraightCheck +
 		'|Big Straight   |' +
 		' '.repeat(3 - scoreboard.bigStraightScore.toString().length) +
 		scoreboard.bigStraightScore +
 		'|\n' +
+		'|' +
+		scoreboard.sixesCheck +
 		'|Sixes  |' +
 		' '.repeat(3 - scoreboard.sixesScore.toString().length) +
 		scoreboard.sixesScore +
+		'|' +
+		scoreboard.chanceCheck +
 		'|Chance         |' +
 		' '.repeat(3 - scoreboard.chanceScore.toString().length) +
 		scoreboard.chanceScore +
 		'|\n' +
-		'|Bonus* |' +
+		'|-|Bonus* |' +
 		' '.repeat(3 - scoreboard.bonusScore.toString().length) +
 		scoreboard.bonusScore +
+		'|' +
+		scoreboard.yachtCheck +
 		'|Yacht          |' +
 		' '.repeat(3 - scoreboard.yachtScore.toString().length) +
 		scoreboard.yachtScore +
-		'|\n|-------|---|---------------|---|\n*35 Bonus Points when Left Score >= 63\n\n|-----------|---|\n' +
+		'|\n|-|-------|---|-|---------------|---|\n*35 Bonus Points when Left Score >= 63\n\n|-----------|---|\n' +
 		'|Left Score |' +
 		' '.repeat(3 - scoreboard.leftScore.toString().length) +
 		scoreboard.leftScore +
 		'|\n|Right Score|' +
 		' '.repeat(3 - scoreboard.rightScore.toString().length) +
 		scoreboard.rightScore +
-		'|\n|Grand Total|' +
+		'|\n|-----------|---|\n|Grand Total|' +
 		' '.repeat(3 - scoreboard.grandTotalScore.toString().length) +
 		scoreboard.grandTotalScore +
 		'|\n|-----------|---|\nRolls left: ' +
@@ -193,62 +232,88 @@ minigames.yacht.init = (message, player) => {
 minigames.yacht.display = (message, player, diceObj, hold, scoreboard, rollsLeft, scoreboardSent) => {
 	//Display
 	scoreboard.display =
-		'```cs\nWelcome to Yacht!\n|-------|---|---------------|---|\n|Ones   |' +
+		'```cs\nWelcome to Yacht!\n|-|-------|---|-|---------------|---|\n|' +
+		scoreboard.onesCheck +
+		'|Ones   |' +
 		' '.repeat(3 - scoreboard.onesScore.toString().length) +
 		scoreboard.onesScore +
+		'|' +
+		scoreboard.threeKindCheck +
 		'|Three of a Kind|' +
 		' '.repeat(3 - scoreboard.threeKindScore.toString().length) +
 		scoreboard.threeKindScore +
 		'|\n' +
+		'|' +
+		scoreboard.twosCheck +
 		'|Twos   |' +
 		' '.repeat(3 - scoreboard.twosScore.toString().length) +
 		scoreboard.twosScore +
+		'|' +
+		scoreboard.fourKindCheck +
 		'|Four of a Kind |' +
 		' '.repeat(3 - scoreboard.fourKindScore.toString().length) +
 		scoreboard.fourKindScore +
 		'|\n' +
+		'|' +
+		scoreboard.threesCheck +
 		'|Threes |' +
 		' '.repeat(3 - scoreboard.threesScore.toString().length) +
 		scoreboard.threesScore +
+		'|' +
+		scoreboard.fullHouseCheck +
 		'|Full House     |' +
 		' '.repeat(3 - scoreboard.fullHouseScore.toString().length) +
 		scoreboard.fullHouseScore +
 		'|\n' +
+		'|' +
+		scoreboard.foursCheck +
 		'|Fours  |' +
 		' '.repeat(3 - scoreboard.foursScore.toString().length) +
 		scoreboard.foursScore +
+		'|' +
+		scoreboard.smStraightCheck +
 		'|Small Straight |' +
 		' '.repeat(3 - scoreboard.smallStraightScore.toString().length) +
 		scoreboard.smallStraightScore +
 		'|\n' +
+		'|' +
+		scoreboard.fivesCheck +
 		'|Fives  |' +
 		' '.repeat(3 - scoreboard.fivesScore.toString().length) +
 		scoreboard.fivesScore +
+		'|' +
+		scoreboard.bigStraightCheck +
 		'|Big Straight   |' +
 		' '.repeat(3 - scoreboard.bigStraightScore.toString().length) +
 		scoreboard.bigStraightScore +
 		'|\n' +
+		'|' +
+		scoreboard.sixesCheck +
 		'|Sixes  |' +
 		' '.repeat(3 - scoreboard.sixesScore.toString().length) +
 		scoreboard.sixesScore +
+		'|' +
+		scoreboard.chanceCheck +
 		'|Chance         |' +
 		' '.repeat(3 - scoreboard.chanceScore.toString().length) +
 		scoreboard.chanceScore +
 		'|\n' +
-		'|Bonus* |' +
+		'|-|Bonus* |' +
 		' '.repeat(3 - scoreboard.bonusScore.toString().length) +
 		scoreboard.bonusScore +
+		'|' +
+		scoreboard.yachtCheck +
 		'|Yacht          |' +
 		' '.repeat(3 - scoreboard.yachtScore.toString().length) +
 		scoreboard.yachtScore +
-		'|\n|-------|---|---------------|---|\n*35 Bonus Points when Left Score >= 63\n\n|-----------|---|\n' +
+		'|\n|-|-------|---|-|---------------|---|\n*35 Bonus Points when Left Score >= 63\n\n|-----------|---|\n' +
 		'|Left Score |' +
 		' '.repeat(3 - scoreboard.leftScore.toString().length) +
 		scoreboard.leftScore +
 		'|\n|Right Score|' +
 		' '.repeat(3 - scoreboard.rightScore.toString().length) +
 		scoreboard.rightScore +
-		'|\n|Grand Total|' +
+		'|\n|-----------|---|\n|Grand Total|' +
 		' '.repeat(3 - scoreboard.grandTotalScore.toString().length) +
 		scoreboard.grandTotalScore +
 		'|\n|-----------|---|\nRolls left: ' +
@@ -418,62 +483,88 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 
 				rollsLeft = 2;
 				scoreboard.display =
-					'```cs\nWelcome to Yacht!\n|-------|---|---------------|---|\n|Ones   |' +
+					'```cs\nWelcome to Yacht!\n|-|-------|---|-|---------------|---|\n|' +
+					scoreboard.onesCheck +
+					'|Ones   |' +
 					' '.repeat(3 - scoreboard.onesScore.toString().length) +
 					scoreboard.onesScore +
+					'|' +
+					scoreboard.threeKindCheck +
 					'|Three of a Kind|' +
 					' '.repeat(3 - scoreboard.threeKindScore.toString().length) +
 					scoreboard.threeKindScore +
 					'|\n' +
+					'|' +
+					scoreboard.twosCheck +
 					'|Twos   |' +
 					' '.repeat(3 - scoreboard.twosScore.toString().length) +
 					scoreboard.twosScore +
+					'|' +
+					scoreboard.fourKindCheck +
 					'|Four of a Kind |' +
 					' '.repeat(3 - scoreboard.fourKindScore.toString().length) +
 					scoreboard.fourKindScore +
 					'|\n' +
+					'|' +
+					scoreboard.threesCheck +
 					'|Threes |' +
 					' '.repeat(3 - scoreboard.threesScore.toString().length) +
 					scoreboard.threesScore +
+					'|' +
+					scoreboard.fullHouseCheck +
 					'|Full House     |' +
 					' '.repeat(3 - scoreboard.fullHouseScore.toString().length) +
 					scoreboard.fullHouseScore +
 					'|\n' +
+					'|' +
+					scoreboard.foursCheck +
 					'|Fours  |' +
 					' '.repeat(3 - scoreboard.foursScore.toString().length) +
 					scoreboard.foursScore +
+					'|' +
+					scoreboard.smStraightCheck +
 					'|Small Straight |' +
 					' '.repeat(3 - scoreboard.smallStraightScore.toString().length) +
 					scoreboard.smallStraightScore +
 					'|\n' +
+					'|' +
+					scoreboard.fivesCheck +
 					'|Fives  |' +
 					' '.repeat(3 - scoreboard.fivesScore.toString().length) +
 					scoreboard.fivesScore +
+					'|' +
+					scoreboard.bigStraightCheck +
 					'|Big Straight   |' +
 					' '.repeat(3 - scoreboard.bigStraightScore.toString().length) +
 					scoreboard.bigStraightScore +
 					'|\n' +
+					'|' +
+					scoreboard.sixesCheck +
 					'|Sixes  |' +
 					' '.repeat(3 - scoreboard.sixesScore.toString().length) +
 					scoreboard.sixesScore +
+					'|' +
+					scoreboard.chanceCheck +
 					'|Chance         |' +
 					' '.repeat(3 - scoreboard.chanceScore.toString().length) +
 					scoreboard.chanceScore +
 					'|\n' +
-					'|Bonus* |' +
+					'|-|Bonus* |' +
 					' '.repeat(3 - scoreboard.bonusScore.toString().length) +
 					scoreboard.bonusScore +
+					'|' +
+					scoreboard.yachtCheck +
 					'|Yacht          |' +
 					' '.repeat(3 - scoreboard.yachtScore.toString().length) +
 					scoreboard.yachtScore +
-					'|\n|-------|---|---------------|---|\n*35 Bonus Points when Left Score >= 63\n\n|-----------|---|\n' +
+					'|\n|-|-------|---|-|---------------|---|\n*35 Bonus Points when Left Score >= 63\n\n|-----------|---|\n' +
 					'|Left Score |' +
 					' '.repeat(3 - scoreboard.leftScore.toString().length) +
 					scoreboard.leftScore +
 					'|\n|Right Score|' +
 					' '.repeat(3 - scoreboard.rightScore.toString().length) +
 					scoreboard.rightScore +
-					'|\n|Grand Total|' +
+					'|\n|-----------|---|\n|Grand Total|' +
 					' '.repeat(3 - scoreboard.grandTotalScore.toString().length) +
 					scoreboard.grandTotalScore +
 					'|\n|-----------|---|\nRolls left: ' +
@@ -492,6 +583,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.onesDone = true;
+						scoreboard.onesCheck = '✓';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -529,6 +621,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.twosDone = true;
+						scoreboard.twosCheck = '✓';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -566,6 +659,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.threesDone = true;
+						scoreboard.threesCheck = '✓';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -603,6 +697,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.foursDone = true;
+						scoreboard.foursCheck = '✓';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -640,6 +735,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.fivesDone = true;
+						scoreboard.fivesCheck = '✓';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -677,6 +773,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.sixesDone = true;
+						scoreboard.sixesCheck = '✓';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -719,6 +816,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.threeKindDone = true;
+						scoreboard.threeKindCheck = '✓';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -761,6 +859,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.fourKindDone = true;
+						scoreboard.fourKindCheck = '✓';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -799,6 +898,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.fullHouseDone = true;
+						scoreboard.fullHouseCheck = '✓';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -837,6 +937,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.smStraightDone = true;
+						scoreboard.smStraightCheck = '✓';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -875,6 +976,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.bigStraightDone = true;
+						scoreboard.bigStraightCheck = '✓';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -911,6 +1013,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.chanceDone = true;
+						scoreboard.chanceCheck = '✓';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -944,8 +1047,24 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						let result = pattern.test(diceObj.result);
 						if (result === true) {
 							scoreboard.yachtScore += 50;
+							scoreboard.yachtCheck = '*';
+						} else if (result === false && scoreboard.yachtScore >= 50) {
+							scoreSent.edit('You cannot scratch into the bonus Yachts. Please pick another option.');
+							setTimeout(() => {
+								scoreSent.delete();
+								minigames.yacht.diceCheck(
+									message,
+									player,
+									diceObj,
+									hold,
+									scoreboard,
+									rollsLeft,
+									scoreboardSent
+								);
+							}, 3000);
 						} else {
 							scoreboard.yachtDone = true;
+							scoreboard.yachtCheck = '✓';
 						}
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
@@ -1072,62 +1191,88 @@ minigames.yacht.end = (scoreboard, scoreboardSent, scoreSent) => {
 	if (!gameOver) {
 		//Display
 		scoreboard.display =
-			'```cs\nWelcome to Yacht!\n|-------|---|---------------|---|\n|Ones   |' +
+			'```cs\nWelcome to Yacht!\n|-|-------|---|-|---------------|---|\n|' +
+			scoreboard.onesCheck +
+			'|Ones   |' +
 			' '.repeat(3 - scoreboard.onesScore.toString().length) +
 			scoreboard.onesScore +
+			'|' +
+			scoreboard.threeKindCheck +
 			'|Three of a Kind|' +
 			' '.repeat(3 - scoreboard.threeKindScore.toString().length) +
 			scoreboard.threeKindScore +
 			'|\n' +
+			'|' +
+			scoreboard.twosCheck +
 			'|Twos   |' +
 			' '.repeat(3 - scoreboard.twosScore.toString().length) +
 			scoreboard.twosScore +
+			'|' +
+			scoreboard.fourKindCheck +
 			'|Four of a Kind |' +
 			' '.repeat(3 - scoreboard.fourKindScore.toString().length) +
 			scoreboard.fourKindScore +
 			'|\n' +
+			'|' +
+			scoreboard.threesCheck +
 			'|Threes |' +
 			' '.repeat(3 - scoreboard.threesScore.toString().length) +
 			scoreboard.threesScore +
+			'|' +
+			scoreboard.fullHouseCheck +
 			'|Full House     |' +
 			' '.repeat(3 - scoreboard.fullHouseScore.toString().length) +
 			scoreboard.fullHouseScore +
 			'|\n' +
+			'|' +
+			scoreboard.foursCheck +
 			'|Fours  |' +
 			' '.repeat(3 - scoreboard.foursScore.toString().length) +
 			scoreboard.foursScore +
+			'|' +
+			scoreboard.smStraightCheck +
 			'|Small Straight |' +
 			' '.repeat(3 - scoreboard.smallStraightScore.toString().length) +
 			scoreboard.smallStraightScore +
 			'|\n' +
+			'|' +
+			scoreboard.fivesCheck +
 			'|Fives  |' +
 			' '.repeat(3 - scoreboard.fivesScore.toString().length) +
 			scoreboard.fivesScore +
+			'|' +
+			scoreboard.bigStraightCheck +
 			'|Big Straight   |' +
 			' '.repeat(3 - scoreboard.bigStraightScore.toString().length) +
 			scoreboard.bigStraightScore +
 			'|\n' +
+			'|' +
+			scoreboard.sixesCheck +
 			'|Sixes  |' +
 			' '.repeat(3 - scoreboard.sixesScore.toString().length) +
 			scoreboard.sixesScore +
+			'|' +
+			scoreboard.chanceCheck +
 			'|Chance         |' +
 			' '.repeat(3 - scoreboard.chanceScore.toString().length) +
 			scoreboard.chanceScore +
 			'|\n' +
-			'|Bonus* |' +
+			'|-|Bonus* |' +
 			' '.repeat(3 - scoreboard.bonusScore.toString().length) +
 			scoreboard.bonusScore +
+			'|' +
+			scoreboard.yachtCheck +
 			'|Yacht          |' +
 			' '.repeat(3 - scoreboard.yachtScore.toString().length) +
 			scoreboard.yachtScore +
-			'|\n|-------|---|---------------|---|\n*35 Bonus Points when Left Score >= 63\n\n|-----------|---|\n' +
+			'|\n|-|-------|---|-|---------------|---|\n*35 Bonus Points when Left Score >= 63\n\n|-----------|---|\n' +
 			'|Left Score |' +
 			' '.repeat(3 - scoreboard.leftScore.toString().length) +
 			scoreboard.leftScore +
 			'|\n|Right Score|' +
 			' '.repeat(3 - scoreboard.rightScore.toString().length) +
 			scoreboard.rightScore +
-			'|\n|Grand Total|' +
+			'|\n|-----------|---|\n|Grand Total|' +
 			' '.repeat(3 - scoreboard.grandTotalScore.toString().length) +
 			scoreboard.grandTotalScore +
 			'|\n|-----------|---|\nRolls left: ' +
