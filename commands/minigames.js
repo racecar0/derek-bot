@@ -101,6 +101,7 @@ minigames.yacht.init = (message, player) => {
 	scoreboard.foursCheck = '-';
 	scoreboard.fivesCheck = '-';
 	scoreboard.sixesCheck = '-';
+	scoreboard.bonusCheck = '-';
 	scoreboard.threeKindCheck = '-';
 	scoreboard.fourKindCheck = '-';
 	scoreboard.fullHouseCheck = '-';
@@ -110,7 +111,9 @@ minigames.yacht.init = (message, player) => {
 	scoreboard.yachtCheck = '-';
 	var rollsLeft = 2;
 	scoreboard.display =
-		'```cs\nWelcome to Yacht!\n|-|-------|---|-|---------------|---|\n|' +
+		'```cs\nWelcome to Yacht, ' +
+		player.username +
+		'!\n|-|-------|---|-|---------------|---|\n|' +
 		scoreboard.onesCheck +
 		'|Ones   |' +
 		' '.repeat(3 - scoreboard.onesScore.toString().length) +
@@ -176,7 +179,9 @@ minigames.yacht.init = (message, player) => {
 		' '.repeat(3 - scoreboard.chanceScore.toString().length) +
 		scoreboard.chanceScore +
 		'|\n' +
-		'|-|Bonus* |' +
+		'|' +
+		scoreboard.bonusCheck +
+		'|Bonus* |' +
 		' '.repeat(3 - scoreboard.bonusScore.toString().length) +
 		scoreboard.bonusScore +
 		'|' +
@@ -232,7 +237,9 @@ minigames.yacht.init = (message, player) => {
 minigames.yacht.display = (message, player, diceObj, hold, scoreboard, rollsLeft, scoreboardSent) => {
 	//Display
 	scoreboard.display =
-		'```cs\nWelcome to Yacht!\n|-|-------|---|-|---------------|---|\n|' +
+		'```cs\nWelcome to Yacht, ' +
+		player.username +
+		'!\n|-|-------|---|-|---------------|---|\n|' +
 		scoreboard.onesCheck +
 		'|Ones   |' +
 		' '.repeat(3 - scoreboard.onesScore.toString().length) +
@@ -321,7 +328,7 @@ minigames.yacht.display = (message, player, diceObj, hold, scoreboard, rollsLeft
 		'```';
 	scoreboardSent.edit(scoreboard.display).then((scoreboardSent) => {
 		if (rollsLeft > 0) {
-			message.channel.send(diceObj.display).then((diceSent) => {
+			message.channel.send(player.username + "'s dice:\n" + diceObj.display).then((diceSent) => {
 				diceSent
 					.react('1️⃣')
 					.then(() => diceSent.react('2️⃣'))
@@ -399,7 +406,9 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 	message.channel.send('Now it is is time to score.').then((scoreSent) => {
 		scoreSent
 			.edit(
-				"Here's the scoring key:\n1️⃣=Ones, 2️⃣=Twos, 3️⃣=Threes, 4️⃣=Fours, 5️⃣=Fives, 6️⃣=Sixes, ☘=3 of a Kind, 🍀=4 of a Kind, 🏠=Full House, ⏩=Small Straight, ⏭=Big Straight, 🎰=Chance, 🎲=Yacht\n" +
+				"Here's the scoring key, " +
+					player.username +
+					':\n1️⃣=Ones, 2️⃣=Twos, 3️⃣=Threes,\n4️⃣=Fours, 5️⃣=Fives, 6️⃣=Sixes,\n☘=3 of a Kind, 🍀=4 of a Kind,\n🏠=Full House, ⏩=Small Straight, ⏭=Big Straight,\n🎰=Chance, 🎲=Yacht\n' +
 					diceObj.display
 			)
 			.then(() => {
@@ -483,7 +492,9 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 
 				rollsLeft = 2;
 				scoreboard.display =
-					'```cs\nWelcome to Yacht!\n|-|-------|---|-|---------------|---|\n|' +
+					'```cs\nWelcome to Yacht, ' +
+					player.username +
+					'!\n|-|-------|---|-|---------------|---|\n|' +
 					scoreboard.onesCheck +
 					'|Ones   |' +
 					' '.repeat(3 - scoreboard.onesScore.toString().length) +
@@ -583,7 +594,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.onesDone = true;
-						scoreboard.onesCheck = '✓';
+						scoreboard.onesCheck = 'X';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -621,7 +632,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.twosDone = true;
-						scoreboard.twosCheck = '✓';
+						scoreboard.twosCheck = 'X';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -659,7 +670,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.threesDone = true;
-						scoreboard.threesCheck = '✓';
+						scoreboard.threesCheck = 'X';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -697,7 +708,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.foursDone = true;
-						scoreboard.foursCheck = '✓';
+						scoreboard.foursCheck = 'X';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -735,7 +746,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.fivesDone = true;
-						scoreboard.fivesCheck = '✓';
+						scoreboard.fivesCheck = 'X';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -773,7 +784,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.sixesDone = true;
-						scoreboard.sixesCheck = '✓';
+						scoreboard.sixesCheck = 'X';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -816,7 +827,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.threeKindDone = true;
-						scoreboard.threeKindCheck = '✓';
+						scoreboard.threeKindCheck = 'X';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -859,7 +870,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.fourKindDone = true;
-						scoreboard.fourKindCheck = '✓';
+						scoreboard.fourKindCheck = 'X';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -898,7 +909,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.fullHouseDone = true;
-						scoreboard.fullHouseCheck = '✓';
+						scoreboard.fullHouseCheck = 'X';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -937,7 +948,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.smStraightDone = true;
-						scoreboard.smStraightCheck = '✓';
+						scoreboard.smStraightCheck = 'X';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -976,7 +987,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.bigStraightDone = true;
-						scoreboard.bigStraightCheck = '✓';
+						scoreboard.bigStraightCheck = 'X';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -1013,7 +1024,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
 						scoreboard.chanceDone = true;
-						scoreboard.chanceCheck = '✓';
+						scoreboard.chanceCheck = 'X';
 						scoreSent.delete();
 						minigames.yacht.display(
 							message,
@@ -1064,7 +1075,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 							}, 3000);
 						} else {
 							scoreboard.yachtDone = true;
-							scoreboard.yachtCheck = '✓';
+							scoreboard.yachtCheck = 'X';
 						}
 						var newTotal = minigames.yacht.calculateTotal(scoreboard);
 						var rolledDiceObj = minigames.yacht.rollDice(hold, diceObj);
@@ -1160,6 +1171,7 @@ minigames.yacht.calculateTotal = (scoreboard) => {
 		scoreboard.yachtScore;
 	if (scoreboard.leftScore > 62) {
 		scoreboard.bonusScore = 35;
+		scoreboard.bonusCheck = 'X';
 	}
 	scoreboard.leftScore += scoreboard.bonusScore;
 	scoreboard.grandTotalScore = scoreboard.leftScore + scoreboard.rightScore;
@@ -1191,7 +1203,9 @@ minigames.yacht.end = (scoreboard, scoreboardSent, scoreSent) => {
 	if (!gameOver) {
 		//Display
 		scoreboard.display =
-			'```cs\nWelcome to Yacht!\n|-|-------|---|-|---------------|---|\n|' +
+			'```cs\nWelcome to Yacht, ' +
+			player.username +
+			'!\n|-|-------|---|-|---------------|---|\n|' +
 			scoreboard.onesCheck +
 			'|Ones   |' +
 			' '.repeat(3 - scoreboard.onesScore.toString().length) +
