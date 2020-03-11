@@ -439,10 +439,10 @@ realm.upkeep = function(message, player, time) {
 				const reaction = collected.first();
 				setTimeout(() => {
 					if (reaction.emoji.name === '👍') {
-						sent.clearReactions();
+						sent.reactions.removeAll();
 						realm.autoUpkeep(message, player, time);
 					} else if (reaction.emoji.name === '👎') {
-						sent.clearReactions();
+						sent.reactions.removeAll();
 						realm.manualUpkeep(message, player, time);
 					}
 				}, 2500);
@@ -451,7 +451,7 @@ realm.upkeep = function(message, player, time) {
 				message.channel.send(
 					'Either something went wrong, or you did not pick an option. Either way, we will run it automatically for you.'
 				);
-				sent.clearReactions();
+				sent.reactions.removeAll();
 				realm.autoUpkeep(message, player, time);
 			});
 	});

@@ -63,19 +63,19 @@ combat.setup = function(commandMessage, monster, player, turnCount) {
 					const reaction = collected.first();
 					setTimeout(() => {
 						if (reaction.emoji.name === '⚔') {
-							sent.clearReactions();
+							sent.reactions.removeAll();
 							combat.attack(commandMessage, monster, player, turnCount, sent);
 						} else if (reaction.emoji.name === '👟') {
-							sent.clearReactions();
+							sent.reactions.removeAll();
 							combat.run(commandMessage, monster, player, turnCount, sent);
 						} else if (reaction.emoji.name === '🩹') {
-							sent.clearReactions();
+							sent.reactions.removeAll();
 							combat.heal(commandMessage, monster, player, turnCount, sent);
 						} else if (reaction.emoji.name === '❔') {
-							sent.clearReactions();
+							sent.reactions.removeAll();
 							combat.status(commandMessage, monster, player, turnCount, sent);
 						} else if (reaction.emoji.name === '✨' && turnCount >= player.specialMove.counter) {
-							sent.clearReactions();
+							sent.reactions.removeAll();
 							combat.special(commandMessage, monster, player, turnCount, sent);
 						} else if (reaction.emoji.name === '✨' && turnCount < player.specialMove.counter) {
 							commandMessage.channel.send(
@@ -131,19 +131,19 @@ combat.edit = function(commandMessage, monster, player, turnCount, sent) {
 					const reaction = collected.first();
 					setTimeout(() => {
 						if (reaction.emoji.name === '⚔') {
-							sent.clearReactions();
+							sent.reactions.removeAll();
 							combat.attack(commandMessage, monster, player, turnCount, sent);
 						} else if (reaction.emoji.name === '👟') {
-							sent.clearReactions();
+							sent.reactions.removeAll();
 							combat.run(commandMessage, monster, player, turnCount, sent);
 						} else if (reaction.emoji.name === '🩹') {
-							sent.clearReactions();
+							sent.reactions.removeAll();
 							combat.heal(commandMessage, monster, player, turnCount, sent);
 						} else if (reaction.emoji.name === '❔') {
-							sent.clearReactions();
+							sent.reactions.removeAll();
 							combat.status(commandMessage, monster, player, turnCount, sent);
 						} else if (reaction.emoji.name === '✨' && turnCount >= player.specialMove.counter) {
-							sent.clearReactions();
+							sent.reactions.removeAll();
 							combat.special(commandMessage, monster, player, turnCount, sent);
 						} else if (reaction.emoji.name === '✨' && turnCount < player.specialMove.counter) {
 							commandMessage.channel.send(
@@ -232,7 +232,7 @@ combat.run = function(commandMessage, monster, player, turnCount, sent) {
 	if (runSuccess >= 40) {
 		//success
 		sent.edit('```http\nYou have successfully run away from ' + monster.name + '.```');
-		sent.clearReactions();
+		sent.reactions.removeAll();
 	} else {
 		//failure
 		monster.damage = Math.floor(Math.random() * (monster.damageMax - monster.damageMin + 1)) + monster.damageMin;

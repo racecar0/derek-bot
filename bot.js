@@ -1,4 +1,4 @@
-const { Client, Attachment, Collection } = require('discord.js'),
+const { Client, Attachment, Collection, Guild } = require('discord.js'),
 	client = new Client(),
 	commands = new Collection(),
 	express = require('express'),
@@ -185,14 +185,9 @@ client.once('ready', () => {
 	client.user.setActivity('with Mindy St. Claire');
 	// List servers the bot is connected to
 	console.log('Servers:');
-	client.guilds.forEach((guild) => {
-		console.log(' - ' + guild.name + ', ' + guild.id);
-		// //List all users
-		// console.log(guild.members);
-		// List all channels
-		// guild.channels.forEach((channel) => {
-		// 	console.log(` -- ${channel.name} (${channel.type}) - ${channel.id}`);
-		// });
+	let cache = client.guilds.cache.array();
+	let guilds = cache.flatMap((guild) => {
+		console.log(guild.name + ' - ' + guild.id);
 	});
 	//SetInterval for Realm
 	// var realmTimer = setInterval(function() {
