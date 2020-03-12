@@ -37,8 +37,14 @@ Mini Todo
 =========
 * Add visual timers to choices.
 * Add DB support for a high score board.
-* Fix scoring button order.
-* Add game cleanup.
 * Change scoring to match Yacht and not Yahtzee.
 * Add betting credits.
 * Double-check scoring a small straight with a big one.
+* Test game ending with scratching a yahtzee.
+* Put randomizer back to 1-2 and test yahtzee scratching where there is no delete()
+
+
+Things added:
+20 second timers instead of 30
+endScreen
+new emoji
