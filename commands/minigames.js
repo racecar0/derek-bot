@@ -1437,7 +1437,9 @@ minigames.yacht.leaderboardCreate = (message, player, scoreboard) => {
 };
 minigames.yacht.displayLeaderboard = (message) => {
 	Yacht.find({ score: { $gte: 0 } }, (err, foundScores) => {
-		// foundScores.sort({ field: 'desc', test: 1 });
+		foundScores.sort(function(a, b) {
+			return b.score - a.score;
+		});
 		leaderboardArray = [];
 		let placeholder = '| -- |     ----------     | --- |--/--/----|\n';
 		for (i = 0; i < 10; i++) {
