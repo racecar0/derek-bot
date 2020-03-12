@@ -1,5 +1,6 @@
 const { Client, Attachment, Collection } = require('discord.js'),
 	User = require('../models/user'),
+	Yacht = require('../models/yachtleaderboard'),
 	mongoose = require('mongoose'),
 	client = new Client();
 
@@ -62,6 +63,25 @@ minigames.flip = function(message, player, args) {
 //////////////////
 //YACHT MINIGAME//
 //////////////////
+minigames.yacht.sort = (message, player, args) => {
+	if (args === undefined) {
+		message.channel.send(
+			'Please use one of the following options with the !yacht command:\nEx. !yacht (option)\n\nplay\nrules\nleaderboard\nmyhighscore'
+		);
+	} else if (args[0] === 'play') {
+		minigames.yacht.init(message, player);
+	} else if (args[0] === 'rules') {
+		message.channel.send('Currently, the rules are the same as Yahtzee. Official Yacht rules coming soon.');
+	} else if (args[0] === 'leaderboard') {
+		minigames.yacht.displayLeaderboard(message);
+	} else if (args[0] === 'myhighscore') {
+		minigames.yacht.myHighScore(message, player);
+	} else {
+		message.channel.send(
+			'Please use one of the following options with the !yacht command:\nEx. !yacht (option)\n\nplay\nrules\nleaderboard\nmyhighscore'
+		);
+	}
+};
 minigames.yacht.init = (message, player) => {
 	//Setup
 	var scoreboard = {};
@@ -486,7 +506,7 @@ minigames.yacht.diceCheck = (message, player, diceObj, hold, scoreboard, rollsLe
 		};
 
 		scoreSent
-			.awaitReactions(filter, { max: 1, time: 20000, errors: [ 'time' ] })
+			.awaitReactions(filter, { max: 1, time: 60000, errors: [ 'time' ] })
 			.then((collected) => {
 				const reaction = collected.first();
 
@@ -1274,7 +1294,7 @@ minigames.yacht.endCheck = (scoreboard) => {
 	});
 	if (gameOverCount === 0) {
 		return true;
-	} else if (gameOverCount === 1 && scoreboard.yachtScore >= 50) {
+	} else if (gameOverCount === 1 && scoreboard.yachtCheck !== 'X') {
 		return true;
 	} else {
 		return false;
@@ -1385,7 +1405,112 @@ minigames.yacht.endScreen = (message, scoreboard, scoreboardSent, scoreSent) => 
 				// sent.delete().catch(console.error);
 				//End the game.
 				message.channel.send('The game is over! Your final score: ' + scoreboard.grandTotalScore);
+				minigames.yacht.leaderboardCreate(message, player, scoreboard);
 			});
+	});
+};
+
+minigames.yacht.leaderboardCreate = (message, player, scoreboard) => {
+	var date = new Date();
+	var month = date.getMonth() + 1;
+	var day = date.getDate();
+	var year = date.getFullYear();
+	if (month < 10) {
+		month = '0' + month;
+	}
+	var fullDate = month + '/' + day + '/' + year;
+	var newScore = {
+		userID: player.userID,
+		username: player.username,
+		discriminator: player.discriminator,
+		dateCreated: fullDate,
+		score: scoreboard.grandTotalScore,
+		scoreboard: scoreboard.display
+	};
+	Yacht.create(newScore, (err, newEntry) => {
+		if (err) {
+			console.log(err);
+		} else {
+			message.channel.send('Your score has been added.');
+		}
+	});
+};
+minigames.yacht.displayLeaderboard = (message) => {
+	Yacht.find({ score: { $gte: 0 } }, (err, foundScores) => {
+		// foundScores.sort({ field: 'desc', test: 1 });
+		leaderboardArray = [];
+		let placeholder = '|0000|     ----------     |00000|00/00/0000|\n';
+		for (i = 0; i < 10; i++) {
+			if (foundScores[i] !== undefined) {
+				let rank = i + 1;
+				leaderboardArray[i] =
+					'|' +
+					' '.repeat(4 - rank.toString().length) +
+					rank +
+					'|' +
+					foundScores[i].username +
+					' '.repeat(20 - foundScores[i].username.length) +
+					'|' +
+					foundScores[i].score +
+					' '.repeat(5 - foundScores[i].score.toString().length) +
+					'|' +
+					foundScores[i].dateCreated +
+					'|\n';
+			} else {
+				leaderboardArray[i] = placeholder;
+			}
+		}
+
+		let arrayConcat = '';
+		leaderboardArray.forEach((str) => {
+			arrayConcat += str;
+		});
+		let leaderboardDisplay =
+			'```cs\nYacht Leaderboard: ' +
+			message.guild.name +
+			'\n|----|--------------------|-----|----------|\n|Rank|        Name        |Score|   Date   |\n|----|--------------------|-----|----------|\n' +
+			arrayConcat +
+			'|----|--------------------|-----|----------|```';
+		message.channel.send(leaderboardDisplay);
+	});
+};
+minigames.yacht.myHighScore = (message, player) => {
+	Yacht.find({ userID: player.userID }, (err, foundScores) => {
+		// foundScores.sort({ field: 'desc', test: 1 });
+		leaderboardArray = [];
+		let placeholder = '|0000|     ----------     |00000|00/00/0000|\n';
+		for (i = 0; i < 10; i++) {
+			if (foundScores[i] !== undefined) {
+				let rank = i + 1;
+				leaderboardArray[i] =
+					'|' +
+					rank +
+					' '.repeat(4 - rank.toString().length) +
+					'|' +
+					foundScores[i].username +
+					' '.repeat(20 - foundScores[i].username.length) +
+					'|' +
+					foundScores[i].score +
+					' '.repeat(5 - foundScores[i].score.toString().length) +
+					'|' +
+					foundScores[i].dateCreated +
+					'|\n';
+			} else {
+				leaderboardArray[i] = placeholder;
+			}
+		}
+
+		let arrayConcat = '';
+		leaderboardArray.forEach((str) => {
+			arrayConcat += str;
+		});
+		let leaderboardDisplay =
+			'```cs\nYacht High Scores: ' +
+			player.username +
+			'\n|----|--------------------|-----|----------|\n|Rank|        Name        |Score|   Date   |\n|----|--------------------|-----|----------|\n' +
+			arrayConcat +
+			'|----|--------------------|-----|----------|```';
+		message.channel.send(leaderboardDisplay);
 	});
 };
 module.exports = minigames;

@@ -36,15 +36,9 @@ Other notes: Food and Natural Resources in surplus can be eliminated through cat
 Mini Todo
 =========
 * Add visual timers to choices.
-* Add DB support for a high score board.
 * Change scoring to match Yacht and not Yahtzee.
 * Add betting credits.
 * Double-check scoring a small straight with a big one.
-* Test game ending with scratching a yahtzee.
-* Put randomizer back to 1-2 and test yahtzee scratching where there is no delete()
-
-
-Things added:
-20 second timers instead of 30
-endScreen
-new emoji
+* Test endScreen if you've scratched a yacht at some point before the last score (currently ends a turn too early)
+* add custom emoji
+* add ability to see a leaderboard scorecard
