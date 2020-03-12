@@ -1439,7 +1439,7 @@ minigames.yacht.displayLeaderboard = (message) => {
 	Yacht.find({ score: { $gte: 0 } }, (err, foundScores) => {
 		// foundScores.sort({ field: 'desc', test: 1 });
 		leaderboardArray = [];
-		let placeholder = '|0000|     ----------     |00000|00/00/0000|\n';
+		let placeholder = '| -- |     ----------     | --- |--/--/----|\n';
 		for (i = 0; i < 10; i++) {
 			if (foundScores[i] !== undefined) {
 				let rank = i + 1;

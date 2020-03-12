@@ -39,6 +39,5 @@ Mini Todo
 * Change scoring to match Yacht and not Yahtzee.
 * Add betting credits.
 * Double-check scoring a small straight with a big one.
-* Test endScreen if you've scratched a yacht at some point before the last score (currently ends a turn too early)
 * add custom emoji
 * add ability to see a leaderboard scorecard
