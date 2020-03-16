@@ -41,3 +41,5 @@ Mini Todo
 * Double-check scoring a small straight with a big one.
 * add custom emoji
 * add ability to see a leaderboard scorecard
+* find out how to remove a choice and select another
+* Test different regex for Yacht.
