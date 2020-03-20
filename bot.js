@@ -212,10 +212,10 @@ client.once('ready', () => {
 	});
 	//SetInterval for Reminder
 	var realmTimer = setInterval(function() {
-		var seanMessages = [ 'poop', 'fart', 'f||ork||', 'sh||irt||' ];
-		var randomMSG = Math.floor(Math.random() * Math.floor(seanMessages.length));
-		annoyBot = client.channels.cache.get('456875845483757570');
-		annoyBot.send('<@249360930402598913>:' + seanMessages[randomMSG]);
+		// var seanMessages = [ 'poop', 'fart', 'f||ork||', 'sh||irt||' ];
+		// var randomMSG = Math.floor(Math.random() * Math.floor(seanMessages.length));
+		// annoyBot = client.channels.cache.get('456875845483757570');
+		// annoyBot.send('<@249360930402598913>: ' + seanMessages[randomMSG]);
 		Reminder.find({}, (err, foundReminders) => {
 			foundReminders.forEach((reminder) => {
 				reminder.reminderTime -= 60000;
