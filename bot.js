@@ -13,13 +13,13 @@ const { Client, Attachment, Collection, Guild } = require('discord.js'),
 	port = process.env.PORT || 3000;
 
 //FOR LOCAL DEVELOPMENT
-const { token } = require('./config.json'),
-	botToken = token,
-	url = 'mongodb://localhost:27017/derek_bot';
+// const { token } = require('./config.json'),
+// 	botToken = token,
+// 	url = 'mongodb://localhost:27017/derek_bot';
 
 // //FOR PRODUCTION ENVIRONMENT
-// const botToken = process.env.BOTTOKEN,
-// 	url = process.env.DATABASEURL;
+const botToken = process.env.BOTTOKEN,
+	url = process.env.DATABASEURL;
 
 mongoose.connect(url, {
 	useNewUrlParser: true,
