@@ -214,7 +214,7 @@ client.once('ready', () => {
 	var realmTimer = setInterval(function() {
 		Reminder.find({}, (err, foundReminders) => {
 			foundReminders.forEach((reminder) => {
-				reminder.reminderTime -= 1000;
+				reminder.reminderTime -= 60000;
 				Reminder.updateOne(
 					{ messageID: reminder.messageID },
 					{ reminderTime: reminder.reminderTime },
@@ -234,7 +234,7 @@ client.once('ready', () => {
 				);
 			});
 		});
-	}, 1000);
+	}, 60000);
 	//Set Interval for Realm
 	// var realmTimer = setInterval(function() {
 	// 	Realm.updateMany({}, { takenTurn: true }, function(err, res) {
