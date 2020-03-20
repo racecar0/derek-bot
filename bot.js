@@ -9,6 +9,7 @@ const { Client, Attachment, Collection, Guild } = require('discord.js'),
 	prefix = '!',
 	User = require('./models/user'),
 	Realm = require('./models/realm'),
+	Reminder = require('./models/reminder'),
 	port = process.env.PORT || 3000;
 
 //FOR LOCAL DEVELOPMENT
@@ -75,6 +76,26 @@ client.on('message', (message) => {
 	} catch (error) {
 		console.error(error);
 		message.reply('There was an error trying to execute that command!');
+	}
+});
+
+//REMINDME
+client.on('message', (message) => {
+	// Prevent bot from responding to its own messages and doing anything without prefix
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
+	//Remove prefix
+	var args = message.content.slice(prefix.length);
+	args = args.split(/ +/);
+	var commandName = args[0];
+	var remindTime = args[1];
+	remindTime = parseInt(remindTime);
+	args = args.slice(2);
+	var remindMessage = args.join(' ');
+
+	//Take first element from args (the command itself) and store it
+	commandName = commandName.toLowerCase();
+	if (commandName === 'remindme') {
+		button.remindme(message, remindTime, remindMessage);
 	}
 });
 
@@ -189,7 +210,32 @@ client.once('ready', () => {
 	let guilds = cache.flatMap((guild) => {
 		console.log(guild.name + ' - ' + guild.id);
 	});
-	//SetInterval for Realm
+	//SetInterval for Reminder
+	var realmTimer = setInterval(function() {
+		Reminder.find({}, (err, foundReminders) => {
+			foundReminders.forEach((reminder) => {
+				reminder.reminderTime -= 1000;
+				Reminder.updateOne(
+					{ messageID: reminder.messageID },
+					{ reminderTime: reminder.reminderTime },
+					(err, updateReminder) => {
+						if (err) {
+							console.log(err);
+						} else {
+							if (reminder.reminderTime <= 0) {
+								const channel = client.channels.cache.get(reminder.messageChannel);
+								channel.send('<@' + reminder.userID + '>: ' + reminder.message);
+								Reminder.findOneAndDelete({ messageID: reminder.messageID }, (err, doc) => {
+									if (err) console.log;
+								});
+							}
+						}
+					}
+				);
+			});
+		});
+	}, 1000);
+	//Set Interval for Realm
 	// var realmTimer = setInterval(function() {
 	// 	Realm.updateMany({}, { takenTurn: true }, function(err, res) {
 	// 		if (err) {

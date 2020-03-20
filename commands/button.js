@@ -1,7 +1,8 @@
 var button = {};
 const { Client, Attachment, Collection } = require('discord.js'),
 	mongoose = require('mongoose'),
-	Derek = require('../models/derek');
+	Derek = require('../models/derek'),
+	Reminder = require('../models/reminder');
 
 //hello action
 button.hello = (message, command) => {
@@ -59,6 +60,27 @@ button.button = (message) => {
 					);
 				});
 		});
+};
+
+button.remindme = function(message, remindTime, remindMessage) {
+	remindTime = remindTime * 60000;
+	newReminder = {
+		userID: message.author.id,
+		username: message.author.username,
+		discriminator: message.author.discriminator,
+		reminderTime: remindTime,
+		message: remindMessage,
+		messageChannel: message.channel,
+		messageID: message.id
+	};
+
+	Reminder.create(newReminder, (err, newReminder) => {
+		if (err) {
+			conso.log(err);
+		} else {
+			newReminder.messageChannel.send('OK! I will remind you in about ' + remindTime / 60000 + ' minute(s)!');
+		}
+	});
 };
 //DEREK DATABASE START CODE
 // var newDerek = {
