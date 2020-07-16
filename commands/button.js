@@ -1,5 +1,5 @@
 var button = {};
-const { Client, Attachment, Collection } = require('discord.js'),
+const { Client, MessageAttachment, Collection } = require('discord.js'),
 	mongoose = require('mongoose'),
 	Derek = require('../models/derek'),
 	Reminder = require('../models/reminder');
@@ -34,7 +34,7 @@ button.button = (message) => {
 							} else {
 								var returnDerek = foundDerek[0];
 								returnDerek.resets++;
-								var reset = new Attachment(
+								var reset = new MessageAttachment(
 									'https://media.discordapp.net/attachments/669255645559652366/674012017933418516/derekreset.gif'
 								);
 								message.channel.send(reset);
